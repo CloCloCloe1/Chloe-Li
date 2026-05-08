@@ -89,7 +89,7 @@ export const content = {
     metrics: [
       { value: "AI", label: "Manual workflows transformed into AI and software processes" },
       { value: "Data", label: "Finance, client, and product database analysis" },
-      { value: "95%", label: "Defect resolution rate" }
+      { value: "Business", label: "Bridge between business needs and technical solutions" }
     ],
     about: {
       eyebrow: "About",
@@ -159,7 +159,7 @@ export const content = {
     },
     projects: {
       eyebrow: "Projects",
-      title: "Selected work themes.",
+      title: "Practical solutions across AI workflows, product data, and reporting.",
       items: [
         {
           title: "AI Workflow and Knowledge Base",
@@ -228,7 +228,7 @@ export const content = {
     metrics: [
       { value: "AI", label: "将人工流程转化为 AI 工作流与软件化流程" },
       { value: "Data", label: "金融、客户与产品数据库分析" },
-      { value: "95%", label: "缺陷解决率" }
+      { value: "Business", label: "连接业务需求与技术解决方案" }
     ],
     about: {
       eyebrow: "关于我",
@@ -298,7 +298,7 @@ export const content = {
     },
     projects: {
       eyebrow: "项目",
-      title: "代表性工作方向。",
+      title: "围绕 AI 工作流、产品数据与报表分析的实践方案。",
       items: [
         {
           title: "AI 工作流与知识库",
