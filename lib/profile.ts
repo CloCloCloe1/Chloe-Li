@@ -109,7 +109,7 @@ export const content = {
       items: [
         {
           company: "MEC-Tech",
-          location: "Toronto, ON",
+          location: "Remote",
           title: "Algorithm Engineer",
           period: "Feb 2026 - Present",
           bullets: [
@@ -248,7 +248,7 @@ export const content = {
       items: [
         {
           company: "MEC-Tech",
-          location: "Toronto, ON",
+          location: "Remote",
           title: "算法工程师",
           period: "2026.02 - 至今",
           bullets: [
