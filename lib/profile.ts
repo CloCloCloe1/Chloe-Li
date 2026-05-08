@@ -1,7 +1,10 @@
 export type Locale = "en" | "zh";
 
+type NavKey = "home" | "about" | "experience" | "projects" | "education" | "contact";
+
 type PortfolioContent = {
-  nav: Record<"home" | "about" | "experience" | "projects" | "resume" | "contact", string>;
+  displayName: string;
+  nav: Record<NavKey, string>;
   hero: {
     eyebrow: string;
     title: string;
@@ -36,15 +39,15 @@ type PortfolioContent = {
       description: string;
     }[];
   };
-  resume: {
+  education: {
     eyebrow: string;
     title: string;
-    educationTitle: string;
-    education: string[];
-    skillsTitle: string;
-    skills: string[];
-    languagesTitle: string;
-    languages: string;
+    items: {
+      degree: string;
+      school: string;
+      period: string;
+      details: string[];
+    }[];
   };
   contact: {
     eyebrow: string;
@@ -56,52 +59,66 @@ type PortfolioContent = {
 
 export const contact = {
   name: "Chloe Li",
+  chineseName: "李珉萱",
   phone: "+1 437 661 2745",
   email: "liminxuan118@gmail.com",
   location: "Toronto, ON",
-  linkedin: "#",
+  linkedin: "https://www.linkedin.com/in/chloe-li-mmsc-cs-econ/",
   resumeUrl: "/chloe-li-resume.docx"
 };
 
 export const content = {
   en: {
+    displayName: "Chloe Li",
     nav: {
       home: "Home",
       about: "About",
       experience: "Experience",
       projects: "Projects",
-      resume: "Resume",
+      education: "Education",
       contact: "Contact"
     },
     hero: {
       eyebrow: "Business Analyst / Product Analyst",
       title: "Data clarity for better products, systems, and decisions.",
       summary:
-        "I turn complex datasets and business workflows into clear insights, reliable reporting, and practical product and systems improvements.",
+        "I turn complex datasets and business workflows into clear insights, reliable reporting, AI-supported workflows, and practical product and systems improvements.",
       primaryCta: "View Experience",
       secondaryCta: "Download Resume"
     },
     metrics: [
-      { value: "40%", label: "manual effort reduced" },
-      { value: "50+", label: "datasets analyzed" },
-      { value: "95%", label: "defect resolution rate" }
+      { value: "AI", label: "Manual workflows transformed into AI and software processes" },
+      { value: "Data", label: "Finance, client, and product database analysis" },
+      { value: "95%", label: "Defect resolution rate" }
     ],
     about: {
       eyebrow: "About",
       title: "Analytical, structured, and product-minded.",
       body:
-        "I am a data-focused analyst with experience across financial systems, mobile app data validation, workflow automation, and business reporting. My work combines SQL, Python, dashboarding, and stakeholder collaboration to improve data quality, operational visibility, and delivery outcomes.",
+        "I am a data-focused analyst with experience across financial systems, product data validation, AI workflow development, process automation, and business reporting. My work combines SQL, Python, dashboarding, workflow tools, and stakeholder collaboration to improve data quality, operational visibility, and delivery outcomes.",
       focus: [
         "Business and product analysis",
+        "AI workflow and knowledge-base development",
         "Data validation and reconciliation",
-        "Workflow automation and process improvement",
         "Dashboarding, reporting, and stakeholder communication"
       ]
     },
     experience: {
       eyebrow: "Experience",
-      title: "Experience across financial systems, product data, and operations.",
+      title: "Experience across AI workflows, financial systems, product data, and operations.",
       items: [
+        {
+          company: "MEC-Tech",
+          location: "Toronto, ON",
+          title: "Algorithm Engineer",
+          period: "Feb 2026 - Present",
+          bullets: [
+            "Optimized internal algorithm workflows to reduce manual processing and improve the accuracy and consistency of operational data outputs.",
+            "Built AI knowledge-base and product-database workflows using Dify, DeepSeek, and DingTalk to support internal search, product information retrieval, and team collaboration.",
+            "Designed structured data logic and validation steps to improve reliability across product, client, and business knowledge repositories.",
+            "Collaborated with business and technical stakeholders to translate operational needs into scalable AI-assisted workflow solutions."
+          ]
+        },
         {
           company: "Investment Management Corporation of Ontario (IMCO)",
           location: "Toronto, ON",
@@ -145,10 +162,10 @@ export const content = {
       title: "Selected work themes.",
       items: [
         {
-          title: "Data Workflow Automation",
-          tag: "ETL / Power Automate",
+          title: "AI Workflow and Knowledge Base",
+          tag: "Dify / DeepSeek / DingTalk",
           description:
-            "Automated recurring data preparation and validation steps to reduce manual work and improve reporting consistency."
+            "Built AI-assisted knowledge and product database workflows to reduce manual search, improve information retrieval, and support internal collaboration."
         },
         {
           title: "Product Data Validation",
@@ -164,80 +181,83 @@ export const content = {
         }
       ]
     },
-    resume: {
-      eyebrow: "Resume",
-      title: "A concise profile for analyst and product-focused roles.",
-      educationTitle: "Education",
-      education: [
-        "Master of Management Sciences, University of Waterloo, GPA 4.0, UW Grad Scholarship",
-        "Bachelor of Computing (Honors), Queen's University, Major in Computing Arts, Minor in Economics"
-      ],
-      skillsTitle: "Skills",
-      skills: [
-        "SQL",
-        "Python",
-        "Excel",
-        "Tableau",
-        "Power BI",
-        "Power Automate",
-        "Dynamics 365",
-        "JIRA",
-        "Confluence",
-        "Visio",
-        "Data pipelines",
-        "Financial reporting",
-        "Process improvement",
-        "Product data validation"
-      ],
-      languagesTitle: "Languages",
-      languages: "Mandarin native, English professional proficiency"
+    education: {
+      eyebrow: "Education",
+      title: "Academic foundation in management science, computing, and economics.",
+      items: [
+        {
+          degree: "Master of Management Sciences",
+          school: "University of Waterloo",
+          period: "Sep 2023 - Jun 2025",
+          details: ["GPA 4.0", "UW Grad Scholarship"]
+        },
+        {
+          degree: "Bachelor of Computing (Honors)",
+          school: "Queen's University",
+          period: "Sep 2019 - Jun 2023",
+          details: ["Major in Computing Arts", "Minor in Economics", "Dean's List", "Admission Scholarship"]
+        }
+      ]
     },
     contact: {
       eyebrow: "Contact",
       title: "Open to Business Analyst and Product Analyst opportunities.",
       body:
-        "I am interested in roles where data, product thinking, and business systems come together to improve user and operational outcomes.",
+        "I am interested in roles where data, product thinking, AI workflows, and business systems come together to improve user and operational outcomes.",
       emailCta: "Email Chloe"
     }
   },
   zh: {
+    displayName: "李珉萱",
     nav: {
       home: "首页",
       about: "关于",
       experience: "经历",
       projects: "项目",
-      resume: "简历",
+      education: "教育",
       contact: "联系"
     },
     hero: {
       eyebrow: "商业分析 / 产品分析",
       title: "用清晰的数据，支持更好的产品、系统与业务决策。",
       summary:
-        "我擅长把复杂数据和业务流程转化为可执行的洞察、稳定的报表，以及面向产品和系统改进的解决方案。",
+        "我擅长把复杂数据和业务流程转化为可执行的洞察、稳定的报表、AI 辅助工作流，以及面向产品和系统改进的解决方案。",
       primaryCta: "查看经历",
       secondaryCta: "下载简历"
     },
     metrics: [
-      { value: "40%", label: "减少手工处理工作" },
-      { value: "50+", label: "分析数据集" },
+      { value: "AI", label: "将人工流程转化为 AI 工作流与软件化流程" },
+      { value: "Data", label: "金融、客户与产品数据库分析" },
       { value: "95%", label: "缺陷解决率" }
     ],
     about: {
       eyebrow: "关于我",
       title: "结构化、数据导向，并具备产品思维。",
       body:
-        "我是一名数据导向的分析师，拥有金融系统、移动应用数据验证、流程自动化和业务报表相关经验。我的工作结合 SQL、Python、可视化工具和跨团队沟通，帮助提升数据质量、业务可见性和交付效率。",
+        "我是一名数据导向的分析师，拥有金融系统、产品数据验证、AI 工作流搭建、流程自动化和业务报表相关经验。我的工作结合 SQL、Python、可视化工具、工作流平台和跨团队沟通，帮助提升数据质量、业务可见性和交付效率。",
       focus: [
         "商业分析与产品分析",
+        "AI 工作流与知识库搭建",
         "数据验证、清洗与对账",
-        "流程自动化与流程优化",
         "仪表盘、报表与利益相关方沟通"
       ]
     },
     experience: {
       eyebrow: "经历",
-      title: "覆盖金融系统、产品数据与运营流程的分析经验。",
+      title: "覆盖 AI 工作流、金融系统、产品数据与运营流程的分析经验。",
       items: [
+        {
+          company: "MEC-Tech",
+          location: "Toronto, ON",
+          title: "算法工程师",
+          period: "2026.02 - 至今",
+          bullets: [
+            "优化公司内部算法流程，减少人工处理环节，并提升运营数据输出的准确性与一致性。",
+            "使用 Dify、DeepSeek、钉钉等工具搭建 AI 知识库与产品库工作流，支持内部搜索、产品信息检索和团队协作。",
+            "设计结构化数据逻辑与验证步骤，提升产品、客户和业务知识库的数据可靠性。",
+            "与业务和技术团队协作，将运营需求转化为可扩展的 AI 辅助工作流解决方案。"
+          ]
+        },
         {
           company: "Investment Management Corporation of Ontario (IMCO)",
           location: "Toronto, ON",
@@ -281,10 +301,10 @@ export const content = {
       title: "代表性工作方向。",
       items: [
         {
-          title: "数据流程自动化",
-          tag: "ETL / Power Automate",
+          title: "AI 工作流与知识库",
+          tag: "Dify / DeepSeek / 钉钉",
           description:
-            "自动化重复性数据准备与验证步骤，减少手工处理并提升报表一致性。"
+            "搭建 AI 辅助的知识库和产品库工作流，减少人工检索，提高信息获取效率，并支持内部协作。"
         },
         {
           title: "产品数据验证",
@@ -300,39 +320,29 @@ export const content = {
         }
       ]
     },
-    resume: {
-      eyebrow: "简历",
-      title: "面向分析与产品相关岗位的简洁职业概览。",
-      educationTitle: "教育背景",
-      education: [
-        "University of Waterloo，管理科学硕士，GPA 4.0，UW Grad Scholarship",
-        "Queen's University，计算机荣誉学士，Computing Arts 主修，Economics 辅修"
-      ],
-      skillsTitle: "技能",
-      skills: [
-        "SQL",
-        "Python",
-        "Excel",
-        "Tableau",
-        "Power BI",
-        "Power Automate",
-        "Dynamics 365",
-        "JIRA",
-        "Confluence",
-        "Visio",
-        "数据管道",
-        "金融报表",
-        "流程优化",
-        "产品数据验证"
-      ],
-      languagesTitle: "语言",
-      languages: "普通话母语，英语职业工作水平"
+    education: {
+      eyebrow: "教育背景",
+      title: "管理科学、计算机与经济学交叉背景。",
+      items: [
+        {
+          degree: "Master of Management Sciences",
+          school: "University of Waterloo",
+          period: "2023.09 - 2025.06",
+          details: ["GPA 4.0", "UW Grad Scholarship"]
+        },
+        {
+          degree: "Bachelor of Computing (Honors)",
+          school: "Queen's University",
+          period: "2019.09 - 2023.06",
+          details: ["Computing Arts 主修", "Economics 辅修", "Dean's List", "Admission Scholarship"]
+        }
+      ]
     },
     contact: {
       eyebrow: "联系",
       title: "正在寻找 Business Analyst 和 Product Analyst 相关机会。",
       body:
-        "我关注数据、产品思维和业务系统交汇的岗位，希望通过分析和流程优化提升用户体验与运营结果。",
+        "我关注数据、产品思维、AI 工作流和业务系统交汇的岗位，希望通过分析和流程优化提升用户体验与运营结果。",
       emailCta: "发送邮件"
     }
   }

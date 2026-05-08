@@ -6,6 +6,7 @@ import {
   Check,
   Download,
   Globe2,
+  Linkedin,
   Mail,
   MapPin,
   Phone,
@@ -15,7 +16,7 @@ import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { contact, content, type Locale } from "@/lib/profile";
 
-const sectionIds = ["home", "about", "experience", "projects", "resume", "contact"] as const;
+const sectionIds = ["home", "about", "experience", "projects", "education", "contact"] as const;
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
@@ -31,7 +32,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur-xl">
         <nav className="section-shell flex h-14 items-center justify-between">
           <a className="text-sm font-semibold tracking-normal text-neutral-950 focus-ring" href="#home">
-            {contact.name}
+            {t.displayName}
           </a>
 
           <div className="hidden items-center gap-7 md:flex">
@@ -59,7 +60,10 @@ export default function Home() {
       </header>
 
       <section className="section-shell flex min-h-[calc(100vh-3.5rem)] flex-col justify-center py-20 text-center" id="home">
-        <p className="animate-rise text-sm font-semibold text-[#0066cc]">{t.hero.eyebrow}</p>
+        <p className="animate-rise text-2xl font-semibold tracking-normal text-neutral-950 sm:text-3xl">
+          {t.displayName}
+        </p>
+        <p className="mt-5 animate-rise text-sm font-semibold text-[#0066cc]">{t.hero.eyebrow}</p>
         <h1 className="mx-auto mt-5 max-w-5xl animate-rise text-5xl font-semibold leading-[1.05] tracking-normal text-neutral-950 sm:text-7xl">
           {t.hero.title}
         </h1>
@@ -159,39 +163,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-neutral-100 py-24" id="resume">
-        <div className="section-shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
-            <SectionIntro eyebrow={t.resume.eyebrow} title={t.resume.title} />
-            <a
-              className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-neutral-950 px-6 text-sm font-semibold text-white transition hover:bg-[#0066cc] focus-ring"
-              href={contact.resumeUrl}
-            >
-              <Download size={16} />
-              {t.hero.secondaryCta}
-            </a>
-          </div>
+      <section className="bg-neutral-100 py-24" id="education">
+        <div className="section-shell">
+          <SectionIntro eyebrow={t.education.eyebrow} title={t.education.title} />
 
-          <div className="grid gap-5">
-            <InfoPanel title={t.resume.educationTitle}>
-              <div className="grid gap-4">
-                {t.resume.education.map((item) => (
-                  <p className="text-sm leading-6 text-neutral-700" key={item}>{item}</p>
-                ))}
-              </div>
-            </InfoPanel>
-            <InfoPanel title={t.resume.skillsTitle}>
-              <div className="flex flex-wrap gap-2">
-                {t.resume.skills.map((skill) => (
-                  <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </InfoPanel>
-            <InfoPanel title={t.resume.languagesTitle}>
-              <p className="text-sm leading-6 text-neutral-700">{t.resume.languages}</p>
-            </InfoPanel>
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {t.education.items.map((item) => (
+              <article className="rounded-[2rem] bg-white p-7 shadow-sm" key={item.degree}>
+                <p className="text-sm font-semibold text-[#0066cc]">{item.period}</p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.degree}</h3>
+                <p className="mt-2 text-base font-medium text-neutral-700">{item.school}</p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {item.details.map((detail) => (
+                    <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={detail}>
+                      {detail}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -204,9 +194,10 @@ export default function Home() {
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-600">{t.contact.body}</p>
 
-          <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
+          <div className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <ContactItem href={`mailto:${contact.email}`} icon={<Mail size={18} />} label={contact.email} />
             <ContactItem href={`tel:${contact.phone}`} icon={<Phone size={18} />} label={contact.phone} />
+            <ContactItem href={contact.linkedin} icon={<Linkedin size={18} />} label="LinkedIn" />
             <ContactItem href="#contact" icon={<MapPin size={18} />} label={contact.location} />
           </div>
 
@@ -221,7 +212,7 @@ export default function Home() {
 
       <footer className="border-t border-black/10 py-8">
         <div className="section-shell flex flex-col justify-between gap-3 text-xs text-neutral-500 sm:flex-row">
-          <p>© {new Date().getFullYear()} {contact.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {t.displayName}. All rights reserved.</p>
           <p>Business Analyst · Product Analyst · Data Analyst</p>
         </div>
       </footer>
@@ -245,21 +236,6 @@ function SectionIntro({
         {title}
       </h2>
     </div>
-  );
-}
-
-function InfoPanel({
-  title,
-  children
-}: {
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <article className="rounded-[2rem] bg-white p-6 shadow-sm">
-      <h3 className="text-lg font-semibold tracking-normal text-neutral-950">{title}</h3>
-      <div className="mt-4">{children}</div>
-    </article>
   );
 }
 
