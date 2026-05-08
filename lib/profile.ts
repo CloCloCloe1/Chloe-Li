@@ -105,7 +105,7 @@ export const content = {
         {
           company: "Investment Management Corporation of Ontario (IMCO)",
           location: "Toronto, ON",
-          title: "Business Systems Analyst Intern",
+          title: "Business Systems Analyst",
           period: "Sep 2025 - Jan 2026",
           bullets: [
             "Designed and automated data workflows and ETL processes using Excel, Power Query, and Power Automate, reducing manual processing effort by 40%.",
@@ -117,7 +117,7 @@ export const content = {
         {
           company: "Nissan Motor Corporation",
           location: "Mississauga, ON",
-          title: "Business Systems Analyst Intern",
+          title: "Business Systems Analyst",
           period: "May 2024 - Dec 2024",
           bullets: [
             "Supported backend data validation for the MyNissan app across financial and transactional datasets.",
@@ -129,7 +129,7 @@ export const content = {
         {
           company: "HGTECH",
           location: "Wuhan, China",
-          title: "International Business Analyst Intern",
+          title: "International Business Analyst",
           period: "May 2023 - Aug 2023",
           bullets: [
             "Cleaned and structured 1,000+ CRM records to improve usability and reporting accuracy.",
@@ -241,7 +241,7 @@ export const content = {
         {
           company: "Investment Management Corporation of Ontario (IMCO)",
           location: "Toronto, ON",
-          title: "Business Systems Analyst Intern",
+          title: "Business Systems Analyst",
           period: "2025.09 - 2026.01",
           bullets: [
             "使用 Excel、Power Query 和 Power Automate 设计并自动化数据工作流与 ETL 流程，减少 40% 手工处理工作。",
@@ -253,7 +253,7 @@ export const content = {
         {
           company: "Nissan Motor Corporation",
           location: "Mississauga, ON",
-          title: "Business Systems Analyst Intern",
+          title: "Business Systems Analyst",
           period: "2024.05 - 2024.12",
           bullets: [
             "支持 MyNissan App 后端数据验证，覆盖金融和交易类数据集。",
@@ -265,7 +265,7 @@ export const content = {
         {
           company: "HGTECH",
           location: "Wuhan, China",
-          title: "International Business Analyst Intern",
+          title: "International Business Analyst",
           period: "2023.05 - 2023.08",
           bullets: [
             "清洗并结构化 1,000+ 条 CRM 记录，提升数据可用性和报表准确性。",
