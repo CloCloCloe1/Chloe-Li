@@ -15,7 +15,6 @@ import {
   Phone,
   Workflow
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
@@ -23,6 +22,20 @@ import { contact, content, type Locale, type PortfolioItem, type SectionKey } fr
 
 const sectionIds = ["home", "about", "experience", "projects", "education", "publications", "contact"] as const;
 const detailSections: SectionKey[] = ["experience", "projects", "education", "publications"];
+
+const imagePositions: Record<string, string> = {
+  "mec-tech-algorithm-engineer": "0% 0%",
+  "imco-business-systems-analyst": "33.333% 0%",
+  "nissan-business-systems-analyst": "66.666% 0%",
+  "hgtech-international-business-analyst": "100% 0%",
+  "ai-workflow-knowledge-base": "0% 50%",
+  "product-data-validation": "33.333% 50%",
+  "reporting-dashboards": "66.666% 50%",
+  "waterloo-management-sciences": "100% 50%",
+  "queens-computing": "0% 100%",
+  "high-precision-air-temperature-control": "33.333% 100%",
+  "scd-stacked-carton-dataset": "66.666% 100%"
+};
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
@@ -34,8 +47,8 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-neutral-950">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/85 backdrop-blur-xl">
+    <main className="min-h-screen overflow-hidden bg-white pt-[6.5rem] text-neutral-950 md:pt-14">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <nav className="section-shell flex h-14 items-center justify-between">
           <a className="text-sm font-semibold tracking-normal text-neutral-950 focus-ring" href="#home">
             {t.displayName}
@@ -220,7 +233,7 @@ function PortfolioCard({
       className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-ring"
       href={`/${section}/${item.slug}`}
     >
-      <VisualTile section={section} index={visualIndex} />
+      <VisualTile section={section} index={visualIndex} slug={item.slug} />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <p className="text-sm font-semibold text-[#0066cc]">{item.meta}</p>
         <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</h3>
@@ -235,7 +248,7 @@ function PortfolioCard({
   );
 }
 
-function VisualTile({ section, index }: { section: SectionKey; index: number }) {
+function VisualTile({ section, index, slug }: { section: SectionKey; index: number; slug: string }) {
   const icons = {
     experience: <BriefcaseBusiness size={28} />,
     projects: index === 0 ? <Workflow size={28} /> : <BarChart3 size={28} />,
@@ -244,18 +257,14 @@ function VisualTile({ section, index }: { section: SectionKey; index: number }) 
   };
 
   return (
-    <div className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100">
-      <Image
-        alt=""
-        className="object-cover"
-        fill
-        priority={index < 2}
-        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-        src="/portfolio-card-visual.png"
-        style={{
-          objectPosition: `${22 + (index % 4) * 18}% center`
-        }}
-      />
+    <div
+      className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100 bg-cover"
+      style={{
+        backgroundImage: "url('/portfolio-card-atlas.png')",
+        backgroundPosition: imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
+        backgroundSize: "400% 300%"
+      }}
+    >
       <div className="absolute inset-0 bg-white/10" />
       <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
         {icons[section]}

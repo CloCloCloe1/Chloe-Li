@@ -7,12 +7,25 @@ import {
   GraduationCap,
   Workflow
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, getAllDetailPaths, getSectionItem, type SectionKey } from "@/lib/profile";
 
 const sections = ["experience", "projects", "education", "publications"] as const;
+
+const imagePositions: Record<string, string> = {
+  "mec-tech-algorithm-engineer": "0% 0%",
+  "imco-business-systems-analyst": "33.333% 0%",
+  "nissan-business-systems-analyst": "66.666% 0%",
+  "hgtech-international-business-analyst": "100% 0%",
+  "ai-workflow-knowledge-base": "0% 50%",
+  "product-data-validation": "33.333% 50%",
+  "reporting-dashboards": "66.666% 50%",
+  "waterloo-management-sciences": "100% 50%",
+  "queens-computing": "0% 100%",
+  "high-precision-air-temperature-control": "33.333% 100%",
+  "scd-stacked-carton-dataset": "66.666% 100%"
+};
 
 type DetailPageProps = {
   params: Promise<{
@@ -54,8 +67,8 @@ export default async function DetailPage({ params }: DetailPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-white text-neutral-950">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/85 backdrop-blur-xl">
+    <main className="min-h-screen bg-white pt-14 text-neutral-950">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <nav className="section-shell flex h-14 items-center justify-between">
           <Link className="text-sm font-semibold text-neutral-950 focus-ring" href="/">
             Chloe Li
@@ -92,7 +105,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
           </div>
 
           <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-neutral-100 shadow-sm">
-            <DetailVisual section={section} />
+            <DetailVisual section={section} slug={slug} />
           </div>
         </div>
 
@@ -137,7 +150,7 @@ function isSectionKey(section: string): section is SectionKey {
   return sections.includes(section as SectionKey);
 }
 
-function DetailVisual({ section }: { section: SectionKey }) {
+function DetailVisual({ section, slug }: { section: SectionKey; slug: string }) {
   const icons = {
     experience: <BriefcaseBusiness size={34} />,
     projects: section === "projects" ? <Workflow size={34} /> : <BarChart3 size={34} />,
@@ -146,15 +159,14 @@ function DetailVisual({ section }: { section: SectionKey }) {
   };
 
   return (
-    <div className="relative flex min-h-80 items-center justify-center overflow-hidden p-10">
-      <Image
-        alt=""
-        className="object-cover"
-        fill
-        priority
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        src="/portfolio-card-visual.png"
-      />
+    <div
+      className="relative flex min-h-80 items-center justify-center overflow-hidden bg-neutral-100 bg-cover p-10"
+      style={{
+        backgroundImage: "url('/portfolio-card-atlas.png')",
+        backgroundPosition: imagePositions[slug] ?? "50% 50%",
+        backgroundSize: "400% 300%"
+      }}
+    >
       <div className="absolute inset-0 bg-white/10" />
       <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">
         {icons[section]}

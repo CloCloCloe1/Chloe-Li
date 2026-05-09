@@ -5,7 +5,7 @@
 :root {
   color-scheme: light;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 7rem;
 }
 
 body {
@@ -36,5 +36,5 @@ body {
 }
 
 .page-section {
-  @apply scroll-mt-20;
+  @apply scroll-mt-28 md:scroll-mt-20;
 }
