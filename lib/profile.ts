@@ -528,7 +528,7 @@ export function getSectionItem(section: SectionKey, slug: string, locale: Locale
 }
 
 export function getAllDetailPaths() {
-  return (["experience", "projects", "education", "publications"] as SectionKey[]).flatMap((section) =>
+  return (["experience", "education", "publications"] as SectionKey[]).flatMap((section) =>
     content.en.sections[section].items.map((item) => ({
       section,
       slug: item.slug

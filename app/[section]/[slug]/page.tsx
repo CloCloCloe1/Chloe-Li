@@ -1,17 +1,16 @@
 import {
   ArrowLeft,
   ArrowUpRight,
-  BarChart3,
   BriefcaseBusiness,
   FileText,
   GraduationCap,
-  Workflow
 } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { content, getAllDetailPaths, getSectionItem, type SectionKey } from "@/lib/profile";
+import { content, getAllDetailPaths, getSectionItem } from "@/lib/profile";
 
-const sections = ["experience", "projects", "education", "publications"] as const;
+const sections = ["experience", "education", "publications"] as const;
+type DetailSectionKey = (typeof sections)[number];
 
 const imagePositions: Record<string, string> = {
   "mec-tech-algorithm-engineer": "0% 0%",
@@ -155,15 +154,14 @@ export default async function DetailPage({ params }: DetailPageProps) {
   );
 }
 
-function isSectionKey(section: string): section is SectionKey {
-  return sections.includes(section as SectionKey);
+function isSectionKey(section: string): section is DetailSectionKey {
+  return (sections as readonly string[]).includes(section);
 }
 
-function DetailVisual({ section, slug }: { section: SectionKey; slug: string }) {
+function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: string }) {
   const brandImage = brandImages[slug];
   const icons = {
     experience: <BriefcaseBusiness size={34} />,
-    projects: section === "projects" ? <Workflow size={34} /> : <BarChart3 size={34} />,
     education: <GraduationCap size={34} />,
     publications: <FileText size={34} />
   };
