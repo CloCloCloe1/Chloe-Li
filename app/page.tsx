@@ -40,7 +40,7 @@ const imagePositions: Record<string, string> = {
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; imageClassName?: string }> = {
   "mec-tech-algorithm-engineer": {
-    src: "/brand/mectech.png",
+    src: "/brand/mectech.png?v=2",
     backgroundColor: "#edf4ff",
     blend: true,
     imageClassName: "max-h-24"
@@ -56,7 +56,7 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
     imageClassName: "max-h-20"
   },
   "hgtech-international-business-analyst": {
-    src: "/brand/hgtech.png",
+    src: "/brand/hgtech.png?v=2",
     backgroundColor: "#fff5f5",
     blend: true,
     imageClassName: "max-h-24"
@@ -68,19 +68,19 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
     imageClassName: "max-h-24"
   },
   "queens-computing": {
-    src: "/brand/qu.jpg",
+    src: "/brand/qu.jpg?v=2",
     backgroundColor: "#f8f1f4",
     blend: true,
     imageClassName: "max-h-24"
   },
   "high-precision-air-temperature-control": {
-    src: "/brand/sciencedirect.png",
+    src: "/brand/sciencedirect.png?v=2",
     backgroundColor: "#fff6f1",
     blend: true,
     imageClassName: "max-h-24"
   },
   "scd-stacked-carton-dataset": {
-    src: "/brand/mdpi.png",
+    src: "/brand/mdpi.png?v=2",
     backgroundColor: "#f2f7fc",
     blend: true,
     imageClassName: "max-h-24"
