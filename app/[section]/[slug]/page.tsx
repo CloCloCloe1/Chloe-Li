@@ -1,0 +1,157 @@
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  BarChart3,
+  BriefcaseBusiness,
+  FileText,
+  GraduationCap,
+  Workflow
+} from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { content, getAllDetailPaths, getSectionItem, type SectionKey } from "@/lib/profile";
+
+const sections = ["experience", "projects", "education", "publications"] as const;
+
+type DetailPageProps = {
+  params: Promise<{
+    section: string;
+    slug: string;
+  }>;
+};
+
+export function generateStaticParams() {
+  return getAllDetailPaths();
+}
+
+export async function generateMetadata({ params }: DetailPageProps) {
+  const { section, slug } = await params;
+  if (!isSectionKey(section)) {
+    return {};
+  }
+
+  const item = getSectionItem(section, slug, "en");
+
+  return {
+    title: item ? `${item.title} | Chloe Li` : "Chloe Li"
+  };
+}
+
+export default async function DetailPage({ params }: DetailPageProps) {
+  const { section, slug } = await params;
+  if (!isSectionKey(section)) {
+    notFound();
+  }
+
+  const item = getSectionItem(section, slug, "en");
+  const zhItem = getSectionItem(section, slug, "zh");
+  const sectionLabel = content.en.nav[section];
+  const sectionHref = `/#${section}`;
+
+  if (!item) {
+    notFound();
+  }
+
+  return (
+    <main className="min-h-screen bg-white text-neutral-950">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/85 backdrop-blur-xl">
+        <nav className="section-shell flex h-14 items-center justify-between">
+          <Link className="text-sm font-semibold text-neutral-950 focus-ring" href="/">
+            Chloe Li
+          </Link>
+          <Link className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring" href={sectionHref}>
+            <ArrowLeft size={14} />
+            {sectionLabel}
+          </Link>
+        </nav>
+      </header>
+
+      <section className="section-shell py-16 sm:py-24">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold text-[#0066cc]">{sectionLabel}</p>
+            <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-normal text-neutral-950 sm:text-6xl">
+              {item.title}
+            </h1>
+            <p className="mt-5 text-xl font-medium leading-8 text-neutral-700">{item.subtitle}</p>
+            <p className="mt-3 text-sm font-semibold text-neutral-500">{item.meta}</p>
+            {item.description ? <p className="mt-8 text-lg leading-8 text-neutral-700">{item.description}</p> : null}
+
+            {item.url ? (
+              <a
+                className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-6 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
+                href={item.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {item.cta ?? "Open link"}
+                <ArrowUpRight size={16} />
+              </a>
+            ) : null}
+          </div>
+
+          <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-neutral-100 shadow-sm">
+            <DetailVisual section={section} />
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+          <article className="rounded-[2rem] bg-neutral-100 p-6 sm:p-8">
+            <h2 className="text-2xl font-semibold tracking-normal text-neutral-950">Details</h2>
+            <ul className="mt-6 grid gap-4">
+              {item.bullets?.map((bullet) => (
+                <li className="flex gap-3 text-sm leading-7 text-neutral-700" key={bullet}>
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-950" />
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <aside className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm sm:p-8">
+            <h2 className="text-2xl font-semibold tracking-normal text-neutral-950">Focus</h2>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {item.tags?.map((tag) => (
+                <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {zhItem ? (
+              <div className="mt-8 border-t border-black/10 pt-6">
+                <p className="text-sm font-semibold text-[#0066cc]">中文摘要</p>
+                <h3 className="mt-3 text-xl font-semibold tracking-normal text-neutral-950">{zhItem.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-neutral-700">{zhItem.description}</p>
+              </div>
+            ) : null}
+          </aside>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function isSectionKey(section: string): section is SectionKey {
+  return sections.includes(section as SectionKey);
+}
+
+function DetailVisual({ section }: { section: SectionKey }) {
+  const icons = {
+    experience: <BriefcaseBusiness size={34} />,
+    projects: section === "projects" ? <Workflow size={34} /> : <BarChart3 size={34} />,
+    education: <GraduationCap size={34} />,
+    publications: <FileText size={34} />
+  };
+
+  return (
+    <div className="relative flex min-h-80 items-center justify-center overflow-hidden p-10">
+      <div className="absolute left-10 top-10 h-24 w-40 rounded-[2rem] bg-white shadow-sm" />
+      <div className="absolute bottom-10 right-10 h-32 w-44 rounded-[2rem] border border-black/10 bg-white/70" />
+      <div className="absolute inset-x-16 top-1/2 h-24 -translate-y-1/2 rounded-full border border-black/10 bg-white/60" />
+      <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950 text-white shadow-sm">
+        {icons[section]}
+      </div>
+    </div>
+  );
+}

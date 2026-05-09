@@ -3,20 +3,25 @@
 import {
   ArrowRight,
   BarChart3,
+  BriefcaseBusiness,
   Check,
   Download,
+  FileText,
   Globe2,
+  GraduationCap,
   Linkedin,
   Mail,
   MapPin,
   Phone,
   Workflow
 } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
-import { contact, content, type Locale } from "@/lib/profile";
+import { contact, content, type Locale, type PortfolioItem, type SectionKey } from "@/lib/profile";
 
-const sectionIds = ["home", "about", "experience", "projects", "education", "contact"] as const;
+const sectionIds = ["home", "about", "experience", "projects", "education", "publications", "contact"] as const;
+const detailSections: SectionKey[] = ["experience", "projects", "education", "publications"];
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
@@ -29,13 +34,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-white text-neutral-950">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/85 backdrop-blur-xl">
         <nav className="section-shell flex h-14 items-center justify-between">
           <a className="text-sm font-semibold tracking-normal text-neutral-950 focus-ring" href="#home">
             {t.displayName}
           </a>
 
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-6 lg:flex">
             {nav.map((item) => (
               <a
                 className="text-xs font-medium text-neutral-600 transition hover:text-neutral-950 focus-ring"
@@ -59,7 +64,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="section-shell flex min-h-[calc(100vh-3.5rem)] flex-col justify-center py-20 text-center" id="home">
+      <section className="page-section section-shell flex min-h-[calc(100vh-3.5rem)] flex-col justify-center py-20 text-center" id="home">
         <p className="animate-rise text-2xl font-semibold tracking-normal text-neutral-950 sm:text-3xl">
           {t.displayName}
         </p>
@@ -98,7 +103,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-neutral-100 py-24" id="about">
+      <section className="page-section bg-neutral-100 py-24" id="about">
         <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <SectionIntro eyebrow={t.about.eyebrow} title={t.about.title} />
           <div>
@@ -115,78 +120,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24" id="experience">
-        <div className="section-shell">
-          <SectionIntro eyebrow={t.experience.eyebrow} title={t.experience.title} />
+      {detailSections.map((section, index) => (
+        <LineupSection
+          background={index % 2 === 0 ? "white" : "gray"}
+          key={section}
+          locale={locale}
+          section={section}
+        />
+      ))}
 
-          <div className="mt-12 grid gap-5">
-            {t.experience.items.map((job) => (
-              <article className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8" key={`${job.company}-${job.period}`}>
-                <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold text-[#0066cc]">{job.period}</p>
-                    <h3 className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950">{job.title}</h3>
-                    <p className="mt-2 text-sm text-neutral-600">
-                      {job.company} · {job.location}
-                    </p>
-                  </div>
-                </div>
-                <ul className="mt-6 grid gap-3 md:grid-cols-2">
-                  {job.bullets.map((bullet) => (
-                    <li className="flex gap-3 text-sm leading-6 text-neutral-700" key={bullet}>
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-950" />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-neutral-950 py-24 text-white" id="projects">
-        <div className="section-shell">
-          <SectionIntro eyebrow={t.projects.eyebrow} title={t.projects.title} inverted />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {t.projects.items.map((project, index) => (
-              <article className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 transition duration-300 hover:-translate-y-1 hover:bg-white/[0.09]" key={project.title}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-neutral-950">
-                  {index === 0 ? <Workflow size={20} /> : <BarChart3 size={20} />}
-                </div>
-                <p className="mt-8 text-xs font-semibold uppercase tracking-[0.14em] text-white/45">{project.tag}</p>
-                <h3 className="mt-3 text-2xl font-semibold tracking-normal">{project.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-white/68">{project.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-neutral-100 py-24" id="education">
-        <div className="section-shell">
-          <SectionIntro eyebrow={t.education.eyebrow} title={t.education.title} />
-
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {t.education.items.map((item) => (
-              <article className="rounded-[2rem] bg-white p-7 shadow-sm" key={item.degree}>
-                <p className="text-sm font-semibold text-[#0066cc]">{item.period}</p>
-                <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.degree}</h3>
-                <p className="mt-2 text-base font-medium text-neutral-700">{item.school}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {item.details.map((detail) => (
-                    <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={detail}>
-                      {detail}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24" id="contact">
+      <section className="page-section py-24" id="contact">
         <div className="section-shell text-center">
           <p className="text-sm font-semibold text-[#0066cc]">{t.contact.eyebrow}</p>
           <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-semibold leading-tight tracking-normal text-neutral-950 sm:text-6xl">
@@ -217,6 +160,84 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function LineupSection({
+  section,
+  locale,
+  background
+}: {
+  section: SectionKey;
+  locale: Locale;
+  background: "white" | "gray";
+}) {
+  const sectionData = content[locale].sections[section];
+  const bgClass = background === "gray" ? "bg-neutral-100" : "bg-white";
+
+  return (
+    <section className={`page-section py-24 ${bgClass}`} id={section}>
+      <div className="section-shell">
+        <SectionIntro eyebrow={sectionData.eyebrow} title={sectionData.title} />
+        <p className="mt-10 text-2xl font-semibold tracking-normal text-neutral-950 sm:text-3xl">
+          {sectionData.lineup}
+        </p>
+        <div className={`mt-6 grid gap-5 ${section === "experience" ? "lg:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}>
+          {sectionData.items.map((item, index) => (
+            <PortfolioCard item={item} key={item.slug} section={section} visualIndex={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PortfolioCard({
+  item,
+  section,
+  visualIndex
+}: {
+  item: PortfolioItem;
+  section: SectionKey;
+  visualIndex: number;
+}) {
+  return (
+    <Link
+      className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-ring"
+      href={`/${section}/${item.slug}`}
+    >
+      <VisualTile section={section} index={visualIndex} />
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <p className="text-sm font-semibold text-[#0066cc]">{item.meta}</p>
+        <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</h3>
+        <p className="mt-2 text-sm font-medium text-neutral-600">{item.subtitle}</p>
+        {item.description ? <p className="mt-5 text-sm leading-7 text-neutral-700">{item.description}</p> : null}
+        <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-[#0066cc]">
+          <span>Learn more</span>
+          <ArrowRight className="transition group-hover:translate-x-1" size={16} />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function VisualTile({ section, index }: { section: SectionKey; index: number }) {
+  const icons = {
+    experience: <BriefcaseBusiness size={28} />,
+    projects: index === 0 ? <Workflow size={28} /> : <BarChart3 size={28} />,
+    education: <GraduationCap size={28} />,
+    publications: <FileText size={28} />
+  };
+
+  return (
+    <div className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100">
+      <div className="absolute inset-x-8 top-8 h-16 rounded-full border border-black/10 bg-white/70" />
+      <div className="absolute bottom-8 left-8 h-16 w-28 rounded-2xl bg-white shadow-sm" />
+      <div className="absolute bottom-8 right-8 h-20 w-24 rounded-2xl border border-black/10 bg-white/70" />
+      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950 text-white shadow-sm">
+        {icons[section]}
+      </div>
+    </div>
   );
 }
 

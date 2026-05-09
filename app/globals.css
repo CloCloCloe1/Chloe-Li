@@ -5,6 +5,7 @@
 :root {
   color-scheme: light;
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -32,4 +33,8 @@ body {
 
 .focus-ring {
   @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal;
+}
+
+.page-section {
+  @apply scroll-mt-20;
 }
