@@ -5,6 +5,7 @@ import {
   FileText,
   GraduationCap,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, getAllDetailPaths, getSectionItem } from "@/lib/profile";
@@ -26,13 +27,49 @@ const imagePositions: Record<string, string> = {
   "scd-stacked-carton-dataset": "66.666% 100%"
 };
 
-const brandImages: Record<string, string> = {
-  "mec-tech-algorithm-engineer": "/brand/mec-tech.png",
-  "imco-business-systems-analyst": "/brand/imco.svg",
-  "nissan-business-systems-analyst": "/brand/nissan.svg",
-  "hgtech-international-business-analyst": "/brand/hgtech.svg",
-  "waterloo-management-sciences": "/brand/waterloo.png",
-  "queens-computing": "/brand/queens.jpg"
+const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; imageClassName?: string }> = {
+  "mec-tech-algorithm-engineer": {
+    src: "/brand/mec-tech.png",
+    backgroundColor: "#edf4ff",
+    imageClassName: "max-h-44"
+  },
+  "imco-business-systems-analyst": {
+    src: "/brand/imco.svg",
+    backgroundColor: "#eef9fb",
+    imageClassName: "max-h-48"
+  },
+  "nissan-business-systems-analyst": {
+    src: "/brand/nissan.svg",
+    backgroundColor: "#f5f5f7",
+    imageClassName: "max-h-36"
+  },
+  "hgtech-international-business-analyst": {
+    src: "/brand/hgtech.svg",
+    backgroundColor: "#fff5f5",
+    imageClassName: "max-h-40"
+  },
+  "waterloo-management-sciences": {
+    src: "/brand/waterloo.png",
+    backgroundColor: "#f5f5f7",
+    blend: true,
+    imageClassName: "max-h-44"
+  },
+  "queens-computing": {
+    src: "/brand/queens.jpg",
+    backgroundColor: "#f8f1f4",
+    blend: true,
+    imageClassName: "max-h-44"
+  },
+  "high-precision-air-temperature-control": {
+    src: "/brand/sciencedirect.svg",
+    backgroundColor: "#fff6f1",
+    imageClassName: "max-h-40"
+  },
+  "scd-stacked-carton-dataset": {
+    src: "/brand/mdpi.svg",
+    backgroundColor: "#f2f7fc",
+    imageClassName: "max-h-40"
+  }
 };
 
 type DetailPageProps = {
@@ -159,7 +196,7 @@ function isSectionKey(section: string): section is DetailSectionKey {
 }
 
 function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: string }) {
-  const brandImage = brandImages[slug];
+  const brandVisual = brandVisuals[slug];
   const icons = {
     experience: <BriefcaseBusiness size={34} />,
     education: <GraduationCap size={34} />,
@@ -169,14 +206,26 @@ function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: stri
   return (
     <div
       className="relative flex min-h-80 items-center justify-center overflow-hidden bg-neutral-100 p-10"
-      style={{
-        backgroundImage: `url('${brandImage ?? "/portfolio-card-atlas.png"}')`,
-        backgroundPosition: brandImage ? "center" : imagePositions[slug] ?? "50% 50%",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: brandImage ? "70% auto" : "400% 300%"
-      }}
+      style={
+        brandVisual
+          ? { backgroundColor: brandVisual.backgroundColor }
+          : {
+              backgroundImage: "url('/portfolio-card-atlas.png')",
+              backgroundPosition: imagePositions[slug] ?? "50% 50%",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "400% 300%"
+            }
+      }
     >
-      {brandImage ? null : (
+      {brandVisual ? (
+        <Image
+          alt=""
+          className={`w-[78%] object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""} ${brandVisual.imageClassName ?? ""}`}
+          height={260}
+          src={brandVisual.src}
+          width={760}
+        />
+      ) : (
         <>
           <div className="absolute inset-0 bg-white/10" />
           <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">

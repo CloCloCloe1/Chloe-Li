@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" role="img" aria-label="HGTECH">
-  <rect width="900" height="240" fill="#ffffff"/>
-  <g transform="translate(38 36)">
-    <path d="M36 82C45 38 75 8 124 6h20c-20 27-29 59-31 96H77c-1 30 12 50 39 62-47 0-78-13-95-39-10-15-13-29-9-43z" fill="#ee1b24"/>
-    <path d="M169 7c46 4 75 29 86 76 12 51-12 92-65 117 16-30 24-63 23-99h-37c2-35 0-66-7-94z" fill="#ee1b24"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" role="img" aria-label="HGTECH">
+  <g transform="translate(28 34)" fill="#ec1c24">
+    <path d="M32 64C44 24 76 2 128 0c-18 24-27 52-29 86H65c-3 28 11 49 42 63-48-2-79-16-94-43-8-14-10-28-5-42h24z"/>
+    <path d="M164 0c51 4 83 31 94 81 11 51-14 91-72 119 20-31 29-65 27-102h-38c3-35-1-68-11-98z"/>
   </g>
-  <text x="310" y="116" fill="#050505" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" letter-spacing="5">HGTECH</text>
-  <text x="315" y="166" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">for Higher Glory in manufacturing</text>
+  <text x="300" y="110" fill="#050505" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700" letter-spacing="3">HGTECH</text>
+  <text x="304" y="154" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">for Higher Glory in manufacturing</text>
 </svg>

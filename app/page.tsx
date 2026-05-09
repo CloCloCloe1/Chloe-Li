@@ -15,6 +15,7 @@ import {
   Phone,
   Workflow
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
@@ -37,13 +38,49 @@ const imagePositions: Record<string, string> = {
   "scd-stacked-carton-dataset": "66.666% 100%"
 };
 
-const brandImages: Record<string, string> = {
-  "mec-tech-algorithm-engineer": "/brand/mec-tech.png",
-  "imco-business-systems-analyst": "/brand/imco.svg",
-  "nissan-business-systems-analyst": "/brand/nissan.svg",
-  "hgtech-international-business-analyst": "/brand/hgtech.svg",
-  "waterloo-management-sciences": "/brand/waterloo.png",
-  "queens-computing": "/brand/queens.jpg"
+const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; imageClassName?: string }> = {
+  "mec-tech-algorithm-engineer": {
+    src: "/brand/mec-tech.png",
+    backgroundColor: "#edf4ff",
+    imageClassName: "max-h-24"
+  },
+  "imco-business-systems-analyst": {
+    src: "/brand/imco.svg",
+    backgroundColor: "#eef9fb",
+    imageClassName: "max-h-28"
+  },
+  "nissan-business-systems-analyst": {
+    src: "/brand/nissan.svg",
+    backgroundColor: "#f5f5f7",
+    imageClassName: "max-h-20"
+  },
+  "hgtech-international-business-analyst": {
+    src: "/brand/hgtech.svg",
+    backgroundColor: "#fff5f5",
+    imageClassName: "max-h-24"
+  },
+  "waterloo-management-sciences": {
+    src: "/brand/waterloo.png",
+    backgroundColor: "#f5f5f7",
+    blend: true,
+    imageClassName: "max-h-24"
+  },
+  "queens-computing": {
+    src: "/brand/queens.jpg",
+    backgroundColor: "#f8f1f4",
+    blend: true,
+    imageClassName: "max-h-24"
+  },
+  "high-precision-air-temperature-control": {
+    src: "/brand/sciencedirect.svg",
+    backgroundColor: "#fff6f1",
+    imageClassName: "max-h-24"
+  },
+  "scd-stacked-carton-dataset": {
+    src: "/brand/mdpi.svg",
+    backgroundColor: "#f2f7fc",
+    imageClassName: "max-h-24"
+  }
 };
 
 export default function Home() {
@@ -258,7 +295,7 @@ function PortfolioCard({
 }
 
 function VisualTile({ section, index, slug }: { section: SectionKey; index: number; slug: string }) {
-  const brandImage = brandImages[slug];
+  const brandVisual = brandVisuals[slug];
   const icons = {
     experience: <BriefcaseBusiness size={28} />,
     projects: index === 0 ? <Workflow size={28} /> : <BarChart3 size={28} />,
@@ -269,14 +306,26 @@ function VisualTile({ section, index, slug }: { section: SectionKey; index: numb
   return (
     <div
       className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100"
-      style={{
-        backgroundImage: `url('${brandImage ?? "/portfolio-card-atlas.png"}')`,
-        backgroundPosition: brandImage ? "center" : imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: brandImage ? "78% auto" : "400% 300%"
-      }}
+      style={
+        brandVisual
+          ? { backgroundColor: brandVisual.backgroundColor }
+          : {
+              backgroundImage: "url('/portfolio-card-atlas.png')",
+              backgroundPosition: imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "400% 300%"
+            }
+      }
     >
-      {brandImage ? null : (
+      {brandVisual ? (
+        <Image
+          alt=""
+          className={`w-[78%] object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""} ${brandVisual.imageClassName ?? ""}`}
+          height={220}
+          src={brandVisual.src}
+          width={640}
+        />
+      ) : (
         <>
           <div className="absolute inset-0 bg-white/10" />
           <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
