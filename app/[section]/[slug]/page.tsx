@@ -35,8 +35,9 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
     imageClassName: "max-h-44"
   },
   "imco-business-systems-analyst": {
-    src: "/brand/imco.svg",
+    src: "/brand/imco.png?v=2",
     backgroundColor: "#eef9fb",
+    blend: true,
     imageClassName: "max-h-48"
   },
   "nissan-business-systems-analyst": {
