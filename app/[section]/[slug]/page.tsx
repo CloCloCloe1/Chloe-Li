@@ -7,6 +7,7 @@ import {
   GraduationCap,
   Workflow
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, getAllDetailPaths, getSectionItem, type SectionKey } from "@/lib/profile";
@@ -146,10 +147,16 @@ function DetailVisual({ section }: { section: SectionKey }) {
 
   return (
     <div className="relative flex min-h-80 items-center justify-center overflow-hidden p-10">
-      <div className="absolute left-10 top-10 h-24 w-40 rounded-[2rem] bg-white shadow-sm" />
-      <div className="absolute bottom-10 right-10 h-32 w-44 rounded-[2rem] border border-black/10 bg-white/70" />
-      <div className="absolute inset-x-16 top-1/2 h-24 -translate-y-1/2 rounded-full border border-black/10 bg-white/60" />
-      <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950 text-white shadow-sm">
+      <Image
+        alt=""
+        className="object-cover"
+        fill
+        priority
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        src="/portfolio-card-visual.png"
+      />
+      <div className="absolute inset-0 bg-white/10" />
+      <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">
         {icons[section]}
       </div>
     </div>

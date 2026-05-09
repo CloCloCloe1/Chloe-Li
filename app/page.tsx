@@ -15,6 +15,7 @@ import {
   Phone,
   Workflow
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
@@ -40,7 +41,7 @@ export default function Home() {
             {t.displayName}
           </a>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 md:flex">
             {nav.map((item) => (
               <a
                 className="text-xs font-medium text-neutral-600 transition hover:text-neutral-950 focus-ring"
@@ -62,6 +63,19 @@ export default function Home() {
             {locale === "en" ? "中文" : "EN"}
           </button>
         </nav>
+        <div className="border-t border-black/5 md:hidden">
+          <div className="flex gap-5 overflow-x-auto px-5 py-3">
+            {nav.map((item) => (
+              <a
+                className="shrink-0 text-xs font-medium text-neutral-600 transition hover:text-neutral-950 focus-ring"
+                href={`#${item.id}`}
+                key={item.id}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </header>
 
       <section className="page-section section-shell flex min-h-[calc(100vh-3.5rem)] flex-col justify-center py-20 text-center" id="home">
@@ -231,10 +245,19 @@ function VisualTile({ section, index }: { section: SectionKey; index: number }) 
 
   return (
     <div className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100">
-      <div className="absolute inset-x-8 top-8 h-16 rounded-full border border-black/10 bg-white/70" />
-      <div className="absolute bottom-8 left-8 h-16 w-28 rounded-2xl bg-white shadow-sm" />
-      <div className="absolute bottom-8 right-8 h-20 w-24 rounded-2xl border border-black/10 bg-white/70" />
-      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950 text-white shadow-sm">
+      <Image
+        alt=""
+        className="object-cover"
+        fill
+        priority={index < 2}
+        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        src="/portfolio-card-visual.png"
+        style={{
+          objectPosition: `${22 + (index % 4) * 18}% center`
+        }}
+      />
+      <div className="absolute inset-0 bg-white/10" />
+      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
         {icons[section]}
       </div>
     </div>
