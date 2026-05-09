@@ -27,7 +27,7 @@ const imagePositions: Record<string, string> = {
   "scd-stacked-carton-dataset": "66.666% 100%"
 };
 
-const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; imageClassName?: string }> = {
+const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "mec-tech-algorithm-engineer": {
     src: "/brand/mectech.png?v=2",
     backgroundColor: "#edf4ff",
@@ -59,9 +59,9 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
   },
   "queens-computing": {
     src: "/brand/qu.jpg?v=2",
-    backgroundColor: "#f8f1f4",
-    blend: true,
-    imageClassName: "max-h-44"
+    backgroundColor: "#f4f4f4",
+    fullBleed: true,
+    imageClassName: "object-cover"
   },
   "high-precision-air-temperature-control": {
     src: "/brand/sciencedirect.png?v=2",
@@ -222,7 +222,12 @@ function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: stri
             }
       }
     >
-      {brandVisual ? (
+      {brandVisual?.fullBleed ? (
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: `url('${brandVisual.src}')` }}
+        />
+      ) : brandVisual ? (
         <Image
           alt=""
           className={`w-[78%] object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""} ${brandVisual.imageClassName ?? ""}`}
