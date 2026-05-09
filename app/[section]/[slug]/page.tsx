@@ -27,6 +27,15 @@ const imagePositions: Record<string, string> = {
   "scd-stacked-carton-dataset": "66.666% 100%"
 };
 
+const brandImages: Record<string, string> = {
+  "mec-tech-algorithm-engineer": "/brand/mec-tech.png",
+  "imco-business-systems-analyst": "/brand/imco.svg",
+  "nissan-business-systems-analyst": "/brand/nissan.svg",
+  "hgtech-international-business-analyst": "/brand/hgtech.svg",
+  "waterloo-management-sciences": "/brand/waterloo.png",
+  "queens-computing": "/brand/queens.jpg"
+};
+
 type DetailPageProps = {
   params: Promise<{
     section: string;
@@ -151,6 +160,7 @@ function isSectionKey(section: string): section is SectionKey {
 }
 
 function DetailVisual({ section, slug }: { section: SectionKey; slug: string }) {
+  const brandImage = brandImages[slug];
   const icons = {
     experience: <BriefcaseBusiness size={34} />,
     projects: section === "projects" ? <Workflow size={34} /> : <BarChart3 size={34} />,
@@ -160,17 +170,22 @@ function DetailVisual({ section, slug }: { section: SectionKey; slug: string }) 
 
   return (
     <div
-      className="relative flex min-h-80 items-center justify-center overflow-hidden bg-neutral-100 bg-cover p-10"
+      className="relative flex min-h-80 items-center justify-center overflow-hidden bg-neutral-100 p-10"
       style={{
-        backgroundImage: "url('/portfolio-card-atlas.png')",
-        backgroundPosition: imagePositions[slug] ?? "50% 50%",
-        backgroundSize: "400% 300%"
+        backgroundImage: `url('${brandImage ?? "/portfolio-card-atlas.png"}')`,
+        backgroundPosition: brandImage ? "center" : imagePositions[slug] ?? "50% 50%",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: brandImage ? "70% auto" : "400% 300%"
       }}
     >
-      <div className="absolute inset-0 bg-white/10" />
-      <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">
-        {icons[section]}
-      </div>
+      {brandImage ? null : (
+        <>
+          <div className="absolute inset-0 bg-white/10" />
+          <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">
+            {icons[section]}
+          </div>
+        </>
+      )}
     </div>
   );
 }

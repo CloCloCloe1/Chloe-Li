@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" role="img" aria-label="HGTECH">
+  <rect width="900" height="240" fill="#ffffff"/>
+  <g transform="translate(38 36)">
+    <path d="M36 82C45 38 75 8 124 6h20c-20 27-29 59-31 96H77c-1 30 12 50 39 62-47 0-78-13-95-39-10-15-13-29-9-43z" fill="#ee1b24"/>
+    <path d="M169 7c46 4 75 29 86 76 12 51-12 92-65 117 16-30 24-63 23-99h-37c2-35 0-66-7-94z" fill="#ee1b24"/>
+  </g>
+  <text x="310" y="116" fill="#050505" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700" letter-spacing="5">HGTECH</text>
+  <text x="315" y="166" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">for Higher Glory in manufacturing</text>
+</svg>

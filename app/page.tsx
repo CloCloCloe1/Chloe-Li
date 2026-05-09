@@ -37,6 +37,15 @@ const imagePositions: Record<string, string> = {
   "scd-stacked-carton-dataset": "66.666% 100%"
 };
 
+const brandImages: Record<string, string> = {
+  "mec-tech-algorithm-engineer": "/brand/mec-tech.png",
+  "imco-business-systems-analyst": "/brand/imco.svg",
+  "nissan-business-systems-analyst": "/brand/nissan.svg",
+  "hgtech-international-business-analyst": "/brand/hgtech.svg",
+  "waterloo-management-sciences": "/brand/waterloo.png",
+  "queens-computing": "/brand/queens.jpg"
+};
+
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
   const t = content[locale];
@@ -249,6 +258,7 @@ function PortfolioCard({
 }
 
 function VisualTile({ section, index, slug }: { section: SectionKey; index: number; slug: string }) {
+  const brandImage = brandImages[slug];
   const icons = {
     experience: <BriefcaseBusiness size={28} />,
     projects: index === 0 ? <Workflow size={28} /> : <BarChart3 size={28} />,
@@ -258,17 +268,22 @@ function VisualTile({ section, index, slug }: { section: SectionKey; index: numb
 
   return (
     <div
-      className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100 bg-cover"
+      className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100"
       style={{
-        backgroundImage: "url('/portfolio-card-atlas.png')",
-        backgroundPosition: imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
-        backgroundSize: "400% 300%"
+        backgroundImage: `url('${brandImage ?? "/portfolio-card-atlas.png"}')`,
+        backgroundPosition: brandImage ? "center" : imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: brandImage ? "78% auto" : "400% 300%"
       }}
     >
-      <div className="absolute inset-0 bg-white/10" />
-      <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
-        {icons[section]}
-      </div>
+      {brandImage ? null : (
+        <>
+          <div className="absolute inset-0 bg-white/10" />
+          <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
+            {icons[section]}
+          </div>
+        </>
+      )}
     </div>
   );
 }
