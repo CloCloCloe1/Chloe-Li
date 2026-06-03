@@ -1,9 +1,6 @@
 import {
   ArrowLeft,
   ArrowUpRight,
-  BriefcaseBusiness,
-  FileText,
-  GraduationCap,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,20 +9,6 @@ import { content, getAllDetailPaths, getSectionItem } from "@/lib/profile";
 
 const sections = ["experience", "education", "publications"] as const;
 type DetailSectionKey = (typeof sections)[number];
-
-const imagePositions: Record<string, string> = {
-  "mec-tech-algorithm-engineer": "0% 0%",
-  "imco-business-systems-analyst": "33.333% 0%",
-  "nissan-business-systems-analyst": "66.666% 0%",
-  "hgtech-international-business-analyst": "100% 0%",
-  "ai-workflow-knowledge-base": "0% 50%",
-  "product-data-validation": "33.333% 50%",
-  "reporting-dashboards": "66.666% 50%",
-  "waterloo-management-sciences": "100% 50%",
-  "queens-computing": "0% 100%",
-  "high-precision-air-temperature-control": "33.333% 100%",
-  "scd-stacked-carton-dataset": "66.666% 100%"
-};
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "mec-tech-algorithm-engineer": {
@@ -155,7 +138,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
           </div>
 
           <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-neutral-100 shadow-sm">
-            <DetailVisual section={section} slug={slug} />
+            <DetailVisual slug={slug} />
           </div>
         </div>
 
@@ -200,27 +183,13 @@ function isSectionKey(section: string): section is DetailSectionKey {
   return (sections as readonly string[]).includes(section);
 }
 
-function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: string }) {
+function DetailVisual({ slug }: { slug: string }) {
   const brandVisual = brandVisuals[slug];
-  const icons = {
-    experience: <BriefcaseBusiness size={34} />,
-    education: <GraduationCap size={34} />,
-    publications: <FileText size={34} />
-  };
 
   return (
     <div
       className="relative flex min-h-80 items-center justify-center overflow-hidden bg-neutral-100 p-10"
-      style={
-        brandVisual
-          ? { backgroundColor: brandVisual.backgroundColor }
-          : {
-              backgroundImage: "url('/portfolio-card-atlas.png')",
-              backgroundPosition: imagePositions[slug] ?? "50% 50%",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "400% 300%"
-            }
-      }
+      style={{ backgroundColor: brandVisual.backgroundColor }}
     >
       {brandVisual?.fullBleed ? (
         <div
@@ -235,14 +204,7 @@ function DetailVisual({ section, slug }: { section: DetailSectionKey; slug: stri
           src={brandVisual.src}
           width={760}
         />
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-white/10" />
-          <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-neutral-950/90 text-white shadow-sm backdrop-blur">
-            {icons[section]}
-          </div>
-        </>
-      )}
+      ) : null}
     </div>
   );
 }

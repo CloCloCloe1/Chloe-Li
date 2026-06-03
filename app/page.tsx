@@ -2,18 +2,13 @@
 
 import {
   ArrowRight,
-  BarChart3,
-  BriefcaseBusiness,
   Check,
   Download,
-  FileText,
   Globe2,
-  GraduationCap,
   Linkedin,
   Mail,
   MapPin,
-  Phone,
-  Workflow
+  Phone
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,20 +18,6 @@ import { contact, content, type Locale, type PortfolioItem, type SectionKey } fr
 
 const sectionIds = ["home", "about", "experience", "education", "publications", "contact"] as const;
 const detailSections: SectionKey[] = ["experience", "education", "publications"];
-
-const imagePositions: Record<string, string> = {
-  "mec-tech-algorithm-engineer": "0% 0%",
-  "imco-business-systems-analyst": "33.333% 0%",
-  "nissan-business-systems-analyst": "66.666% 0%",
-  "hgtech-international-business-analyst": "100% 0%",
-  "ai-workflow-knowledge-base": "0% 50%",
-  "product-data-validation": "33.333% 50%",
-  "reporting-dashboards": "66.666% 50%",
-  "waterloo-management-sciences": "100% 50%",
-  "queens-computing": "0% 100%",
-  "high-precision-air-temperature-control": "33.333% 100%",
-  "scd-stacked-carton-dataset": "66.666% 100%"
-};
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "mec-tech-algorithm-engineer": {
@@ -261,8 +242,8 @@ function LineupSection({
           {sectionData.lineup}
         </p>
         <div className={`mt-6 grid gap-5 ${section === "experience" ? "lg:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3"}`}>
-          {sectionData.items.map((item, index) => (
-            <PortfolioCard item={item} key={item.slug} section={section} visualIndex={index} />
+          {sectionData.items.map((item) => (
+            <PortfolioCard item={item} key={item.slug} section={section} />
           ))}
         </div>
       </div>
@@ -272,19 +253,17 @@ function LineupSection({
 
 function PortfolioCard({
   item,
-  section,
-  visualIndex
+  section
 }: {
   item: PortfolioItem;
   section: SectionKey;
-  visualIndex: number;
 }) {
   return (
     <Link
       className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-ring"
       href={`/${section}/${item.slug}`}
     >
-      <VisualTile section={section} index={visualIndex} slug={item.slug} />
+      <VisualTile slug={item.slug} />
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         <p className="text-sm font-semibold text-[#0066cc]">{item.meta}</p>
         <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</h3>
@@ -299,28 +278,13 @@ function PortfolioCard({
   );
 }
 
-function VisualTile({ section, index, slug }: { section: SectionKey; index: number; slug: string }) {
+function VisualTile({ slug }: { slug: string }) {
   const brandVisual = brandVisuals[slug];
-  const icons = {
-    experience: <BriefcaseBusiness size={28} />,
-    projects: index === 0 ? <Workflow size={28} /> : <BarChart3 size={28} />,
-    education: <GraduationCap size={28} />,
-    publications: <FileText size={28} />
-  };
 
   return (
     <div
       className="relative flex h-44 items-center justify-center overflow-hidden bg-neutral-100"
-      style={
-        brandVisual
-          ? { backgroundColor: brandVisual.backgroundColor }
-          : {
-              backgroundImage: "url('/portfolio-card-atlas.png')",
-              backgroundPosition: imagePositions[slug] ?? `${(index % 4) * 33.333}% ${Math.floor(index / 4) * 50}%`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "400% 300%"
-            }
-      }
+      style={{ backgroundColor: brandVisual.backgroundColor }}
     >
       {brandVisual?.fullBleed ? (
         <div
@@ -335,14 +299,7 @@ function VisualTile({ section, index, slug }: { section: SectionKey; index: numb
           src={brandVisual.src}
           width={640}
         />
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-white/10" />
-          <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-neutral-950/90 text-white shadow-sm backdrop-blur">
-            {icons[section]}
-          </div>
-        </>
-      )}
+      ) : null}
     </div>
   );
 }
