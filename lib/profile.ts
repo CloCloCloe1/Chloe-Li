@@ -57,7 +57,7 @@ export const contact = {
   email: "liminxuan118@gmail.com",
   location: "Toronto, ON",
   linkedin: "https://www.linkedin.com/in/chloe-li-mmsc-cs-econ/",
-  resumeUrl: "/chloe-li-resume.docx"
+  resumeUrl: "/chloe-li-analyst-resume.pdf"
 };
 
 export const content = {
@@ -107,7 +107,7 @@ export const content = {
             slug: "mec-tech-algorithm-engineer",
             title: "Algorithm Engineer",
             subtitle: "MEC-Tech",
-            meta: "Feb 2026 - Present · Remote",
+            meta: "Feb 2026 - Present - Remote",
             description:
               "AI workflow and algorithm-focused role supporting internal automation, product knowledge retrieval, and data reliability.",
             bullets: [
@@ -122,7 +122,7 @@ export const content = {
             slug: "imco-business-systems-analyst",
             title: "Business Systems Analyst",
             subtitle: "Investment Management Corporation of Ontario (IMCO)",
-            meta: "Sep 2025 - Jan 2026 · Toronto, ON",
+            meta: "Sep 2025 - Jan 2026 - Toronto, ON",
             description:
               "Financial systems and data workflow role focused on ETL, reporting, validation, and process documentation.",
             bullets: [
@@ -137,7 +137,7 @@ export const content = {
             slug: "nissan-business-systems-analyst",
             title: "Business Systems Analyst",
             subtitle: "Nissan Motor Corporation",
-            meta: "May 2024 - Dec 2024 · Mississauga, ON",
+            meta: "May 2024 - Dec 2024 - Mississauga, ON",
             description:
               "Product data validation role supporting backend reliability for MyNissan app financial and transactional datasets.",
             bullets: [
@@ -152,7 +152,7 @@ export const content = {
             slug: "hgtech-international-business-analyst",
             title: "International Business Analyst",
             subtitle: "HGTECH",
-            meta: "May 2023 - Aug 2023 · Wuhan, China",
+            meta: "May 2023 - Aug 2023 - Wuhan, China",
             description:
               "International operations and CRM data role supporting structured reporting and marketing performance analysis.",
             bullets: [

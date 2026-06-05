@@ -91,7 +91,6 @@ export default async function DetailPage({ params }: DetailPageProps) {
   }
 
   const item = getSectionItem(section, slug, "en");
-  const zhItem = getSectionItem(section, slug, "zh");
   const sectionLabel = content.en.nav[section];
   const sectionHref = `/#${section}`;
 
@@ -164,14 +163,6 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 </span>
               ))}
             </div>
-
-            {zhItem ? (
-              <div className="mt-8 border-t border-black/10 pt-6">
-                <p className="text-sm font-semibold text-[#0066cc]">中文摘要</p>
-                <h3 className="mt-3 text-xl font-semibold tracking-normal text-neutral-950">{zhItem.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-neutral-700">{zhItem.description}</p>
-              </div>
-            ) : null}
           </aside>
         </div>
       </section>

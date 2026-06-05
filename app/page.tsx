@@ -145,6 +145,7 @@ export default function Home() {
           </a>
           <a
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+            download="ChloeLi_Analyst_resume.pdf"
             href={contact.resumeUrl}
           >
             <Download size={16} />
@@ -215,7 +216,7 @@ export default function Home() {
       <footer className="border-t border-black/10 py-8">
         <div className="section-shell flex flex-col justify-between gap-3 text-xs text-neutral-500 sm:flex-row">
           <p>© {new Date().getFullYear()} {t.displayName}. All rights reserved.</p>
-          <p>Business Analyst · Product Analyst · Data Analyst</p>
+          <p>Business Analyst | Product Analyst | Data Analyst</p>
         </div>
       </footer>
     </main>
