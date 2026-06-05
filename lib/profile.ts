@@ -109,14 +109,14 @@ export const content = {
             subtitle: "MEC-Tech",
             meta: "Feb 2026 - Present - Remote",
             description:
-              "AI workflow and algorithm-focused role supporting internal automation, product knowledge retrieval, and data reliability.",
+              "AI workflow and algorithm-focused role supporting internal automation, enterprise knowledge management, product knowledge retrieval, and data reliability.",
             bullets: [
               "Optimized internal algorithm workflows to reduce manual processing and improve the accuracy and consistency of operational data outputs.",
-              "Built AI knowledge-base and product-database workflows using Dify, DeepSeek, and DingTalk to support internal search, product information retrieval, and team collaboration.",
-              "Designed structured data logic and validation steps to improve reliability across product, client, and business knowledge repositories.",
-              "Collaborated with business and technical stakeholders to translate operational needs into scalable AI-assisted workflow solutions."
+              "Built and maintained AI knowledge-base and product-database workflows using Dify, DeepSeek, and DingTalk to support enterprise knowledge management and internal search.",
+              "Structured product, client, and business knowledge into reusable knowledge-management workflows with validation logic for reliable information retrieval.",
+              "Collaborated with business and technical stakeholders to translate operational needs into scalable AI-assisted workflow and knowledge-base solutions."
             ],
-            tags: ["Dify", "DeepSeek", "DingTalk", "AI workflow"]
+            tags: ["Dify", "DeepSeek", "DingTalk", "Knowledge base", "Enterprise knowledge management", "AI workflow"]
           },
           {
             slug: "imco-business-systems-analyst",
@@ -124,14 +124,15 @@ export const content = {
             subtitle: "Investment Management Corporation of Ontario (IMCO)",
             meta: "Sep 2025 - Jan 2026 - Toronto, ON",
             description:
-              "Financial systems and data workflow role focused on ETL, reporting, validation, and process documentation.",
+              "Financial systems and data workflow role focused on ETL, reporting, validation, internal knowledge management, and process documentation.",
             bullets: [
               "Designed and automated data workflows and ETL processes using Excel, Power Query, and Power Automate, reducing manual processing effort by 40%.",
+              "Supported internal knowledge-base setup, maintenance, and documentation for business systems, data workflows, and operational process references.",
+              "Worked with Microsoft Copilot and Dynamics 365-related business process context to support knowledge retrieval, documentation, and systems understanding.",
               "Wrote and optimized SQL queries for data extraction, validation, and reporting across operational datasets.",
-              "Analyzed 50+ datasets to identify data quality issues and implemented improvements that increased workflow efficiency by 25%.",
-              "Documented data flows, structures, and process logic to support scalability and audit readiness."
+              "Analyzed 50+ datasets to identify data quality issues and documented data flows, structures, and process logic to support scalability and audit readiness."
             ],
-            tags: ["SQL", "Power Query", "Power Automate", "ETL"]
+            tags: ["SQL", "Power Query", "Power Automate", "Microsoft Copilot", "Dynamics 365", "Internal knowledge base"]
           },
           {
             slug: "nissan-business-systems-analyst",
@@ -139,14 +140,15 @@ export const content = {
             subtitle: "Nissan Motor Corporation",
             meta: "May 2024 - Dec 2024 - Mississauga, ON",
             description:
-              "Product data validation role supporting backend reliability for MyNissan app financial and transactional datasets.",
+              "Product data validation and systems analysis role supporting backend reliability, data integration, and UAT readiness for MyNissan app financial and transactional datasets.",
             bullets: [
-              "Supported backend data validation for the MyNissan app across financial and transactional datasets.",
-              "Performed data reconciliation and integrity checks across APIs and financial databases.",
-              "Managed data-related defects in JIRA and contributed to a 95% resolution rate.",
-              "Built Tableau dashboards and SQL-based reports to monitor account activity and performance metrics."
+              "Supported backend data validation, data integration checks, and system integration analysis for the MyNissan app across financial and transactional datasets.",
+              "Performed data reconciliation and integrity checks across APIs, financial databases, and downstream reporting outputs.",
+              "Managed data-related defects in JIRA, documented requirements and process notes in Confluence, and contributed to a 95% resolution rate.",
+              "Supported UAT testing by validating expected system behavior, tracking defects, and mapping process flows with Visio.",
+              "Built Tableau dashboards and SQL-based reports to monitor account activity, data quality, and performance metrics."
             ],
-            tags: ["JIRA", "Tableau", "SQL", "Data validation"]
+            tags: ["JIRA", "Confluence", "Visio", "Data integration", "System integration", "UAT testing"]
           },
           {
             slug: "hgtech-international-business-analyst",
@@ -154,14 +156,15 @@ export const content = {
             subtitle: "HGTECH",
             meta: "May 2023 - Aug 2023 - Wuhan, China",
             description:
-              "International operations and CRM data role supporting structured reporting and marketing performance analysis.",
+              "International operations, website development, and marketing analytics role supporting CRM reporting, branding, exhibition promotion, and digital content execution.",
             bullets: [
               "Cleaned and structured 1,000+ CRM records to improve usability and reporting accuracy.",
-              "Developed web-based data interfaces with HTML and CSS for structured data presentation.",
-              "Analyzed marketing and operations data, supporting a 28% increase in traffic performance.",
-              "Assisted with multi-source data inputs for international operations and reporting."
+              "Developed and maintained product website content and web-based data interfaces with HTML and CSS for structured product presentation.",
+              "Analyzed sales inquiries, marketing activity, and operations data to support customer targeting, branding decisions, and exhibition promotion planning.",
+              "Supported TikTok video publishing and digital campaign execution to improve brand visibility and product awareness.",
+              "Assisted with multi-source data inputs for international operations, website reporting, and marketing performance analysis."
             ],
-            tags: ["CRM", "HTML/CSS", "Operations", "Reporting"]
+            tags: ["Website development", "Marketing", "Branding", "Exhibition promotion", "Sales inquiries analysis", "Product website development"]
           }
         ]
       },
