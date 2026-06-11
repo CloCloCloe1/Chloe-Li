@@ -154,7 +154,7 @@ export const content = {
               {
                 title: "BA Consignment System",
                 label: "Operations website",
-                image: "/work/ba-consignment-system.svg",
+                image: "/work/ba-consignment-admin-real.png",
                 problem:
                   "Tester, damage/theft, restock, and store records were difficult to track consistently across manual files and store communication.",
                 solution:
