@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nakama Work Samples | Chloe Li</title>
+    <meta
+      name="description"
+      content="Sanitized Nakama work samples showing product analysis, workflow websites, label lookup, consignment operations, brand analysis, and monthly planning."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --text: #1d1d1f;
+        --muted: #6e6e73;
+        --line: rgba(0, 0, 0, 0.1);
+        --soft: #f5f5f7;
+        --blue: #0066cc;
+        --blue-dark: #004f9e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: saturate(180%) blur(18px);
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .nav .shell {
+        display: flex;
+        min-height: 56px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .links a,
+      .pill {
+        border-radius: 999px;
+        background: var(--soft);
+        padding: 8px 12px;
+        color: #424245;
+        font-size: 12px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      .links a:hover,
+      .button:hover {
+        color: #fff;
+        background: var(--blue-dark);
+      }
+
+      .hero {
+        padding: 92px 0 60px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--blue);
+        font-size: 14px;
+        font-weight: 750;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 18px auto 0;
+        font-size: clamp(44px, 8vw, 84px);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .hero p.summary {
+        max-width: 760px;
+        margin: 24px auto 0;
+        color: var(--muted);
+        font-size: clamp(18px, 2.4vw, 24px);
+        line-height: 1.45;
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .notice {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--soft);
+        padding: 18px 0;
+        color: #515154;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section:nth-of-type(even) {
+        background: var(--soft);
+      }
+
+      .section-header {
+        max-width: 760px;
+        margin-bottom: 32px;
+      }
+
+      h2 {
+        margin: 12px 0 0;
+        font-size: clamp(34px, 5vw, 56px);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .section-header p {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .case-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .visual {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
+      }
+
+      .visual img {
+        display: block;
+        width: 100%;
+        min-height: 360px;
+        object-fit: cover;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: #fff;
+        padding: 30px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.04);
+      }
+
+      .section:nth-of-type(even) .panel,
+      .section:nth-of-type(even) .visual {
+        box-shadow: none;
+      }
+
+      .point + .point {
+        margin-top: 24px;
+      }
+
+      .point h3 {
+        margin: 0;
+        color: #515154;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .point p,
+      .point ul {
+        margin: 9px 0 0;
+        color: #3f3f43;
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .point ul {
+        padding-left: 18px;
+      }
+
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 24px;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: var(--blue);
+        padding: 0 18px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        background: var(--soft);
+        color: var(--text);
+      }
+
+      .capabilities {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .capability {
+        min-height: 150px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: #fff;
+        padding: 22px;
+      }
+
+      .capability strong {
+        display: block;
+        font-size: 18px;
+        line-height: 1.2;
+      }
+
+      .capability span {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 30px 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .nav .shell {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .links {
+          justify-content: flex-start;
+        }
+
+        .case-grid,
+        .capabilities {
+          grid-template-columns: 1fr;
+        }
+
+        .visual img {
+          min-height: 260px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="shell">
+        <a class="brand" href="/experience/nakama-brand-product-analyst">Chloe Li | Nakama Work</a>
+        <div class="links" aria-label="Work sample navigation">
+          <a href="#label-info-finder">Label Finder</a>
+          <a href="#ba-consignment-system">BA System</a>
+          <a href="#brand-analysis-website">Brand Analysis</a>
+          <a href="#monthly-planning-calendar">Calendar</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero shell">
+      <p class="eyebrow">Product Analysis / Website Development / Business Workflow</p>
+      <h1>Nakama Work Samples</h1>
+      <p class="summary">
+        Public, sanitized examples of workflow websites and analysis tools I built or designed to support label lookup,
+        BA operations, brand decisions, and monthly planning.
+      </p>
+      <div class="pills" aria-label="Capabilities">
+        <span class="pill">Product analysis</span>
+        <span class="pill">Workflow design</span>
+        <span class="pill">Website development</span>
+        <span class="pill">Inventory / sales / PO analysis</span>
+        <span class="pill">Excel automation</span>
+      </div>
+    </header>
+
+    <div class="notice">
+      <div class="shell">
+        These samples use sanitized previews and representative interfaces. Sensitive company data, real product
+        records, customer data, and internal files are intentionally excluded.
+      </div>
+    </div>
+
+    <section class="section" id="label-info-finder">
+      <div class="shell">
+        <div class="section-header">
+          <p class="eyebrow">Product Data Workflow</p>
+          <h2>Label Info Finder</h2>
+          <p>
+            A search and validation workflow for turning scattered product label fields into a faster review process.
+          </p>
+        </div>
+        <div class="case-grid">
+          <a class="visual" href="/work/label-info-finder.svg" target="_blank" rel="noreferrer">
+            <img src="/work/label-info-finder.svg" alt="Label Info Finder sample interface" />
+          </a>
+          <article class="panel">
+            <div class="point">
+              <h3>Problem solved</h3>
+              <p>
+                Label requirements and product attributes were spread across workbooks and reference sources, making
+                barcode lookup, bilingual label completion, and missing-field review slow and easy to repeat manually.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What I built</h3>
+              <p>
+                A private lookup workflow for uploaded Excel files, product references, barcode/product search,
+                label-field review, manual edits, and downloadable results.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What this shows</h3>
+              <ul>
+                <li>Product data modeling and label-field mapping</li>
+                <li>Excel-based workflow automation</li>
+                <li>Bilingual product information review</li>
+                <li>User-centered internal tool design</li>
+              </ul>
+            </div>
+            <div class="tag-row">
+              <span class="pill">Barcode search</span>
+              <span class="pill">Product data</span>
+              <span class="pill">Label validation</span>
+              <span class="pill">Excel workflow</span>
+            </div>
+            <div class="button-row">
+              <a class="button" href="/experience/nakama-brand-product-analyst">Back to portfolio</a>
+              <a class="button secondary" href="#ba-consignment-system">Next sample</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ba-consignment-system">
+      <div class="shell">
+        <div class="section-header">
+          <p class="eyebrow">Operations Website</p>
+          <h2>BA Consignment System</h2>
+          <p>
+            A store and admin workflow concept for cleaner BA consignment record submission, review, search, and export.
+          </p>
+        </div>
+        <div class="case-grid">
+          <a class="visual" href="/work/ba-consignment-admin-real.png" target="_blank" rel="noreferrer">
+            <img src="/work/ba-consignment-admin-real.png" alt="BA Consignment admin page screenshot" />
+          </a>
+          <article class="panel">
+            <div class="point">
+              <h3>Problem solved</h3>
+              <p>
+                Tester, damage/theft, restock, and store records needed a clearer workflow than scattered manual files
+                and store communication.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What I built</h3>
+              <p>
+                A role-based store reporting and admin dashboard flow with product search, record review, status
+                tracking, metrics, and export-ready data.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What this shows</h3>
+              <ul>
+                <li>Business operations workflow design</li>
+                <li>Admin interface and record-management thinking</li>
+                <li>Store-facing product master lookup</li>
+                <li>Data capture for later reporting and reconciliation</li>
+              </ul>
+            </div>
+            <div class="tag-row">
+              <span class="pill">Consignment</span>
+              <span class="pill">Admin UI</span>
+              <span class="pill">Store workflow</span>
+              <span class="pill">Record tracking</span>
+            </div>
+            <div class="button-row">
+              <a class="button" href="/experience/nakama-brand-product-analyst">Back to portfolio</a>
+              <a class="button secondary" href="#brand-analysis-website">Next sample</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brand-analysis-website">
+      <div class="shell">
+        <div class="section-header">
+          <p class="eyebrow">Product and Business Analysis</p>
+          <h2>Brand Analysis Website</h2>
+          <p>
+            A structured analysis workflow that turns inventory, sales, catalogue, and purchase-order inputs into
+            business recommendations.
+          </p>
+        </div>
+        <div class="case-grid">
+          <a class="visual" href="/work/brand-analysis-site.svg" target="_blank" rel="noreferrer">
+            <img src="/work/brand-analysis-site.svg" alt="Brand Analysis Website sample interface" />
+          </a>
+          <article class="panel">
+            <div class="point">
+              <h3>Problem solved</h3>
+              <p>
+                Raw inventory, sales, and PO files did not directly tell the team which SKUs should be reordered,
+                promoted, slowed down, reviewed, or watched more closely.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What I built</h3>
+              <p>
+                An analysis website concept that converts sales, stock, catalogue, and purchase-order files into SABC
+                summaries, inventory health views, sales suggestions, replenishment priorities, and downloadable
+                reporting outputs.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What this shows</h3>
+              <ul>
+                <li>Inventory, sales, and PO analysis</li>
+                <li>Business-rule design for recommendation logic</li>
+                <li>Product and brand planning communication</li>
+                <li>Downloadable analysis outputs for non-technical users</li>
+              </ul>
+            </div>
+            <div class="tag-row">
+              <span class="pill">Inventory health</span>
+              <span class="pill">Sales suggestion</span>
+              <span class="pill">PO planning</span>
+              <span class="pill">Brand review</span>
+            </div>
+            <div class="button-row">
+              <a class="button" href="/experience/nakama-brand-product-analyst">Back to portfolio</a>
+              <a class="button secondary" href="#monthly-planning-calendar">Next sample</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="monthly-planning-calendar">
+      <div class="shell">
+        <div class="section-header">
+          <p class="eyebrow">Planning and Execution</p>
+          <h2>Monthly Planning Calendar</h2>
+          <p>
+            A planning view that connects analysis outputs with campaign timing, PO checkpoints, replenishment, and BA
+            follow-up.
+          </p>
+        </div>
+        <div class="case-grid">
+          <a class="visual" href="/work/monthly-calendar.svg" target="_blank" rel="noreferrer">
+            <img src="/work/monthly-calendar.svg" alt="Monthly planning calendar sample interface" />
+          </a>
+          <article class="panel">
+            <div class="point">
+              <h3>Problem solved</h3>
+              <p>
+                Brand recommendations needed a shared execution view so analysis could translate into dated follow-up,
+                campaign support, ordering checkpoints, and store coordination.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What I built</h3>
+              <p>
+                A monthly calendar-style planning view that turns analysis results into actions by week, including
+                reorder review, campaign timing, BA follow-up, and inventory checkpoints.
+              </p>
+            </div>
+            <div class="point">
+              <h3>What this shows</h3>
+              <ul>
+                <li>Translation from analysis to execution</li>
+                <li>Business cadence and stakeholder planning</li>
+                <li>Action tracking across product, brand, and operations</li>
+                <li>Clear communication for cross-functional follow-up</li>
+              </ul>
+            </div>
+            <div class="tag-row">
+              <span class="pill">Monthly calendar</span>
+              <span class="pill">Campaign planning</span>
+              <span class="pill">Replenishment</span>
+              <span class="pill">Action tracking</span>
+            </div>
+            <div class="button-row">
+              <a class="button" href="/experience/nakama-brand-product-analyst">Back to portfolio</a>
+              <a class="button secondary" href="#label-info-finder">Top sample</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-header">
+          <p class="eyebrow">Capabilities Demonstrated</p>
+          <h2>What I can do</h2>
+        </div>
+        <div class="capabilities">
+          <div class="capability">
+            <strong>Build internal tools</strong>
+            <span>Turn messy spreadsheet workflows into searchable, reviewable, export-ready websites.</span>
+          </div>
+          <div class="capability">
+            <strong>Translate data into decisions</strong>
+            <span>Use inventory, sales, PO, and catalogue inputs to support product and brand actions.</span>
+          </div>
+          <div class="capability">
+            <strong>Design business workflows</strong>
+            <span>Map store, admin, BA, and product workflows into clear user flows and status logic.</span>
+          </div>
+          <div class="capability">
+            <strong>Create stakeholder outputs</strong>
+            <span>Produce clean summaries, downloadable reports, and planning views for business users.</span>
+          </div>
+          <div class="capability">
+            <strong>Protect sensitive data</strong>
+            <span>Show proof of work through sanitized screenshots without exposing private records.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="shell">Chloe Li | Portfolio work samples | Sanitized public preview</div>
+    </footer>
+  </body>
+</html>

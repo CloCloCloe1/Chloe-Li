@@ -21,6 +21,7 @@ export type WorkSample = {
   title: string;
   label: string;
   image: string;
+  url?: string;
   problem: string;
   solution: string;
   outcome: string;
@@ -143,6 +144,7 @@ export const content = {
                 title: "Label Info Finder",
                 label: "Product data workflow",
                 image: "/work/label-info-finder.svg",
+                url: "/work/nakama-case-studies.html#label-info-finder",
                 problem:
                   "Label requirements and product attributes were scattered across workbooks, making barcode lookup, bilingual label completion, and missing-field review slow and error-prone.",
                 solution:
@@ -155,6 +157,7 @@ export const content = {
                 title: "BA Consignment System",
                 label: "Operations website",
                 image: "/work/ba-consignment-admin-real.png",
+                url: "/work/nakama-case-studies.html#ba-consignment-system",
                 problem:
                   "Tester, damage/theft, restock, and store records were difficult to track consistently across manual files and store communication.",
                 solution:
@@ -167,6 +170,7 @@ export const content = {
                 title: "Brand Analysis Website",
                 label: "Product and business analysis",
                 image: "/work/brand-analysis-site.svg",
+                url: "/work/nakama-case-studies.html#brand-analysis-website",
                 problem:
                   "Inventory, sales, and PO files did not directly answer which SKUs should be reordered, promoted, slowed down, or reviewed.",
                 solution:
@@ -179,6 +183,7 @@ export const content = {
                 title: "Monthly Planning Calendar",
                 label: "Planning and execution",
                 image: "/work/monthly-calendar.svg",
+                url: "/work/nakama-case-studies.html#monthly-planning-calendar",
                 problem:
                   "Brand recommendations needed a shared planning view to connect campaign timing, purchase orders, replenishment, and BA follow-up actions.",
                 solution:

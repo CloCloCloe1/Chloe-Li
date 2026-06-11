@@ -184,15 +184,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
                   className="overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm lg:grid lg:grid-cols-[1.05fr_0.95fr]"
                   key={sample.title}
                 >
-                  <div className="relative min-h-[260px] overflow-hidden bg-neutral-100 sm:min-h-[340px]">
-                    <Image
-                      alt={`${sample.title} sanitized preview`}
-                      className="object-cover"
-                      fill
-                      sizes="(min-width: 1024px) 52vw, 100vw"
-                      src={sample.image}
-                    />
-                  </div>
+                  <SampleImage sample={sample} />
                   <div className="p-6 sm:p-8">
                     <p className="text-sm font-semibold text-[#0066cc]">{sample.label}</p>
                     <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{sample.title}</h3>
@@ -208,6 +200,17 @@ export default async function DetailPage({ params }: DetailPageProps) {
                         </span>
                       ))}
                     </div>
+                    {sample.url ? (
+                      <a
+                        className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-5 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
+                        href={sample.url}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        View sample
+                        <ArrowUpRight size={16} />
+                      </a>
+                    ) : null}
                   </div>
                 </article>
               ))}
@@ -216,6 +219,46 @@ export default async function DetailPage({ params }: DetailPageProps) {
         ) : null}
       </section>
     </main>
+  );
+}
+
+function SampleImage({
+  sample
+}: {
+  sample: {
+    title: string;
+    image: string;
+    url?: string;
+  };
+}) {
+  const image = (
+    <Image
+      alt={`${sample.title} sanitized preview`}
+      className="object-cover transition duration-300 group-hover:scale-[1.02]"
+      fill
+      sizes="(min-width: 1024px) 52vw, 100vw"
+      src={sample.image}
+    />
+  );
+
+  if (!sample.url) {
+    return <div className="relative min-h-[260px] overflow-hidden bg-neutral-100 sm:min-h-[340px]">{image}</div>;
+  }
+
+  return (
+    <a
+      aria-label={`Open ${sample.title} sample`}
+      className="group relative block min-h-[260px] overflow-hidden bg-neutral-100 focus-ring sm:min-h-[340px]"
+      href={sample.url}
+      rel="noreferrer"
+      target="_blank"
+    >
+      {image}
+      <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm backdrop-blur">
+        Open sample
+        <ArrowUpRight size={14} />
+      </span>
+    </a>
   );
 }
 
