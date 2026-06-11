@@ -117,7 +117,7 @@ export const content = {
         items: [
           {
             slug: "nakama-brand-product-analyst",
-            title: "Brand Coordinator / Product Analyst",
+            title: "Brand Analyst",
             subtitle: "Nakama",
             meta: "May 2026 - Present - Toronto, ON",
             description:
