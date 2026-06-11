@@ -20,6 +20,12 @@ const sectionIds = ["home", "about", "experience", "education", "publications", 
 const detailSections: SectionKey[] = ["experience", "education", "publications"];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
+  "nakama-brand-product-analyst": {
+    src: "/brand/nakama.png",
+    backgroundColor: "#eef7ef",
+    fullBleed: true,
+    imageClassName: "object-cover"
+  },
   "mec-tech-algorithm-engineer": {
     src: "/brand/mectech.png?v=2",
     backgroundColor: "#edf4ff",

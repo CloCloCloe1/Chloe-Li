@@ -11,6 +11,12 @@ const sections = ["experience", "education", "publications"] as const;
 type DetailSectionKey = (typeof sections)[number];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
+  "nakama-brand-product-analyst": {
+    src: "/brand/nakama.png",
+    backgroundColor: "#eef7ef",
+    fullBleed: true,
+    imageClassName: "object-cover"
+  },
   "mec-tech-algorithm-engineer": {
     src: "/brand/mectech.png?v=2",
     backgroundColor: "#edf4ff",
@@ -165,8 +171,60 @@ export default async function DetailPage({ params }: DetailPageProps) {
             </div>
           </aside>
         </div>
+
+        {item.workSamples?.length ? (
+          <section className="mt-14">
+            <p className="text-sm font-semibold text-[#0066cc]">Selected work samples</p>
+            <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-tight tracking-normal text-neutral-950 sm:text-4xl">
+              Sanitized examples of product and business problems translated into usable workflows.
+            </h2>
+            <div className="mt-8 grid gap-6">
+              {item.workSamples.map((sample) => (
+                <article
+                  className="overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm lg:grid lg:grid-cols-[1.05fr_0.95fr]"
+                  key={sample.title}
+                >
+                  <div className="relative min-h-[260px] overflow-hidden bg-neutral-100 sm:min-h-[340px]">
+                    <Image
+                      alt={`${sample.title} sanitized preview`}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 52vw, 100vw"
+                      src={sample.image}
+                    />
+                  </div>
+                  <div className="p-6 sm:p-8">
+                    <p className="text-sm font-semibold text-[#0066cc]">{sample.label}</p>
+                    <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{sample.title}</h3>
+                    <div className="mt-6 grid gap-5">
+                      <SamplePoint label="Problem" text={sample.problem} />
+                      <SamplePoint label="Solution" text={sample.solution} />
+                      <SamplePoint label="Outcome" text={sample.outcome} />
+                    </div>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {sample.tags.map((tag) => (
+                        <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={tag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </section>
     </main>
+  );
+}
+
+function SamplePoint({ label, text }: { label: string; text: string }) {
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">{label}</p>
+      <p className="mt-2 text-sm leading-7 text-neutral-700">{text}</p>
+    </div>
   );
 }
 

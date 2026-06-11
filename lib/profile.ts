@@ -14,6 +14,17 @@ export type PortfolioItem = {
   tags?: string[];
   url?: string;
   cta?: string;
+  workSamples?: WorkSample[];
+};
+
+export type WorkSample = {
+  title: string;
+  label: string;
+  image: string;
+  problem: string;
+  solution: string;
+  outcome: string;
+  tags: string[];
 };
 
 type PortfolioContent = {
@@ -103,6 +114,81 @@ export const content = {
         title: "Experience across AI workflows, financial systems, product data, and operations.",
         lineup: "Explore experience",
         items: [
+          {
+            slug: "nakama-brand-product-analyst",
+            title: "Brand Coordinator / Product Analyst",
+            subtitle: "Nakama",
+            meta: "May 2026 - Present - Toronto, ON",
+            description:
+              "Product and brand operations role focused on building internal websites, product-data tools, brand analysis workflows, and planning views that translate inventory, sales, PO, and label information into actionable business decisions.",
+            bullets: [
+              "Built product and workflow websites to support label information lookup, consignment store operations, brand review, and monthly planning without exposing sensitive source data.",
+              "Designed a Label Info Finder workflow that helps teams search barcode, product, brand, ingredient, manufacturer, COO, and bilingual label fields from uploaded workbooks and reference data.",
+              "Developed a BA Consignment System concept for store-facing tester, damage/theft, and restock workflows, improving record visibility and operational handoff.",
+              "Created brand analysis views that connect inventory, sales, and PO data to inventory health, sales suggestions, replenishment priorities, and purchase-order planning.",
+              "Translated product, inventory, and sales inputs into concise business recommendations for brand planning, campaign timing, and cross-functional decision making."
+            ],
+            tags: [
+              "Product analysis",
+              "Website development",
+              "Brand analysis",
+              "Inventory analysis",
+              "Sales analysis",
+              "PO analysis",
+              "Label workflow",
+              "Monthly calendar"
+            ],
+            workSamples: [
+              {
+                title: "Label Info Finder",
+                label: "Product data workflow",
+                image: "/work/label-info-finder.svg",
+                problem:
+                  "Label requirements and product attributes were scattered across workbooks, making barcode lookup, bilingual label completion, and missing-field review slow and error-prone.",
+                solution:
+                  "Built a private lookup workflow for uploaded Excel files, product references, barcode/product search, label-field completion, manual review, and export.",
+                outcome:
+                  "Improved label validation speed, reduced repeated manual search, and created a reusable product-information workflow for operations.",
+                tags: ["Barcode search", "Product data", "Label validation", "Excel workflow"]
+              },
+              {
+                title: "BA Consignment System",
+                label: "Operations website",
+                image: "/work/ba-consignment-system.svg",
+                problem:
+                  "Tester, damage/theft, restock, and store records were difficult to track consistently across manual files and store communication.",
+                solution:
+                  "Designed a store workflow interface with role-based views, record submission, search, admin review, and export-ready operational records.",
+                outcome:
+                  "Clarified status tracking for BA/store coordination and reduced duplicate manual reconciliation across consignment activities.",
+                tags: ["Consignment", "Store workflow", "Admin interface", "Record tracking"]
+              },
+              {
+                title: "Brand Analysis Website",
+                label: "Product and business analysis",
+                image: "/work/brand-analysis-site.svg",
+                problem:
+                  "Inventory, sales, and PO files did not directly answer which SKUs should be reordered, promoted, slowed down, or reviewed.",
+                solution:
+                  "Created analysis views that convert inventory, sales, and PO inputs into brand-level summaries, inventory health signals, sales suggestions, and order recommendations.",
+                outcome:
+                  "Supported brand reviews, assortment planning, replenishment decisions, and sales follow-up with structured analysis instead of raw spreadsheet review.",
+                tags: ["Inventory health", "Sales suggestion", "PO planning", "Brand review"]
+              },
+              {
+                title: "Monthly Planning Calendar",
+                label: "Planning and execution",
+                image: "/work/monthly-calendar.svg",
+                problem:
+                  "Brand recommendations needed a shared planning view to connect campaign timing, purchase orders, replenishment, and BA follow-up actions.",
+                solution:
+                  "Built a monthly calendar-style planning view that turns analysis outputs into dated actions and execution checkpoints.",
+                outcome:
+                  "Helped connect analysis with execution cadence across product planning, campaign support, and operational follow-up.",
+                tags: ["Monthly calendar", "Campaign planning", "Replenishment", "Action tracking"]
+              }
+            ]
+          },
           {
             slug: "mec-tech-algorithm-engineer",
             title: "Algorithm Engineer",
