@@ -372,7 +372,7 @@ function VisualTile({ slug }: { slug: string }) {
 function CertificatePreview({ item, compact = false }: { item: PortfolioItem; compact?: boolean }) {
   const pdf = item.attachments?.[0];
 
-  if (!pdf) {
+  if (!item.previewImage) {
     return (
       <div className={`relative flex ${compact ? "h-44" : "min-h-80"} items-center justify-center overflow-hidden bg-[#f5f5f7]`}>
         <div className="text-center">
@@ -384,17 +384,24 @@ function CertificatePreview({ item, compact = false }: { item: PortfolioItem; co
   }
 
   return (
-    <div className={`relative overflow-hidden bg-[#f5f5f7] ${compact ? "h-44" : "min-h-80"}`}>
-      <iframe
-        aria-label={`${item.title} certificate PDF preview`}
-        className="h-full w-full scale-[1.02] border-0 bg-white"
-        src={`${pdf.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
-        title={`${item.title} certificate preview`}
+    <a
+      aria-label={`Open ${item.title} PDF certificate`}
+      className={`group/preview relative block overflow-hidden bg-[#f5f5f7] focus-ring ${compact ? "h-44" : "min-h-80"}`}
+      href={pdf?.url ?? item.previewImage}
+      rel="noreferrer"
+      target="_blank"
+    >
+      <Image
+        alt={`${item.title} certificate preview`}
+        className="object-cover object-top transition duration-300 group-hover/preview:scale-[1.02]"
+        fill
+        sizes={compact ? "(min-width: 1024px) 33vw, 100vw" : "(min-width: 1024px) 50vw, 100vw"}
+        src={item.previewImage}
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 to-white/0 p-4">
         <p className="text-sm font-semibold text-neutral-950">{item.title}</p>
       </div>
-    </div>
+    </a>
   );
 }
 

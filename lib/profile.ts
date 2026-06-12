@@ -14,6 +14,7 @@ export type PortfolioItem = {
   tags?: string[];
   url?: string;
   cta?: string;
+  previewImage?: string;
   attachments?: { label: string; url: string }[];
   workSamples?: WorkSample[];
 };
@@ -385,6 +386,7 @@ export const content = {
         items: [
           {
             slug: "excel-essential-training-microsoft-365-2025",
+            previewImage: "/certificates/previews/excel-essential-training-microsoft-365-2025.png",
             title: "Excel Essential Training: Microsoft 365",
             subtitle: "LinkedIn Learning",
             meta: "2025",
@@ -396,7 +398,7 @@ export const content = {
               "Relevant to data validation, product data review, finance workflows, and stakeholder reporting."
             ],
             tags: ["Excel", "Microsoft 365", "Data analysis", "Reporting"],
-            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -407,6 +409,7 @@ export const content = {
           },
           {
             slug: "microsoft-power-automate-essential-training",
+            previewImage: "/certificates/previews/microsoft-power-automate-essential-training.png",
             title: "Microsoft Power Automate Essential Training",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -418,7 +421,7 @@ export const content = {
               "Relevant to internal workflow design, process improvement, and automation documentation."
             ],
             tags: ["Power Automate", "Workflow automation", "Process improvement"],
-            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -429,6 +432,7 @@ export const content = {
           },
           {
             slug: "creating-your-personal-brand",
+            previewImage: "/certificates/previews/creating-your-personal-brand.png",
             title: "Creating Your Personal Brand",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -440,7 +444,7 @@ export const content = {
               "Relevant to stakeholder communication, presentation, and career-facing portfolio work."
             ],
             tags: ["Personal branding", "Communication", "Professional presence"],
-            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -451,6 +455,7 @@ export const content = {
           },
           {
             slug: "unconscious-bias",
+            previewImage: "/certificates/previews/unconscious-bias.png",
             title: "Unconscious Bias",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -462,7 +467,7 @@ export const content = {
               "Supports professional judgment in business analysis and user-centered product work."
             ],
             tags: ["Inclusive collaboration", "Communication", "Workplace awareness"],
-            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -473,6 +478,7 @@ export const content = {
           },
           {
             slug: "confronting-bias-thriving-across-our-differences",
+            previewImage: "/certificates/previews/confronting-bias-thriving-across-our-differences.png",
             title: "Confronting Bias: Thriving Across Our Differences",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -733,6 +739,7 @@ export const content = {
         items: [
           {
             slug: "excel-essential-training-microsoft-365-2025",
+            previewImage: "/certificates/previews/excel-essential-training-microsoft-365-2025.png",
             title: "Excel Essential Training: Microsoft 365",
             subtitle: "LinkedIn Learning",
             meta: "2025",
@@ -744,7 +751,7 @@ export const content = {
               "Relevant to data validation, finance workflows, and stakeholder reporting."
             ],
             tags: ["Excel", "Microsoft 365", "Data analysis", "Reporting"],
-            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -755,6 +762,7 @@ export const content = {
           },
           {
             slug: "microsoft-power-automate-essential-training",
+            previewImage: "/certificates/previews/microsoft-power-automate-essential-training.png",
             title: "Microsoft Power Automate Essential Training",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -766,7 +774,7 @@ export const content = {
               "Relevant to internal workflow design and process improvement."
             ],
             tags: ["Power Automate", "Workflow automation", "Process improvement"],
-            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -777,6 +785,7 @@ export const content = {
           },
           {
             slug: "creating-your-personal-brand",
+            previewImage: "/certificates/previews/creating-your-personal-brand.png",
             title: "Creating Your Personal Brand",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -788,7 +797,7 @@ export const content = {
               "Relevant to stakeholder communication and portfolio presentation."
             ],
             tags: ["Personal branding", "Communication", "Professional presence"],
-            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -799,6 +808,7 @@ export const content = {
           },
           {
             slug: "unconscious-bias",
+            previewImage: "/certificates/previews/unconscious-bias.png",
             title: "Unconscious Bias",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",
@@ -810,7 +820,7 @@ export const content = {
               "Supports professional judgment in business analysis and product work."
             ],
             tags: ["Inclusive collaboration", "Communication", "Workplace awareness"],
-            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
+            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
             cta: "View LinkedIn certificate",
             attachments: [
               {
@@ -821,6 +831,7 @@ export const content = {
           },
           {
             slug: "confronting-bias-thriving-across-our-differences",
+            previewImage: "/certificates/previews/confronting-bias-thriving-across-our-differences.png",
             title: "Confronting Bias: Thriving Across Our Differences",
             subtitle: "LinkedIn Learning",
             meta: "Professional certificate",

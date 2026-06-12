@@ -291,26 +291,39 @@ function isSectionKey(section: string): section is DetailSectionKey {
   return (sections as readonly string[]).includes(section);
 }
 
-function DetailVisual({ item, slug }: { item: { title: string; attachments?: { label: string; url: string }[] }; slug: string }) {
+function DetailVisual({
+  item,
+  slug
+}: {
+  item: { title: string; previewImage?: string; attachments?: { label: string; url: string }[] };
+  slug: string;
+}) {
   const brandVisual = brandVisuals[slug];
 
   if (!brandVisual) {
     const pdf = item.attachments?.[0];
 
-    if (pdf) {
+    if (item.previewImage) {
       return (
-        <div className="relative min-h-80 overflow-hidden bg-[#f5f5f7]">
-          <iframe
-            aria-label={`${item.title} certificate PDF preview`}
-            className="h-96 w-full border-0 bg-white"
-            src={`${pdf.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
-            title={`${item.title} certificate preview`}
+        <a
+          aria-label={`Open ${item.title} PDF certificate`}
+          className="group/preview relative block min-h-96 overflow-hidden bg-[#f5f5f7] focus-ring"
+          href={pdf?.url ?? item.previewImage}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <Image
+            alt={`${item.title} certificate preview`}
+            className="object-cover object-top transition duration-300 group-hover/preview:scale-[1.02]"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            src={item.previewImage}
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 to-white/0 p-6">
             <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning certificate</p>
             <p className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</p>
           </div>
-        </div>
+        </a>
       );
     }
 
