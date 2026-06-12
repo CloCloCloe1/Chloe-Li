@@ -280,10 +280,9 @@ function TimelineSection({ locale }: { locale: Locale }) {
         <div className="relative mt-14">
           <div className="absolute bottom-4 left-7 top-4 w-1 rounded-full bg-neutral-300 md:left-1/2 md:-translate-x-1/2" />
           <div className="grid gap-7 md:gap-10">
-            {timelineItems.map((entry, index) => (
+            {timelineItems.map((entry) => (
               <WavyTimelineItem
                 accent={entry.accent}
-                index={index}
                 item={entry.item}
                 key={`${entry.section}-${entry.item.slug}`}
                 section={entry.section}
@@ -303,27 +302,25 @@ function WavyTimelineItem({
   section,
   type,
   accent,
-  index,
   year
 }: {
   item: PortfolioItem;
   section: SectionKey;
   type: string;
   accent: string;
-  index: number;
   year: string;
 }) {
-  const isLeft = index % 2 === 0;
+  const isEducation = section === "education";
 
   return (
     <div className="relative grid min-h-40 grid-cols-[4rem_1fr] gap-4 md:grid-cols-[1fr_8rem_1fr] md:items-center">
-      <div className={`${isLeft ? "md:order-1" : "md:order-3"} ${isLeft ? "" : "md:col-start-3"}`}>
+      <div className={isEducation ? "md:order-1" : "md:order-3 md:col-start-3"}>
         <TimelineCard accent={accent} item={item} section={section} type={type} />
       </div>
       <div className="relative z-10 order-first flex items-start justify-center md:order-2 md:col-start-2 md:items-center">
         <TimelineNode accent={accent} slug={item.slug} title={item.title} year={year} />
       </div>
-      <div className={`${isLeft ? "hidden md:order-3 md:block" : "hidden md:order-1 md:block"}`} />
+      <div className={isEducation ? "hidden md:order-3 md:block" : "hidden md:order-1 md:block"} />
     </div>
   );
 }
