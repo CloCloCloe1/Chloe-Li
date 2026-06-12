@@ -159,7 +159,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
           </div>
 
           <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-neutral-100 shadow-sm">
-            <DetailVisual slug={slug} />
+            <DetailVisual item={item} slug={slug} />
           </div>
         </div>
 
@@ -291,10 +291,29 @@ function isSectionKey(section: string): section is DetailSectionKey {
   return (sections as readonly string[]).includes(section);
 }
 
-function DetailVisual({ slug }: { slug: string }) {
+function DetailVisual({ item, slug }: { item: { title: string; attachments?: { label: string; url: string }[] }; slug: string }) {
   const brandVisual = brandVisuals[slug];
 
   if (!brandVisual) {
+    const pdf = item.attachments?.[0];
+
+    if (pdf) {
+      return (
+        <div className="relative min-h-80 overflow-hidden bg-[#f5f5f7]">
+          <iframe
+            aria-label={`${item.title} certificate PDF preview`}
+            className="h-96 w-full border-0 bg-white"
+            src={`${pdf.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+            title={`${item.title} certificate preview`}
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 to-white/0 p-6">
+            <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning certificate</p>
+            <p className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</p>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="relative flex min-h-80 items-center justify-center overflow-hidden bg-[#f5f5f7] p-10">
         <div className="text-center">

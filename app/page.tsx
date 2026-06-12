@@ -265,6 +265,53 @@ function PortfolioCard({
   item: PortfolioItem;
   section: SectionKey;
 }) {
+  if (section === "certifications") {
+    const pdf = item.attachments?.[0];
+
+    return (
+      <article className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+        <CertificatePreview item={item} compact />
+        <div className="flex flex-1 flex-col p-6 sm:p-7">
+          <p className="text-sm font-semibold text-[#0066cc]">{item.meta}</p>
+          <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{item.title}</h3>
+          <p className="mt-2 text-sm font-medium text-neutral-600">{item.subtitle}</p>
+          {item.description ? <p className="mt-5 text-sm leading-7 text-neutral-700">{item.description}</p> : null}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {item.url ? (
+              <a
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-4 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
+                href={item.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                LinkedIn
+                <ArrowRight size={15} />
+              </a>
+            ) : null}
+            {pdf ? (
+              <a
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+                href={pdf.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                PDF
+                <Download size={15} />
+              </a>
+            ) : null}
+            <Link
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-neutral-100 px-4 text-sm font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring"
+              href={`/${section}/${item.slug}`}
+            >
+              Details
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <Link
       className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/10 bg-white text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-ring"
@@ -318,6 +365,35 @@ function VisualTile({ slug }: { slug: string }) {
           width={640}
         />
       ) : null}
+    </div>
+  );
+}
+
+function CertificatePreview({ item, compact = false }: { item: PortfolioItem; compact?: boolean }) {
+  const pdf = item.attachments?.[0];
+
+  if (!pdf) {
+    return (
+      <div className={`relative flex ${compact ? "h-44" : "min-h-80"} items-center justify-center overflow-hidden bg-[#f5f5f7]`}>
+        <div className="text-center">
+          <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning</p>
+          <p className="mt-2 text-3xl font-semibold tracking-normal text-neutral-950">Certificate</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative overflow-hidden bg-[#f5f5f7] ${compact ? "h-44" : "min-h-80"}`}>
+      <iframe
+        aria-label={`${item.title} certificate PDF preview`}
+        className="h-full w-full scale-[1.02] border-0 bg-white"
+        src={`${pdf.url}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+        title={`${item.title} certificate preview`}
+      />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 to-white/0 p-4">
+        <p className="text-sm font-semibold text-neutral-950">{item.title}</p>
+      </div>
     </div>
   );
 }
