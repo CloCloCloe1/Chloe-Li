@@ -16,8 +16,8 @@ import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { contact, content, type Locale, type PortfolioItem, type SectionKey } from "@/lib/profile";
 
-const sectionIds = ["home", "about", "experience", "education", "publications", "contact"] as const;
-const detailSections: SectionKey[] = ["experience", "education", "publications"];
+const sectionIds = ["home", "about", "experience", "education", "publications", "certifications", "contact"] as const;
+const detailSections: SectionKey[] = ["experience", "education", "publications", "certifications"];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "nakama-brand-product-analyst": {
@@ -287,6 +287,17 @@ function PortfolioCard({
 
 function VisualTile({ slug }: { slug: string }) {
   const brandVisual = brandVisuals[slug];
+
+  if (!brandVisual) {
+    return (
+      <div className="relative flex h-44 items-center justify-center overflow-hidden bg-[#f5f5f7]">
+        <div className="text-center">
+          <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning</p>
+          <p className="mt-2 text-3xl font-semibold tracking-normal text-neutral-950">Certificate</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

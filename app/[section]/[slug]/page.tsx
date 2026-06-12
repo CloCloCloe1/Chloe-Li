@@ -7,7 +7,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { content, getAllDetailPaths, getSectionItem } from "@/lib/profile";
 
-const sections = ["experience", "education", "publications"] as const;
+const sections = ["experience", "education", "publications", "certifications"] as const;
 type DetailSectionKey = (typeof sections)[number];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
@@ -139,6 +139,22 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 {item.cta ?? "Open link"}
                 <ArrowUpRight size={16} />
               </a>
+            ) : null}
+            {item.attachments?.length ? (
+              <div className="mt-4 flex flex-wrap gap-3">
+                {item.attachments.map((attachment) => (
+                  <a
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+                    href={attachment.url}
+                    key={attachment.url}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    {attachment.label}
+                    <ArrowUpRight size={16} />
+                  </a>
+                ))}
+              </div>
             ) : null}
           </div>
 
@@ -277,6 +293,17 @@ function isSectionKey(section: string): section is DetailSectionKey {
 
 function DetailVisual({ slug }: { slug: string }) {
   const brandVisual = brandVisuals[slug];
+
+  if (!brandVisual) {
+    return (
+      <div className="relative flex min-h-80 items-center justify-center overflow-hidden bg-[#f5f5f7] p-10">
+        <div className="text-center">
+          <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning</p>
+          <p className="mt-3 text-5xl font-semibold tracking-normal text-neutral-950">Certificate</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

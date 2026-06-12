@@ -1,6 +1,6 @@
 export type Locale = "en" | "zh";
 
-export type SectionKey = "experience" | "projects" | "education" | "publications";
+export type SectionKey = "experience" | "projects" | "education" | "publications" | "certifications";
 
 type NavKey = "home" | "about" | SectionKey | "contact";
 
@@ -14,6 +14,7 @@ export type PortfolioItem = {
   tags?: string[];
   url?: string;
   cta?: string;
+  attachments?: { label: string; url: string }[];
   workSamples?: WorkSample[];
 };
 
@@ -82,6 +83,7 @@ export const content = {
       projects: "Projects",
       education: "Education",
       publications: "Publications",
+      certifications: "Certifications",
       contact: "Contact"
     },
     hero: {
@@ -375,6 +377,123 @@ export const content = {
             cta: "Show publication"
           }
         ]
+      },
+      certifications: {
+        eyebrow: "Certifications",
+        title: "Professional learning across analytics tools, automation, and inclusive collaboration.",
+        lineup: "Explore certifications",
+        items: [
+          {
+            slug: "excel-essential-training-microsoft-365-2025",
+            title: "Excel Essential Training: Microsoft 365",
+            subtitle: "LinkedIn Learning",
+            meta: "2025",
+            description:
+              "Practical Microsoft Excel training for spreadsheet structure, formulas, data cleaning, formatting, and analysis workflows.",
+            bullets: [
+              "Strengthened Excel fundamentals for business analysis, reporting, and operational data review.",
+              "Applied spreadsheet best practices for cleaner workbook structure and repeatable analysis.",
+              "Relevant to data validation, product data review, finance workflows, and stakeholder reporting."
+            ],
+            tags: ["Excel", "Microsoft 365", "Data analysis", "Reporting"],
+            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/excel-essential-training-microsoft-365-2025.pdf"
+              }
+            ]
+          },
+          {
+            slug: "microsoft-power-automate-essential-training",
+            title: "Microsoft Power Automate Essential Training",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training focused on workflow automation, process triggers, approvals, and Microsoft ecosystem productivity.",
+            bullets: [
+              "Built understanding of workflow automation concepts used in business systems and operations.",
+              "Strengthened ability to connect manual processes with automated triggers and actions.",
+              "Relevant to internal workflow design, process improvement, and automation documentation."
+            ],
+            tags: ["Power Automate", "Workflow automation", "Process improvement"],
+            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/microsoft-power-automate-essential-training.pdf"
+              }
+            ]
+          },
+          {
+            slug: "creating-your-personal-brand",
+            title: "Creating Your Personal Brand",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on professional positioning, communication, and consistent personal brand development.",
+            bullets: [
+              "Strengthened professional storytelling and positioning for career communication.",
+              "Built a clearer approach to presenting skills, experience, and project evidence.",
+              "Relevant to stakeholder communication, presentation, and career-facing portfolio work."
+            ],
+            tags: ["Personal branding", "Communication", "Professional presence"],
+            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/creating-your-personal-brand.pdf"
+              }
+            ]
+          },
+          {
+            slug: "unconscious-bias",
+            title: "Unconscious Bias",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on recognizing unconscious bias and improving workplace awareness, decision making, and collaboration.",
+            bullets: [
+              "Developed stronger awareness of bias in team communication and workplace decisions.",
+              "Relevant to cross-functional collaboration, stakeholder communication, and inclusive teamwork.",
+              "Supports professional judgment in business analysis and user-centered product work."
+            ],
+            tags: ["Inclusive collaboration", "Communication", "Workplace awareness"],
+            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/unconscious-bias.pdf"
+              }
+            ]
+          },
+          {
+            slug: "confronting-bias-thriving-across-our-differences",
+            title: "Confronting Bias: Thriving Across Our Differences",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on identifying bias, working across differences, and building more effective team collaboration.",
+            bullets: [
+              "Strengthened practical awareness of inclusive communication across different working styles.",
+              "Relevant to stakeholder interviews, requirements gathering, and cross-team delivery.",
+              "Supports a more thoughtful approach to business systems analysis and product collaboration."
+            ],
+            tags: ["Bias awareness", "Stakeholder communication", "Team collaboration"],
+            url: "https://www.linkedin.com/learning/certificates/dcf321be820995c4a2d1e323568e74e552a180ee77cdcd9596a45d3ee4e0df25?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/confronting-bias-thriving-across-our-differences.pdf"
+              }
+            ]
+          }
+        ]
       }
     },
     contact: {
@@ -394,6 +513,7 @@ export const content = {
       projects: "项目",
       education: "教育",
       publications: "发表",
+      certifications: "认证",
       contact: "联系"
     },
     hero: {
@@ -605,6 +725,123 @@ export const content = {
             cta: "查看发表"
           }
         ]
+      },
+      certifications: {
+        eyebrow: "Certifications",
+        title: "Professional learning in analytics tools, automation, and collaboration.",
+        lineup: "Explore certifications",
+        items: [
+          {
+            slug: "excel-essential-training-microsoft-365-2025",
+            title: "Excel Essential Training: Microsoft 365",
+            subtitle: "LinkedIn Learning",
+            meta: "2025",
+            description:
+              "Practical Excel training for spreadsheet structure, formulas, data cleaning, formatting, and analysis workflows.",
+            bullets: [
+              "Strengthened Excel fundamentals for business analysis and reporting.",
+              "Applied spreadsheet best practices for cleaner workbook structure.",
+              "Relevant to data validation, finance workflows, and stakeholder reporting."
+            ],
+            tags: ["Excel", "Microsoft 365", "Data analysis", "Reporting"],
+            url: "https://www.linkedin.com/learning/certificates/f24efeabb030bf509488e5d63c8f0a80853ddc60ebba6f55eb1b490f9dd49102?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/excel-essential-training-microsoft-365-2025.pdf"
+              }
+            ]
+          },
+          {
+            slug: "microsoft-power-automate-essential-training",
+            title: "Microsoft Power Automate Essential Training",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training focused on workflow automation, process triggers, approvals, and Microsoft ecosystem productivity.",
+            bullets: [
+              "Built understanding of workflow automation concepts used in business systems.",
+              "Strengthened ability to connect manual processes with automated triggers.",
+              "Relevant to internal workflow design and process improvement."
+            ],
+            tags: ["Power Automate", "Workflow automation", "Process improvement"],
+            url: "https://www.linkedin.com/learning/certificates/0438b9606e992eb986bc52fadfb4cecbf799db6d176f426f0799b3ed11b36b14?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/microsoft-power-automate-essential-training.pdf"
+              }
+            ]
+          },
+          {
+            slug: "creating-your-personal-brand",
+            title: "Creating Your Personal Brand",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on professional positioning, communication, and consistent personal brand development.",
+            bullets: [
+              "Strengthened professional storytelling and positioning.",
+              "Built a clearer approach to presenting skills, experience, and project evidence.",
+              "Relevant to stakeholder communication and portfolio presentation."
+            ],
+            tags: ["Personal branding", "Communication", "Professional presence"],
+            url: "https://www.linkedin.com/learning/certificates/8a941ed5da82240406d56ac16835978ac59ca902ec0c516902ed8d0bd7ebb509?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/creating-your-personal-brand.pdf"
+              }
+            ]
+          },
+          {
+            slug: "unconscious-bias",
+            title: "Unconscious Bias",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on recognizing unconscious bias and improving workplace awareness, decision making, and collaboration.",
+            bullets: [
+              "Developed stronger awareness of bias in team communication.",
+              "Relevant to cross-functional collaboration and inclusive teamwork.",
+              "Supports professional judgment in business analysis and product work."
+            ],
+            tags: ["Inclusive collaboration", "Communication", "Workplace awareness"],
+            url: "https://www.linkedin.com/learning/certificates/22237bd685865c0bc5661db14e2b53586f121fb83a61abbd25b14bc626cd6990?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/unconscious-bias.pdf"
+              }
+            ]
+          },
+          {
+            slug: "confronting-bias-thriving-across-our-differences",
+            title: "Confronting Bias: Thriving Across Our Differences",
+            subtitle: "LinkedIn Learning",
+            meta: "Professional certificate",
+            description:
+              "Training on identifying bias, working across differences, and building more effective team collaboration.",
+            bullets: [
+              "Strengthened practical awareness of inclusive communication.",
+              "Relevant to stakeholder interviews, requirements gathering, and cross-team delivery.",
+              "Supports thoughtful business systems analysis and product collaboration."
+            ],
+            tags: ["Bias awareness", "Stakeholder communication", "Team collaboration"],
+            url: "https://www.linkedin.com/learning/certificates/dcf321be820995c4a2d1e323568e74e552a180ee77cdcd9596a45d3ee4e0df25?trk=share_certificate",
+            cta: "View LinkedIn certificate",
+            attachments: [
+              {
+                label: "Open certificate PDF",
+                url: "/certificates/confronting-bias-thriving-across-our-differences.pdf"
+              }
+            ]
+          }
+        ]
       }
     },
     contact: {
@@ -622,7 +859,7 @@ export function getSectionItem(section: SectionKey, slug: string, locale: Locale
 }
 
 export function getAllDetailPaths() {
-  return (["experience", "education", "publications"] as SectionKey[]).flatMap((section) =>
+  return (["experience", "education", "publications", "certifications"] as SectionKey[]).flatMap((section) =>
     content.en.sections[section].items.map((item) => ({
       section,
       slug: item.slug
