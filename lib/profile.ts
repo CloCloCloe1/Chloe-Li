@@ -327,6 +327,22 @@ export const content = {
             tags: ["Management Sciences", "Analytics", "Decision making"]
           },
           {
+            slug: "fudan-international-summer-session",
+            title: "International Summer Session Exchange",
+            subtitle: "Fudan University, School of International Business",
+            meta: "Summer 2021 - Shanghai, China",
+            description:
+              "Exchange study through Fudan University's International Summer Session, with coursework connected to international business, trade, and China's modern economic development.",
+            bullets: [
+              "Completed exchange coursework in international trade and modern Chinese economy.",
+              "Studied business, economic, and market context in a cross-cultural academic environment.",
+              "Built additional foundation for business analysis, market understanding, and international operations."
+            ],
+            tags: ["International business", "International trade", "Modern Chinese economy"],
+            url: "https://iss.fudan.edu.cn/index.htm",
+            cta: "View program"
+          },
+          {
             slug: "queens-computing",
             title: "Bachelor of Computing (Honors)",
             subtitle: "Queen's University",
@@ -678,6 +694,22 @@ export const content = {
               "研究生阶段聚焦管理科学、分析方法和技术驱动的决策支持。",
             bullets: ["GPA 4.0", "UW Grad Scholarship"],
             tags: ["管理科学", "分析", "决策支持"]
+          },
+          {
+            slug: "fudan-international-summer-session",
+            title: "International Summer Session Exchange",
+            subtitle: "Fudan University, School of International Business",
+            meta: "2021 Summer - Shanghai, China",
+            description:
+              "Exchange study through Fudan University's International Summer Session, with coursework in international trade, modern Chinese economy, and international business context.",
+            bullets: [
+              "Completed coursework related to international trade and China's modern economy.",
+              "Studied business and market context in a cross-cultural academic environment.",
+              "Built additional foundation for business analysis and international operations."
+            ],
+            tags: ["International business", "International trade", "Modern Chinese economy"],
+            url: "https://iss.fudan.edu.cn/index.htm",
+            cta: "View program"
           },
           {
             slug: "queens-computing",

@@ -17,7 +17,7 @@ import { useMemo, useState } from "react";
 import { contact, content, type Locale, type PortfolioItem, type SectionKey } from "@/lib/profile";
 
 const sectionIds = ["home", "about", "experience", "education", "publications", "certifications", "contact"] as const;
-const detailSections: SectionKey[] = ["experience", "education", "publications", "certifications"];
+const detailSections: SectionKey[] = ["publications", "certifications"];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "nakama-brand-product-analyst": {
@@ -186,9 +186,11 @@ export default function Home() {
         </div>
       </section>
 
+      <TimelineSection locale={locale} />
+
       {detailSections.map((section, index) => (
         <LineupSection
-          background={index % 2 === 0 ? "white" : "gray"}
+          background={index % 2 === 0 ? "gray" : "white"}
           key={section}
           locale={locale}
           section={section}
@@ -226,6 +228,107 @@ export default function Home() {
         </div>
       </footer>
     </main>
+  );
+}
+
+function TimelineSection({ locale }: { locale: Locale }) {
+  const work = content[locale].sections.experience;
+  const education = content[locale].sections.education;
+  const title =
+    locale === "en"
+      ? "A timeline of business, product, data, and systems work."
+      : "从教育背景到业务、产品、数据与系统实践的时间轴。";
+  const summary =
+    locale === "en"
+      ? "Education and work experience are shown side by side, so the path from analytical training to applied product, systems, and workflow delivery is easy to scan."
+      : "左侧展示教育经历，右侧展示工作经历，帮助快速理解从分析训练到产品、系统和业务流程实践的成长路径。";
+
+  return (
+    <section className="page-section bg-white py-24" id="experience">
+      <span className="block scroll-mt-24" id="education" />
+      <div className="section-shell">
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <SectionIntro eyebrow={work.eyebrow} title={title} />
+          <p className="text-lg leading-8 text-neutral-600">{summary}</p>
+        </div>
+
+        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+          <TimelineColumn
+            eyebrow={education.eyebrow}
+            items={education.items}
+            section="education"
+            title={education.lineup}
+          />
+          <TimelineColumn
+            eyebrow={work.eyebrow}
+            items={work.items}
+            section="experience"
+            title={work.lineup}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TimelineColumn({
+  eyebrow,
+  title,
+  items,
+  section
+}: {
+  eyebrow: string;
+  title: string;
+  items: PortfolioItem[];
+  section: SectionKey;
+}) {
+  return (
+    <div className="rounded-[2rem] border border-black/10 bg-neutral-100 p-4 shadow-sm sm:p-6">
+      <div className="px-2 pb-5">
+        <p className="text-sm font-semibold text-[#0066cc]">{eyebrow}</p>
+        <h3 className="mt-2 text-3xl font-semibold tracking-normal text-neutral-950">{title}</h3>
+      </div>
+      <div className="relative">
+        <div className="absolute bottom-8 left-4 top-8 w-px bg-black/10" />
+        <div className="grid gap-4">
+          {items.map((item) => (
+            <TimelineCard item={item} key={item.slug} section={section} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TimelineCard({ item, section }: { item: PortfolioItem; section: SectionKey }) {
+  return (
+    <Link
+      className="group relative grid grid-cols-[2rem_1fr] gap-3 rounded-[1.5rem] bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-ring sm:p-5"
+      href={`/${section}/${item.slug}`}
+    >
+      <span className="relative z-10 mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-1 ring-black/10">
+        <span className="h-3 w-3 rounded-full bg-[#0066cc] transition group-hover:scale-125" />
+      </span>
+      <span>
+        <span className="text-sm font-semibold text-[#0066cc]">{item.meta}</span>
+        <span className="mt-2 block text-xl font-semibold tracking-normal text-neutral-950">{item.title}</span>
+        <span className="mt-1 block text-sm font-medium text-neutral-600">{item.subtitle}</span>
+        {item.description ? (
+          <span className="mt-3 line-clamp-3 block text-sm leading-6 text-neutral-700">{item.description}</span>
+        ) : null}
+        <span className="mt-4 flex flex-wrap gap-2">
+          {item.tags?.slice(0, 3).map((tag) => (
+            <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-700" key={tag}>
+              {tag}
+            </span>
+          ))}
+        </span>
+        <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#0066cc]">
+          Learn more
+          <ArrowRight className="transition group-hover:translate-x-1" size={15} />
+        </span>
+      </span>
+    </Link>
   );
 }
 

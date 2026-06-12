@@ -330,8 +330,8 @@ function DetailVisual({
     return (
       <div className="relative flex min-h-80 items-center justify-center overflow-hidden bg-[#f5f5f7] p-10">
         <div className="text-center">
-          <p className="text-sm font-semibold text-[#0066cc]">LinkedIn Learning</p>
-          <p className="mt-3 text-5xl font-semibold tracking-normal text-neutral-950">Certificate</p>
+          <p className="text-sm font-semibold text-[#0066cc]">Portfolio detail</p>
+          <p className="mt-3 text-4xl font-semibold tracking-normal text-neutral-950">{item.title}</p>
         </div>
       </div>
     );
