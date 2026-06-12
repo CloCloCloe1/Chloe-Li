@@ -240,6 +240,16 @@ export default function Home() {
 function TimelineSection({ locale }: { locale: Locale }) {
   const work = content[locale].sections.experience;
   const education = content[locale].sections.education;
+  const timelineItems = [
+    { item: work.items[0], section: "experience" as SectionKey, type: work.eyebrow, accent: "#2563eb" },
+    { item: work.items[1], section: "experience" as SectionKey, type: work.eyebrow, accent: "#0ea5a4" },
+    { item: work.items[2], section: "experience" as SectionKey, type: work.eyebrow, accent: "#0f6ea8" },
+    { item: education.items[0], section: "education" as SectionKey, type: education.eyebrow, accent: "#eab308" },
+    { item: work.items[3], section: "experience" as SectionKey, type: work.eyebrow, accent: "#111827" },
+    { item: work.items[4], section: "experience" as SectionKey, type: work.eyebrow, accent: "#ef4444" },
+    { item: education.items[1], section: "education" as SectionKey, type: education.eyebrow, accent: "#1d4ed8" },
+    { item: education.items[2], section: "education" as SectionKey, type: education.eyebrow, accent: "#b91c1c" }
+  ].filter((entry) => entry.item);
   const title =
     locale === "en"
       ? "A timeline of business, product, data, and systems work."
@@ -258,67 +268,135 @@ function TimelineSection({ locale }: { locale: Locale }) {
           <p className="text-lg leading-8 text-neutral-600">{summary}</p>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <TimelineColumn
-            eyebrow={education.eyebrow}
-            items={education.items}
-            section="education"
-            title={education.lineup}
-          />
-          <TimelineColumn
-            eyebrow={work.eyebrow}
-            items={work.items}
-            section="experience"
-            title={work.lineup}
-          />
+        <div className="mt-10 flex flex-wrap gap-3">
+          <a className="rounded-full bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-200 focus-ring" href="#education">
+            {education.lineup}
+          </a>
+          <a className="rounded-full bg-neutral-100 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-200 focus-ring" href="#experience">
+            {work.lineup}
+          </a>
+        </div>
+
+        <div className="relative mt-14">
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute left-6 top-0 hidden h-full w-12 text-neutral-400 md:left-1/2 md:block md:-translate-x-1/2"
+            preserveAspectRatio="none"
+            viewBox="0 0 80 1200"
+          >
+            <path
+              d="M42 0 C10 95 75 145 42 225 C8 305 76 360 42 450 C8 540 76 595 42 685 C8 775 76 835 42 925 C12 1015 58 1070 42 1200"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="8"
+            />
+          </svg>
+          <div className="absolute bottom-0 left-6 top-0 w-1 rounded-full bg-neutral-300 md:hidden" />
+          <div className="grid gap-7 md:gap-10">
+            {timelineItems.map((entry, index) => (
+              <WavyTimelineItem
+                accent={entry.accent}
+                index={index}
+                item={entry.item}
+                key={`${entry.section}-${entry.item.slug}`}
+                section={entry.section}
+                type={entry.type}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function TimelineColumn({
-  eyebrow,
-  title,
-  items,
-  section
+function WavyTimelineItem({
+  item,
+  section,
+  type,
+  accent,
+  index
 }: {
-  eyebrow: string;
-  title: string;
-  items: PortfolioItem[];
+  item: PortfolioItem;
   section: SectionKey;
+  type: string;
+  accent: string;
+  index: number;
 }) {
+  const isLeft = index % 2 === 0;
+
   return (
-    <div className="rounded-[2rem] border border-black/10 bg-neutral-100 p-4 shadow-sm sm:p-6">
-      <div className="px-2 pb-5">
-        <p className="text-sm font-semibold text-[#0066cc]">{eyebrow}</p>
-        <h3 className="mt-2 text-3xl font-semibold tracking-normal text-neutral-950">{title}</h3>
+    <div className="relative grid min-h-40 grid-cols-[3rem_1fr] gap-4 md:grid-cols-[1fr_6rem_1fr] md:items-center">
+      <div className={`${isLeft ? "md:order-1" : "md:order-3"} ${isLeft ? "" : "md:col-start-3"}`}>
+        <TimelineCard accent={accent} item={item} section={section} type={type} />
       </div>
-      <div className="relative">
-        <div className="absolute bottom-8 left-4 top-8 w-px bg-black/10" />
-        <div className="grid gap-4">
-          {items.map((item) => (
-            <TimelineCard item={item} key={item.slug} section={section} />
-          ))}
-        </div>
+      <div className="relative z-10 order-first flex items-start justify-center md:order-2 md:col-start-2 md:items-center">
+        <TimelineNode accent={accent} slug={item.slug} title={item.title} />
       </div>
+      <div className={`${isLeft ? "hidden md:order-3 md:block" : "hidden md:order-1 md:block"}`} />
     </div>
   );
 }
 
-function TimelineCard({ item, section }: { item: PortfolioItem; section: SectionKey }) {
+function TimelineNode({ accent, slug, title }: { accent: string; slug: string; title: string }) {
+  const brandVisual = brandVisuals[slug];
+
+  return (
+    <span
+      className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-white p-1.5 shadow-lg ring-4 md:h-20 md:w-20 md:p-2"
+      style={{ ["--tw-ring-color" as string]: accent }}
+    >
+      {brandVisual ? (
+        brandVisual.fullBleed ? (
+          <span
+            aria-label={title}
+            className="h-full w-full rounded-full bg-cover bg-center"
+            style={{ backgroundImage: `url('${brandVisual.src}')` }}
+          />
+        ) : (
+          <Image
+            alt=""
+            className={`max-h-full max-w-full object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""}`}
+            height={80}
+            src={brandVisual.src}
+            width={80}
+          />
+        )
+      ) : (
+        <span className="h-4 w-4 rounded-full" style={{ backgroundColor: accent }} />
+      )}
+    </span>
+  );
+}
+
+function TimelineCard({
+  item,
+  section,
+  type,
+  accent
+}: {
+  item: PortfolioItem;
+  section: SectionKey;
+  type: string;
+  accent: string;
+}) {
   return (
     <Link
-      className="group relative grid grid-cols-[2rem_1fr] gap-3 rounded-[1.5rem] bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-lg focus-ring sm:p-5"
+      className="group block rounded-[1.5rem] border border-black/10 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl focus-ring sm:p-6"
       href={`/${section}/${item.slug}`}
     >
-      <span className="relative z-10 mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-white ring-1 ring-black/10">
-        <span className="h-3 w-3 rounded-full bg-[#0066cc] transition group-hover:scale-125" />
-      </span>
       <span>
-        <span className="text-sm font-semibold text-[#0066cc]">{item.meta}</span>
-        <TimelineVisual slug={item.slug} />
-        <span className="mt-2 block text-xl font-semibold tracking-normal text-neutral-950">{item.title}</span>
+        <span className="flex flex-wrap items-center gap-2">
+          <span
+            className="rounded-full px-3 py-1 text-xs font-semibold text-white"
+            style={{ backgroundColor: accent }}
+          >
+            {type}
+          </span>
+          <span className="text-sm font-semibold text-neutral-500">{item.meta}</span>
+        </span>
+        <span className="mt-3 block text-xl font-semibold tracking-normal text-neutral-950">{item.title}</span>
         <span className="mt-1 block text-sm font-medium text-neutral-600">{item.subtitle}</span>
         {item.description ? (
           <span className="mt-3 line-clamp-3 block text-sm leading-6 text-neutral-700">{item.description}</span>
@@ -336,36 +414,6 @@ function TimelineCard({ item, section }: { item: PortfolioItem; section: Section
         </span>
       </span>
     </Link>
-  );
-}
-
-function TimelineVisual({ slug }: { slug: string }) {
-  const brandVisual = brandVisuals[slug];
-
-  if (!brandVisual) {
-    return null;
-  }
-
-  return (
-    <span
-      className="relative mt-3 flex h-20 items-center justify-center overflow-hidden rounded-2xl border border-black/10 bg-neutral-100"
-      style={{ backgroundColor: brandVisual.backgroundColor }}
-    >
-      {brandVisual.fullBleed ? (
-        <span
-          className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: `url('${brandVisual.src}')` }}
-        />
-      ) : (
-        <Image
-          alt=""
-          className={`w-[76%] object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""} ${brandVisual.imageClassName ?? ""}`}
-          height={90}
-          src={brandVisual.src}
-          width={320}
-        />
-      )}
-    </span>
   );
 }
 
