@@ -46,6 +46,12 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
     blend: true,
     imageClassName: "max-h-44"
   },
+  "fudan-international-summer-session": {
+    src: "/brand/fudan.jpg",
+    backgroundColor: "#f5f8ff",
+    fullBleed: true,
+    imageClassName: "object-cover"
+  },
   "queens-computing": {
     src: "/brand/qu.jpg?v=2",
     backgroundColor: "#f4f4f4",

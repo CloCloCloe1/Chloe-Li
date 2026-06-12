@@ -55,6 +55,12 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
     blend: true,
     imageClassName: "max-h-24"
   },
+  "fudan-international-summer-session": {
+    src: "/brand/fudan.jpg",
+    backgroundColor: "#f5f8ff",
+    fullBleed: true,
+    imageClassName: "object-cover"
+  },
   "queens-computing": {
     src: "/brand/qu.jpg?v=2",
     backgroundColor: "#f4f4f4",
@@ -311,6 +317,7 @@ function TimelineCard({ item, section }: { item: PortfolioItem; section: Section
       </span>
       <span>
         <span className="text-sm font-semibold text-[#0066cc]">{item.meta}</span>
+        <TimelineVisual slug={item.slug} />
         <span className="mt-2 block text-xl font-semibold tracking-normal text-neutral-950">{item.title}</span>
         <span className="mt-1 block text-sm font-medium text-neutral-600">{item.subtitle}</span>
         {item.description ? (
@@ -329,6 +336,36 @@ function TimelineCard({ item, section }: { item: PortfolioItem; section: Section
         </span>
       </span>
     </Link>
+  );
+}
+
+function TimelineVisual({ slug }: { slug: string }) {
+  const brandVisual = brandVisuals[slug];
+
+  if (!brandVisual) {
+    return null;
+  }
+
+  return (
+    <span
+      className="relative mt-3 flex h-20 items-center justify-center overflow-hidden rounded-2xl border border-black/10 bg-neutral-100"
+      style={{ backgroundColor: brandVisual.backgroundColor }}
+    >
+      {brandVisual.fullBleed ? (
+        <span
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: `url('${brandVisual.src}')` }}
+        />
+      ) : (
+        <Image
+          alt=""
+          className={`w-[76%] object-contain ${brandVisual.blend ? "mix-blend-multiply" : ""} ${brandVisual.imageClassName ?? ""}`}
+          height={90}
+          src={brandVisual.src}
+          width={320}
+        />
+      )}
+    </span>
   );
 }
 
