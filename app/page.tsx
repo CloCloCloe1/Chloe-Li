@@ -85,15 +85,25 @@ export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
   const t = content[locale];
   const oppositeLocale = locale === "en" ? "zh" : "en";
+  const languageLabel = locale === "en" ? "\u4e2d\u6587" : "EN";
   const nav = useMemo(
     () => sectionIds.map((id) => ({ id, label: t.nav[id] })),
     [t.nav]
   );
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white pt-[6.5rem] text-neutral-950 md:pt-14">
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip To Main Content
+      </a>
+    <main
+      className="min-h-screen overflow-hidden bg-white pt-[6.5rem] text-neutral-950 md:pt-14"
+      id="main-content"
+      lang={locale === "zh" ? "zh" : "en"}
+      tabIndex={-1}
+    >
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
-        <nav className="section-shell flex h-14 items-center justify-between">
+        <nav aria-label="Primary" className="section-shell flex h-14 items-center justify-between">
           <a className="text-sm font-semibold tracking-normal text-neutral-950 focus-ring" href="#home">
             {t.displayName}
           </a>
@@ -111,13 +121,13 @@ export default function Home() {
           </div>
 
           <button
-            aria-label="Toggle language"
+            aria-label={`${languageLabel} language toggle`}
             className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-neutral-800 transition hover:border-black/20 hover:bg-neutral-100 focus-ring"
             onClick={() => setLocale(oppositeLocale)}
             type="button"
           >
-            <Globe2 size={14} />
-            {locale === "en" ? "中文" : "EN"}
+            <Globe2 aria-hidden="true" size={14} />
+            {languageLabel}
           </button>
         </nav>
         <div className="border-t border-black/5 md:hidden">
@@ -153,14 +163,14 @@ export default function Home() {
             href="#experience"
           >
             {t.hero.primaryCta}
-            <ArrowRight size={16} />
+            <ArrowRight aria-hidden="true" size={16} />
           </a>
           <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-neutral-500 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
             download="ChloeLi_Analyst_resume.pdf"
             href={contact.resumeUrl}
           >
-            <Download size={16} />
+            <Download aria-hidden="true" size={16} />
             {t.hero.secondaryCta}
           </a>
         </div>
@@ -183,7 +193,7 @@ export default function Home() {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {t.about.focus.map((item) => (
                 <div className="flex items-start gap-3 rounded-3xl bg-white p-5 shadow-sm" key={item}>
-                  <Check className="mt-0.5 shrink-0 text-[#0066cc]" size={18} />
+                  <Check aria-hidden="true" className="mt-0.5 shrink-0 text-[#0066cc]" size={18} />
                   <p className="text-sm font-medium leading-6 text-neutral-700">{item}</p>
                 </div>
               ))}
@@ -212,10 +222,10 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-neutral-600">{t.contact.body}</p>
 
           <div className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <ContactItem href={`mailto:${contact.email}`} icon={<Mail size={18} />} label={contact.email} />
-            <ContactItem href={`tel:${contact.phone}`} icon={<Phone size={18} />} label={contact.phone} />
-            <ContactItem href={contact.linkedin} icon={<Linkedin size={18} />} label="LinkedIn" />
-            <ContactItem href="#contact" icon={<MapPin size={18} />} label={contact.location} />
+            <ContactItem href={`mailto:${contact.email}`} icon={<Mail aria-hidden="true" size={18} />} label={contact.email} />
+            <ContactItem href={`tel:${contact.phone}`} icon={<Phone aria-hidden="true" size={18} />} label={contact.phone} />
+            <ContactItem href={contact.linkedin} icon={<Linkedin aria-hidden="true" size={18} />} label="LinkedIn" />
+            <ContactItem href="#contact" icon={<MapPin aria-hidden="true" size={18} />} label={contact.location} />
           </div>
 
           <a
@@ -234,6 +244,7 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </>
   );
 }
 
@@ -279,7 +290,7 @@ function TimelineSection({ locale }: { locale: Locale }) {
 
         <div className="relative mt-14">
           <div className="absolute bottom-4 left-7 top-4 w-1 rounded-full bg-neutral-300 md:left-1/2 md:-translate-x-1/2" />
-          <div className="grid gap-7 md:gap-10">
+          <ol className="grid gap-7 md:gap-10">
             {timelineItems.map((entry) => (
               <WavyTimelineItem
                 accent={entry.accent}
@@ -290,7 +301,7 @@ function TimelineSection({ locale }: { locale: Locale }) {
                 year={entry.year}
               />
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>
@@ -313,19 +324,19 @@ function WavyTimelineItem({
   const isEducation = section === "education";
 
   return (
-    <div className="relative grid min-h-40 grid-cols-[4rem_1fr] gap-4 md:grid-cols-[1fr_8rem_1fr] md:items-center">
+    <li className="relative grid min-h-40 grid-cols-[4rem_1fr] gap-4 md:grid-cols-[1fr_8rem_1fr] md:items-center">
       <div className={isEducation ? "md:order-1" : "md:order-3 md:col-start-3"}>
         <TimelineCard accent={accent} item={item} section={section} type={type} />
       </div>
       <div className="relative z-10 order-first flex items-start justify-center md:order-2 md:col-start-2 md:items-center">
-        <TimelineNode accent={accent} slug={item.slug} title={item.title} year={year} />
+        <TimelineNode accent={accent} slug={item.slug} year={year} />
       </div>
       <div className={isEducation ? "hidden md:order-3 md:block" : "hidden md:order-1 md:block"} />
-    </div>
+    </li>
   );
 }
 
-function TimelineNode({ accent, slug, title, year }: { accent: string; slug: string; title: string; year: string }) {
+function TimelineNode({ accent, slug, year }: { accent: string; slug: string; year: string }) {
   const brandVisual = brandVisuals[slug];
 
   return (
@@ -342,11 +353,11 @@ function TimelineNode({ accent, slug, title, year }: { accent: string; slug: str
       >
         {brandVisual ? (
           brandVisual.fullBleed ? (
-            <span
-              aria-label={title}
-              className="h-full w-full rounded-full bg-cover bg-center"
-              style={{ backgroundImage: `url('${brandVisual.src}')` }}
-            />
+          <span
+            aria-hidden="true"
+            className="h-full w-full rounded-full bg-cover bg-center"
+            style={{ backgroundImage: `url('${brandVisual.src}')` }}
+          />
           ) : (
             <Image
               alt=""
@@ -403,8 +414,8 @@ function TimelineCard({
           ))}
         </span>
         <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#0066cc]">
-          Learn more
-          <ArrowRight className="transition group-hover:translate-x-1" size={15} />
+          Learn More
+          <ArrowRight aria-hidden="true" className="transition group-hover:translate-x-1" size={15} />
         </span>
       </span>
     </Link>
@@ -467,18 +478,18 @@ function PortfolioCard({
                 target="_blank"
               >
                 LinkedIn
-                <ArrowRight size={15} />
+                <ArrowRight aria-hidden="true" size={15} />
               </a>
             ) : null}
             {pdf ? (
               <a
-                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-neutral-500 bg-white px-4 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
                 href={pdf.url}
                 rel="noreferrer"
                 target="_blank"
               >
                 PDF
-                <Download size={15} />
+                <Download aria-hidden="true" size={15} />
               </a>
             ) : null}
             <Link
@@ -486,7 +497,7 @@ function PortfolioCard({
               href={`/${section}/${item.slug}`}
             >
               Details
-              <ArrowRight size={15} />
+              <ArrowRight aria-hidden="true" size={15} />
             </Link>
           </div>
         </div>
@@ -506,8 +517,8 @@ function PortfolioCard({
         <p className="mt-2 text-sm font-medium text-neutral-600">{item.subtitle}</p>
         {item.description ? <p className="mt-5 text-sm leading-7 text-neutral-700">{item.description}</p> : null}
         <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-[#0066cc]">
-          <span>Learn more</span>
-          <ArrowRight className="transition group-hover:translate-x-1" size={16} />
+          <span>Learn More</span>
+          <ArrowRight aria-hidden="true" className="transition group-hover:translate-x-1" size={16} />
         </div>
       </div>
     </Link>

@@ -111,14 +111,18 @@ export default async function DetailPage({ params }: DetailPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-white pt-14 text-neutral-950">
+    <>
+      <a className="skip-link" href="#main-content">
+        Skip To Main Content
+      </a>
+    <main className="min-h-screen bg-white pt-14 text-neutral-950" id="main-content" tabIndex={-1}>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
-        <nav className="section-shell flex h-14 items-center justify-between">
+        <nav aria-label="Detail page" className="section-shell flex h-14 items-center justify-between">
           <Link className="text-sm font-semibold text-neutral-950 focus-ring" href="/">
             Chloe Li
           </Link>
           <Link className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring" href={sectionHref}>
-            <ArrowLeft size={14} />
+            <ArrowLeft aria-hidden="true" size={14} />
             {sectionLabel}
           </Link>
         </nav>
@@ -142,22 +146,22 @@ export default async function DetailPage({ params }: DetailPageProps) {
                 rel="noreferrer"
                 target="_blank"
               >
-                {item.cta ?? "Open link"}
-                <ArrowUpRight size={16} />
+                {item.cta ?? "Open Link"}
+                <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             ) : null}
             {item.attachments?.length ? (
               <div className="mt-4 flex flex-wrap gap-3">
                 {item.attachments.map((attachment) => (
                   <a
-                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-black/12 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
+                    className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-neutral-500 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
                     href={attachment.url}
                     key={attachment.url}
                     rel="noreferrer"
                     target="_blank"
                   >
                     {attachment.label}
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight aria-hidden="true" size={16} />
                   </a>
                 ))}
               </div>
@@ -230,7 +234,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
                         target="_blank"
                       >
                         View sample
-                        <ArrowUpRight size={16} />
+                        <ArrowUpRight aria-hidden="true" size={16} />
                       </a>
                     ) : null}
                   </div>
@@ -241,6 +245,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
         ) : null}
       </section>
     </main>
+    </>
   );
 }
 
@@ -278,7 +283,7 @@ function SampleImage({
       {image}
       <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm backdrop-blur">
         Open sample
-        <ArrowUpRight size={14} />
+        <ArrowUpRight aria-hidden="true" size={14} />
       </span>
     </a>
   );
