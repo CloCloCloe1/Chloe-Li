@@ -130,12 +130,14 @@ export const content = {
               "Designed a Label Info Finder workflow that helps teams search barcode, product, brand, ingredient, manufacturer, COO, and bilingual label fields from uploaded workbooks and reference data.",
               "Developed a BA Consignment System concept for store-facing tester, damage/theft, and restock workflows, improving record visibility and operational handoff.",
               "Created brand analysis views that connect inventory, sales, and PO data to inventory health, sales suggestions, replenishment priorities, and purchase-order planning.",
+              "Designed event poster creatives for retail campaigns, translating promotion mechanics, brand visuals, and customer instructions into clear in-store marketing materials.",
               "Translated product, inventory, and sales inputs into concise business recommendations for brand planning, campaign timing, and cross-functional decision making."
             ],
             tags: [
               "Product analysis",
               "Website development",
               "Brand analysis",
+              "Events poster design",
               "Inventory analysis",
               "Sales analysis",
               "PO analysis",
@@ -194,6 +196,19 @@ export const content = {
                 outcome:
                   "Helped connect analysis with execution cadence across product planning, campaign support, and operational follow-up.",
                 tags: ["Monthly calendar", "Campaign planning", "Replenishment", "Action tracking"]
+              },
+              {
+                title: "Events Poster Design",
+                label: "Retail marketing creative",
+                image: "/work/posters/events-poster-design-preview.png",
+                url: "/work/nakama-case-studies.html#events-poster-design",
+                problem:
+                  "Retail events needed clear in-store visuals that could explain promotion rules, product offers, and social-sharing steps quickly to customers.",
+                solution:
+                  "Designed campaign poster assets for Spin & Glow and WOW Beauty sample promotions, combining brand visuals, product images, offer mechanics, and concise instructions.",
+                outcome:
+                  "Created customer-facing event materials that supported store engagement, sampling campaigns, and social media participation.",
+                tags: ["Poster design", "Retail events", "Campaign creative", "Brand marketing"]
               }
             ]
           },
