@@ -119,6 +119,37 @@ export const content = {
         lineup: "Explore experience",
         items: [
           {
+            slug: "imco-business-systems-analyst",
+            title: "Business Systems Analyst",
+            subtitle: "Investment Management Corporation of Ontario (IMCO)",
+            meta: "Sep 2025 - Present - Toronto, ON",
+            description:
+              "Financial systems and data workflow role focused on ETL, reporting, validation, internal knowledge management, and process documentation.",
+            bullets: [
+              "Designed and automated data workflows and ETL processes using Excel, Power Query, and Power Automate, reducing manual processing effort by 40%.",
+              "Supported internal knowledge-base setup, maintenance, and documentation for business systems, data workflows, and operational process references.",
+              "Worked with Microsoft Copilot and Dynamics 365-related business process context to support knowledge retrieval, documentation, and systems understanding.",
+              "Wrote and optimized SQL queries for data extraction, validation, and reporting across operational datasets.",
+              "Analyzed 50+ datasets to identify data quality issues and documented data flows, structures, and process logic to support scalability and audit readiness."
+            ],
+            tags: ["SQL", "Power Query", "Power Automate", "Microsoft Copilot", "Dynamics 365", "Internal knowledge base"]
+          },
+          {
+            slug: "mec-tech-algorithm-engineer",
+            title: "Algorithm Engineer",
+            subtitle: "MEC-Tech",
+            meta: "Feb 2026 - Present - Remote",
+            description:
+              "AI workflow and algorithm-focused role supporting internal automation, enterprise knowledge management, product knowledge retrieval, and data reliability.",
+            bullets: [
+              "Optimized internal algorithm workflows to reduce manual processing and improve the accuracy and consistency of operational data outputs.",
+              "Built and maintained AI knowledge-base and product-database workflows using Dify, DeepSeek, and DingTalk to support enterprise knowledge management and internal search.",
+              "Structured product, client, and business knowledge into reusable knowledge-management workflows with validation logic for reliable information retrieval.",
+              "Collaborated with business and technical stakeholders to translate operational needs into scalable AI-assisted workflow and knowledge-base solutions."
+            ],
+            tags: ["Dify", "DeepSeek", "DingTalk", "Knowledge base", "Enterprise knowledge management", "AI workflow"]
+          },
+          {
             slug: "nakama-brand-product-analyst",
             title: "Brand Analyst",
             subtitle: "Nakama",
@@ -211,37 +242,6 @@ export const content = {
                 tags: ["Poster design", "Retail events", "Campaign creative", "Brand marketing"]
               }
             ]
-          },
-          {
-            slug: "mec-tech-algorithm-engineer",
-            title: "Algorithm Engineer",
-            subtitle: "MEC-Tech",
-            meta: "Feb 2026 - Present - Remote",
-            description:
-              "AI workflow and algorithm-focused role supporting internal automation, enterprise knowledge management, product knowledge retrieval, and data reliability.",
-            bullets: [
-              "Optimized internal algorithm workflows to reduce manual processing and improve the accuracy and consistency of operational data outputs.",
-              "Built and maintained AI knowledge-base and product-database workflows using Dify, DeepSeek, and DingTalk to support enterprise knowledge management and internal search.",
-              "Structured product, client, and business knowledge into reusable knowledge-management workflows with validation logic for reliable information retrieval.",
-              "Collaborated with business and technical stakeholders to translate operational needs into scalable AI-assisted workflow and knowledge-base solutions."
-            ],
-            tags: ["Dify", "DeepSeek", "DingTalk", "Knowledge base", "Enterprise knowledge management", "AI workflow"]
-          },
-          {
-            slug: "imco-business-systems-analyst",
-            title: "Business Systems Analyst",
-            subtitle: "Investment Management Corporation of Ontario (IMCO)",
-            meta: "Sep 2025 - Jan 2026 - Toronto, ON",
-            description:
-              "Financial systems and data workflow role focused on ETL, reporting, validation, internal knowledge management, and process documentation.",
-            bullets: [
-              "Designed and automated data workflows and ETL processes using Excel, Power Query, and Power Automate, reducing manual processing effort by 40%.",
-              "Supported internal knowledge-base setup, maintenance, and documentation for business systems, data workflows, and operational process references.",
-              "Worked with Microsoft Copilot and Dynamics 365-related business process context to support knowledge retrieval, documentation, and systems understanding.",
-              "Wrote and optimized SQL queries for data extraction, validation, and reporting across operational datasets.",
-              "Analyzed 50+ datasets to identify data quality issues and documented data flows, structures, and process logic to support scalability and audit readiness."
-            ],
-            tags: ["SQL", "Power Query", "Power Automate", "Microsoft Copilot", "Dynamics 365", "Internal knowledge base"]
           },
           {
             slug: "nissan-business-systems-analyst",
@@ -585,6 +585,21 @@ export const content = {
         lineup: "查看经历",
         items: [
           {
+            slug: "imco-business-systems-analyst",
+            title: "Business Systems Analyst",
+            subtitle: "Investment Management Corporation of Ontario (IMCO)",
+            meta: "2025.09 - 至今 · Toronto, ON",
+            description:
+              "面向金融系统的数据流程、ETL、报表验证与流程文档工作。",
+            bullets: [
+              "使用 Excel、Power Query 和 Power Automate 设计并自动化数据工作流与 ETL 流程，减少 40% 手工处理工作。",
+              "编写并优化 SQL 查询，用于运营数据集的数据提取、验证和报表支持。",
+              "分析 50+ 个数据集，识别数据质量问题并推动改进，使工作流效率提升 25%。",
+              "记录数据流、数据结构和流程逻辑，支持系统扩展和审计准备。"
+            ],
+            tags: ["SQL", "Power Query", "Power Automate", "ETL"]
+          },
+          {
             slug: "mec-tech-algorithm-engineer",
             title: "算法工程师",
             subtitle: "MEC-Tech",
@@ -598,21 +613,6 @@ export const content = {
               "与业务和技术团队协作，将运营需求转化为可扩展的 AI 辅助工作流解决方案。"
             ],
             tags: ["Dify", "DeepSeek", "钉钉", "AI 工作流"]
-          },
-          {
-            slug: "imco-business-systems-analyst",
-            title: "Business Systems Analyst",
-            subtitle: "Investment Management Corporation of Ontario (IMCO)",
-            meta: "2025.09 - 2026.01 · Toronto, ON",
-            description:
-              "面向金融系统的数据流程、ETL、报表验证与流程文档工作。",
-            bullets: [
-              "使用 Excel、Power Query 和 Power Automate 设计并自动化数据工作流与 ETL 流程，减少 40% 手工处理工作。",
-              "编写并优化 SQL 查询，用于运营数据集的数据提取、验证和报表支持。",
-              "分析 50+ 个数据集，识别数据质量问题并推动改进，使工作流效率提升 25%。",
-              "记录数据流、数据结构和流程逻辑，支持系统扩展和审计准备。"
-            ],
-            tags: ["SQL", "Power Query", "Power Automate", "ETL"]
           },
           {
             slug: "nissan-business-systems-analyst",

@@ -252,11 +252,11 @@ function TimelineSection({ locale }: { locale: Locale }) {
   const work = content[locale].sections.experience;
   const education = content[locale].sections.education;
   const timelineItems = [
-    { item: work.items[0], section: "experience" as SectionKey, type: work.eyebrow, accent: "#2563eb", year: "2026" },
+    { item: work.items[0], section: "experience" as SectionKey, type: work.eyebrow, accent: "#2563eb", year: "2025" },
     { item: work.items[1], section: "experience" as SectionKey, type: work.eyebrow, accent: "#0ea5a4", year: "2026" },
-    { item: work.items[2], section: "experience" as SectionKey, type: work.eyebrow, accent: "#0f6ea8", year: "2025" },
-    { item: education.items[0], section: "education" as SectionKey, type: education.eyebrow, accent: "#eab308", year: "2025" },
+    { item: work.items[2], section: "experience" as SectionKey, type: work.eyebrow, accent: "#0f6ea8", year: "2026" },
     { item: work.items[3], section: "experience" as SectionKey, type: work.eyebrow, accent: "#111827", year: "2024" },
+    { item: education.items[0], section: "education" as SectionKey, type: education.eyebrow, accent: "#eab308", year: "2025" },
     { item: work.items[4], section: "experience" as SectionKey, type: work.eyebrow, accent: "#ef4444", year: "2023" },
     { item: education.items[1], section: "education" as SectionKey, type: education.eyebrow, accent: "#1d4ed8", year: "2021" },
     { item: education.items[2], section: "education" as SectionKey, type: education.eyebrow, accent: "#b91c1c", year: "2019" }
