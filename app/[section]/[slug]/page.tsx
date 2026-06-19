@@ -207,28 +207,17 @@ export default async function DetailPage({ params }: DetailPageProps) {
             <div className="mt-8 grid gap-6">
               {item.workSamples.map((sample) => (
                 <article
-                  className="overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-sm lg:grid lg:grid-cols-[1.05fr_0.95fr]"
+                  className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition hover:shadow-md sm:p-8"
                   key={sample.title}
                 >
-                  <SampleImage sample={sample} />
-                  <div className="p-6 sm:p-8">
-                    <p className="text-sm font-semibold text-[#0066cc]">{sample.label}</p>
-                    <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{sample.title}</h3>
-                    <div className="mt-6 grid gap-5">
-                      <SamplePoint label="Problem" text={sample.problem} />
-                      <SamplePoint label="Solution" text={sample.solution} />
-                      <SamplePoint label="Outcome" text={sample.outcome} />
-                    </div>
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {sample.tags.map((tag) => (
-                        <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={tag}>
-                          {tag}
-                        </span>
-                      ))}
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-3xl">
+                      <p className="text-sm font-semibold text-[#0066cc]">{sample.label}</p>
+                      <h3 className="mt-3 text-2xl font-semibold tracking-normal text-neutral-950">{sample.title}</h3>
                     </div>
                     {sample.url ? (
                       <a
-                        className="mt-7 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-5 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
+                        className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-5 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
                         href={sample.url}
                         rel="noreferrer"
                         target="_blank"
@@ -238,6 +227,18 @@ export default async function DetailPage({ params }: DetailPageProps) {
                       </a>
                     ) : null}
                   </div>
+                  <div className="mt-7 grid gap-5 lg:grid-cols-3">
+                    <SamplePoint label="Problem" text={sample.problem} />
+                    <SamplePoint label="Solution" text={sample.solution} />
+                    <SamplePoint label="Outcome" text={sample.outcome} />
+                  </div>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {sample.tags.map((tag) => (
+                      <span className="rounded-full bg-neutral-100 px-3 py-1.5 text-xs font-semibold text-neutral-700" key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </article>
               ))}
             </div>
@@ -246,46 +247,6 @@ export default async function DetailPage({ params }: DetailPageProps) {
       </section>
     </main>
     </>
-  );
-}
-
-function SampleImage({
-  sample
-}: {
-  sample: {
-    title: string;
-    image: string;
-    url?: string;
-  };
-}) {
-  const image = (
-    <Image
-      alt={`${sample.title} sanitized preview`}
-      className="object-cover transition duration-300 group-hover:scale-[1.02]"
-      fill
-      sizes="(min-width: 1024px) 52vw, 100vw"
-      src={sample.image}
-    />
-  );
-
-  if (!sample.url) {
-    return <div className="relative min-h-[260px] overflow-hidden bg-neutral-100 sm:min-h-[340px]">{image}</div>;
-  }
-
-  return (
-    <a
-      aria-label={`Open ${sample.title} sample`}
-      className="group relative block min-h-[260px] overflow-hidden bg-neutral-100 focus-ring sm:min-h-[340px]"
-      href={sample.url}
-      rel="noreferrer"
-      target="_blank"
-    >
-      {image}
-      <span className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-neutral-900 shadow-sm backdrop-blur">
-        Open sample
-        <ArrowUpRight aria-hidden="true" size={14} />
-      </span>
-    </a>
   );
 }
 

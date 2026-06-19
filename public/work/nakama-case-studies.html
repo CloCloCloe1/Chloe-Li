@@ -185,6 +185,35 @@
         object-fit: cover;
       }
 
+      .poster-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .poster-stack a {
+        display: block;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
+      }
+
+      .poster-stack a:focus-visible,
+      .visual:focus-visible,
+      .button:focus-visible,
+      .links a:focus-visible,
+      .brand:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 3px;
+      }
+
+      .poster-stack img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
       .panel {
         border: 1px solid var(--line);
         border-radius: 28px;
@@ -194,7 +223,8 @@
       }
 
       .section:nth-of-type(even) .panel,
-      .section:nth-of-type(even) .visual {
+      .section:nth-of-type(even) .visual,
+      .section:nth-of-type(even) .poster-stack a {
         box-shadow: none;
       }
 
@@ -308,6 +338,10 @@
 
         .visual img {
           min-height: 260px;
+        }
+
+        .poster-stack {
+          gap: 14px;
         }
       }
     </style>
@@ -571,9 +605,14 @@
           </p>
         </div>
         <div class="case-grid">
-          <a class="visual" href="/work/posters/events-poster-design-preview.png" target="_blank" rel="noreferrer">
-            <img src="/work/posters/events-poster-design-preview.png" alt="Preview of Spin and Glow and WOW Beauty event posters" />
-          </a>
+          <div class="poster-stack" aria-label="Event poster previews">
+            <a href="/work/posters/spin-and-glow.pdf" target="_blank" rel="noreferrer">
+              <img src="/work/posters/spin-and-glow.png" alt="Open Spin and Glow event poster PDF" />
+            </a>
+            <a href="/work/posters/wow-beauty-free-sample-eng.pdf" target="_blank" rel="noreferrer">
+              <img src="/work/posters/wow-beauty-free-sample-eng.png" alt="Open WOW Beauty free sample poster PDF" />
+            </a>
+          </div>
           <article class="panel">
             <div class="point">
               <h3>Problem solved</h3>
