@@ -273,7 +273,7 @@ function ParallaxFeatureRow({
         </motion.div>
 
         <motion.div className="relative" style={{ clipPath, opacity }}>
-          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} w-full max-w-[29rem] overflow-hidden rounded-[2rem] p-4`}>
+          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} w-full max-w-[26.1rem] overflow-hidden rounded-[2rem] p-4`}>
             {item.image.fullBleed ? (
               <Image
                 alt={item.image.alt}
