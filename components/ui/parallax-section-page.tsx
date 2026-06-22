@@ -227,13 +227,13 @@ function ParallaxFeatureRow({
           {item.title}
         </h2>
         <p className="mt-5 text-xl font-medium leading-8 text-white/78">{item.subtitle}</p>
-        {item.description ? (
-          <p className="mt-7 max-w-5xl text-base leading-8 text-white/70">{item.description}</p>
-        ) : null}
       </motion.div>
 
       <div className="section-feature-detail-grid mt-10 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(20rem,34rem)] md:items-start">
         <motion.div style={{ y }}>
+          {item.description ? (
+            <p className="mb-7 max-w-3xl text-base leading-8 text-white/70">{item.description}</p>
+          ) : null}
           {item.bullets?.length ? (
             <ul className="grid gap-3">
               {item.bullets.map((bullet) => (
