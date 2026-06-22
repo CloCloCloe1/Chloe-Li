@@ -171,7 +171,7 @@ export default function ParallaxSectionPage({
           </p>
         </section>
 
-        <div className="relative z-10 flex flex-col px-6 md:px-10">
+        <div className="section-feature-shell relative z-10 flex flex-col px-6 md:px-10">
           {items.map((item, index) => (
             <ParallaxFeatureRow
               item={item}
@@ -220,7 +220,7 @@ function ParallaxFeatureRow({
 
   return (
     <section
-      className={`grid min-h-screen items-center gap-10 py-24 md:grid-cols-2 md:gap-14 lg:gap-20 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`section-feature-row grid min-h-screen items-center gap-10 py-24 md:grid-cols-2 md:gap-14 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
       ref={ref}
     >
       <motion.div style={{ y }}>
