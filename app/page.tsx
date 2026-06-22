@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ArrowUpRight,
   Award,
   BookOpen,
   BriefcaseBusiness,
@@ -59,15 +58,8 @@ export default function Home() {
         lang={locale === "zh" ? "zh" : "en"}
         tabIndex={-1}
       >
-        <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
-          <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-            <a
-              className="liquid-glass flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring"
-              href="#home"
-            >
-              CL
-            </a>
-
+        <header className="fixed inset-x-0 top-4 z-50 px-3 sm:px-5">
+          <nav aria-label="Primary" className="relative mx-auto flex w-full max-w-[80rem] items-center justify-center gap-3">
             <div className="liquid-glass hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex">
               {nav.map((item) =>
                 item.id === "contact" ? (
@@ -96,7 +88,7 @@ export default function Home() {
 
             <button
               aria-label={`${languageLabel} language toggle`}
-              className="liquid-glass inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition-colors hover:bg-white/10 focus-ring"
+              className="liquid-glass absolute right-0 inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition-colors hover:bg-white/10 focus-ring"
               onClick={() => setLocale(oppositeLocale)}
               type="button"
             >
@@ -139,7 +131,7 @@ export default function Home() {
         />
 
         <section
-          className="page-section relative flex min-h-screen items-center overflow-hidden bg-black px-5 py-28 sm:px-6 lg:px-8"
+          className="page-section relative flex min-h-screen items-center overflow-hidden bg-black px-4 py-28 sm:px-5 lg:px-6"
           id="home"
         >
           <video
@@ -173,13 +165,6 @@ export default function Home() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  className="liquid-glass-strong inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
-                  href="/experience"
-                >
-                  {t.hero.primaryCta}
-                  <ArrowUpRight aria-hidden="true" size={17} />
-                </Link>
                 <a
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-neutral-950 transition-colors hover:bg-white/85 focus-ring"
                   download="ChloeLi_Analyst_resume.pdf"

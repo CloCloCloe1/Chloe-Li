@@ -43,7 +43,7 @@ h3 {
 }
 
 .section-shell {
-  @apply mx-auto w-full max-w-[76rem] px-4 sm:px-5 lg:px-6;
+  @apply mx-auto w-full max-w-[80rem] px-3 sm:px-4 lg:px-5;
 }
 
 .section-title {
