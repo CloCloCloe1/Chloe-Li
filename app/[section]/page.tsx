@@ -89,7 +89,10 @@ export default async function SectionLanding({ params }: SectionLandingProps) {
   }
 
   const sectionData = content.en.sections[section];
-  const items = (sectionData.items as PortfolioItem[]).map((item) => ({
+  const displaySection =
+    section === "publications" ? "Publication" : section === "certifications" ? "Certification" : sectionData.eyebrow;
+  const orderedItems = orderSectionItems(section, sectionData.items as PortfolioItem[]);
+  const items = orderedItems.map((item) => ({
     slug: item.slug,
     title: item.title,
     subtitle: item.subtitle,
@@ -107,7 +110,8 @@ export default async function SectionLanding({ params }: SectionLandingProps) {
     <ParallaxSectionPage
       eyebrow={sectionData.eyebrow}
       items={items}
-      section={sectionData.eyebrow}
+      section={displaySection}
+      sectionKey={section}
       title={sectionData.title}
     />
   );
@@ -115,4 +119,18 @@ export default async function SectionLanding({ params }: SectionLandingProps) {
 
 function isLandingSection(section: string): section is LandingSection {
   return (landingSections as readonly string[]).includes(section);
+}
+
+function orderSectionItems(section: LandingSection, items: PortfolioItem[]) {
+  if (section !== "education") {
+    return items;
+  }
+
+  const educationOrder = [
+    "waterloo-management-sciences",
+    "queens-computing",
+    "fudan-international-summer-session"
+  ];
+
+  return [...items].sort((a, b) => educationOrder.indexOf(a.slug) - educationOrder.indexOf(b.slug));
 }

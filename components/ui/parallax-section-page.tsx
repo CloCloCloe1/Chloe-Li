@@ -4,7 +4,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import ContactLanyardModal from "@/components/ContactLanyardModal";
 
 export type ParallaxSectionItem = {
   slug: string;
@@ -24,6 +25,7 @@ export type ParallaxSectionItem = {
 type ParallaxSectionPageProps = {
   eyebrow: string;
   section: string;
+  sectionKey: string;
   title: string;
   items: ParallaxSectionItem[];
 };
@@ -34,9 +36,20 @@ const heroVideoSrc =
 export default function ParallaxSectionPage({
   eyebrow,
   section,
+  sectionKey,
   title,
   items
 }: ParallaxSectionPageProps) {
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactButtonRef = useRef<HTMLButtonElement | null>(null);
+  const navItems = [
+    { label: "Home", href: "/" },
+    { label: "Education", href: "/education" },
+    { label: "Experience", href: "/experience" },
+    { label: "Publication", href: "/publications" },
+    { label: "Certification", href: "/certifications" }
+  ];
+
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -57,25 +70,63 @@ export default function ParallaxSectionPage({
         <div className="fixed inset-0 z-0 bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,204,0.28),transparent_34%),linear-gradient(120deg,rgba(0,0,0,0.9),rgba(0,0,0,0.58)_52%,rgba(0,0,0,0.82))]" />
 
         <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
-          <nav aria-label="Section" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
+          <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
             <Link
               className="liquid-glass flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring"
               href="/"
             >
               CL
             </Link>
-            <Link
-              className="liquid-glass inline-flex min-h-12 items-center justify-center rounded-full px-5 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-ring"
-              href="/"
-            >
-              Home
-            </Link>
+            <div className="liquid-glass hidden min-h-12 items-center gap-1 rounded-full px-2 py-1 md:flex">
+              {navItems.map((item) => (
+                <Link
+                  aria-current={item.href === `/${sectionKey}` ? "page" : undefined}
+                  className="rounded-full px-4 py-2 text-sm font-semibold text-white/76 transition-colors hover:bg-white/10 hover:text-white focus-ring"
+                  href={item.href}
+                  key={item.href}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <button
+                className="rounded-full px-4 py-2 text-sm font-semibold text-white/76 transition-colors hover:bg-white/10 hover:text-white focus-ring"
+                onClick={() => setContactOpen(true)}
+                ref={contactButtonRef}
+                type="button"
+              >
+                Contact
+              </button>
+            </div>
+            <span aria-hidden="true" className="hidden h-12 w-12 md:block" />
+          </nav>
+          <nav aria-label="Mobile" className="mx-auto mt-3 flex max-w-6xl gap-2 overflow-x-auto pb-1 md:hidden">
+            {[...navItems, { label: "Contact", href: "#contact" }].map((item) =>
+              item.label === "Contact" ? (
+                <button
+                  className="liquid-glass min-h-10 shrink-0 rounded-full px-4 text-sm font-semibold text-white/82 focus-ring"
+                  key={item.label}
+                  onClick={() => setContactOpen(true)}
+                  type="button"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  aria-current={item.href === `/${sectionKey}` ? "page" : undefined}
+                  className="liquid-glass flex min-h-10 shrink-0 items-center rounded-full px-4 text-sm font-semibold text-white/82 focus-ring"
+                  href={item.href}
+                  key={item.href}
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </nav>
         </header>
 
         <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
           <p className="liquid-glass rounded-full px-4 py-2 text-sm font-semibold text-white/85">{eyebrow}</p>
-          <h1 className="mt-8 max-w-4xl font-heading text-7xl italic leading-[0.9] tracking-normal text-white sm:text-8xl lg:text-[9rem]">
+          <h1 className="mt-8 max-w-4xl text-balance font-heading text-7xl italic leading-[0.9] tracking-normal text-white sm:text-8xl lg:text-[9rem]">
             {section}
           </h1>
           <p className="mt-8 max-w-2xl text-base leading-8 text-white/76 sm:text-lg">{title}</p>
@@ -91,10 +142,16 @@ export default function ParallaxSectionPage({
               item={item}
               key={item.slug}
               reverse={index % 2 === 1}
-              section={section.toLowerCase()}
+              section={sectionKey}
             />
           ))}
         </div>
+
+        <ContactLanyardModal
+          onClose={() => setContactOpen(false)}
+          open={contactOpen}
+          returnFocusRef={contactButtonRef}
+        />
       </main>
     </>
   );
@@ -120,12 +177,12 @@ function ParallaxFeatureRow({
 
   return (
     <section
-      className={`grid min-h-screen items-center gap-10 py-24 md:grid-cols-2 md:gap-20 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`grid min-h-screen items-center gap-12 py-24 md:grid-cols-2 md:gap-24 lg:gap-32 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
       ref={ref}
     >
       <motion.div style={{ y }}>
         <p className="text-sm font-semibold text-[#8ec5ff]">{item.meta}</p>
-        <h2 className="mt-4 max-w-lg font-heading text-5xl italic leading-none tracking-normal text-white sm:text-6xl">
+        <h2 className="mt-4 max-w-lg text-balance font-heading text-5xl italic leading-none tracking-normal text-white sm:text-6xl">
           {item.title}
         </h2>
         <p className="mt-5 text-xl font-medium leading-8 text-white/78">{item.subtitle}</p>
@@ -149,7 +206,7 @@ function ParallaxFeatureRow({
       </motion.div>
 
       <motion.div className="relative" style={{ clipPath, opacity }}>
-        <div className="liquid-glass-strong relative mx-auto aspect-square w-full max-w-[22rem] overflow-hidden rounded-[2rem] p-8 sm:max-w-[26rem]">
+        <div className="liquid-glass-strong relative mx-auto aspect-square w-full max-w-[22rem] overflow-hidden rounded-[2rem] p-8 sm:max-w-[26rem] lg:max-w-[28rem]">
           {item.image.fullBleed ? (
             <Image
               alt={item.image.alt}
