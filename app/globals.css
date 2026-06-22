@@ -198,6 +198,93 @@ h3 {
   min-height: 100%;
 }
 
+.lanyard-modal {
+  animation: lanyard-drop-in 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+  padding-top: 82px;
+}
+
+.lanyard-cord {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 2;
+  height: 124px;
+  width: 132px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.lanyard-cord span {
+  position: absolute;
+  top: -18px;
+  height: 148px;
+  width: 11px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.02)),
+    linear-gradient(180deg, #0f5ca8, #08315f);
+  box-shadow: inset 1px 0 1px rgba(255, 255, 255, 0.28), 0 14px 24px rgba(0, 0, 0, 0.25);
+}
+
+.lanyard-cord span:first-child {
+  left: 40px;
+  transform: rotate(17deg);
+  transform-origin: top center;
+}
+
+.lanyard-cord span:last-child {
+  right: 40px;
+  transform: rotate(-17deg);
+  transform-origin: top center;
+}
+
+.lanyard-clip {
+  position: absolute;
+  left: 50%;
+  top: 78px;
+  z-index: 3;
+  height: 38px;
+  width: 88px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+}
+
+.lanyard-clip::after {
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  height: 19px;
+  width: 42px;
+  transform: translateX(-50%);
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 999px;
+  content: "";
+}
+
+.lanyard-card {
+  position: relative;
+  border-radius: 34px;
+  padding: 22px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.36), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+@keyframes lanyard-drop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-22px) rotate(-2deg) scale(0.96);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translateY(6px) rotate(1deg) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
 @media (max-width: 1023px) {
   .card-swap-stage {
     min-height: 430px;
@@ -218,6 +305,16 @@ h3 {
 
   .card-swap-container {
     transform: translate(-50%, 2%) scale(0.72);
+  }
+
+  .lanyard-modal {
+    max-width: 360px;
+    padding-top: 70px;
+  }
+
+  .lanyard-card {
+    border-radius: 28px;
+    padding: 16px;
   }
 }
 
@@ -240,5 +337,9 @@ h3 {
     filter: none;
     opacity: 1;
     transform: none;
+  }
+
+  .lanyard-modal {
+    animation: none;
   }
 }

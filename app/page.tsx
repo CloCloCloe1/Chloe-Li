@@ -17,8 +17,9 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import CardSwap, { Card } from "@/components/CardSwap";
+import ContactLanyardModal from "@/components/ContactLanyardModal";
 import { contact, content, type Locale, type PortfolioItem, type SectionKey } from "@/lib/profile";
 
 const sectionIds = ["home", "about", "experience", "education", "publications", "certifications", "contact"] as const;
@@ -90,6 +91,8 @@ const brandVisuals: Record<string, { src: string; backgroundColor: string; blend
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
+  const [contactOpen, setContactOpen] = useState(false);
+  const contactButtonRef = useRef<HTMLButtonElement | null>(null);
   const t = content[locale];
   const oppositeLocale = locale === "en" ? "zh" : "en";
   const languageLabel = locale === "en" ? "\u4e2d\u6587" : "EN";
@@ -117,13 +120,27 @@ export default function Home() {
 
           <div className="liquid-glass hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex">
             {nav.map((item) => (
-              <a
-                className="rounded-full px-3 py-2 text-xs font-medium text-white/80 transition hover:bg-white/10 hover:text-white focus-ring"
-                href={`#${item.id}`}
-                key={item.id}
-              >
-                {item.label}
-              </a>
+              item.id === "contact" ? (
+                <button
+                  aria-expanded={contactOpen}
+                  aria-haspopup="dialog"
+                  className="rounded-full px-3 py-2 text-xs font-medium text-white/80 transition hover:bg-white/10 hover:text-white focus-ring"
+                  key={item.id}
+                  onClick={() => setContactOpen(true)}
+                  ref={contactButtonRef}
+                  type="button"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <a
+                  className="rounded-full px-3 py-2 text-xs font-medium text-white/80 transition hover:bg-white/10 hover:text-white focus-ring"
+                  href={`#${item.id}`}
+                  key={item.id}
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </div>
 
@@ -140,17 +157,35 @@ export default function Home() {
         <div className="mt-3 md:hidden">
           <div className="liquid-glass mx-auto flex max-w-[calc(100vw-2rem)] gap-3 overflow-x-auto rounded-full px-4 py-3">
             {nav.map((item) => (
-              <a
-                className="shrink-0 text-xs font-medium text-white/80 transition hover:text-white focus-ring"
-                href={`#${item.id}`}
-                key={item.id}
-              >
-                {item.label}
-              </a>
+              item.id === "contact" ? (
+                <button
+                  aria-expanded={contactOpen}
+                  aria-haspopup="dialog"
+                  className="shrink-0 text-xs font-medium text-white/80 transition hover:text-white focus-ring"
+                  key={item.id}
+                  onClick={() => setContactOpen(true)}
+                  type="button"
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <a
+                  className="shrink-0 text-xs font-medium text-white/80 transition hover:text-white focus-ring"
+                  href={`#${item.id}`}
+                  key={item.id}
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </div>
         </div>
       </header>
+      <ContactLanyardModal
+        onClose={() => setContactOpen(false)}
+        open={contactOpen}
+        returnFocusRef={contactButtonRef}
+      />
 
       <section className="page-section relative flex min-h-screen items-center overflow-hidden bg-black px-5 py-28 sm:px-6 lg:px-8" id="home">
         <video
