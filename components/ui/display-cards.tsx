@@ -27,16 +27,17 @@ export default function DisplayCards({ cards }: DisplayCardsProps) {
           key={card.href}
           style={{ ["--card-tone" as string]: card.tone }}
         >
-          <span className="flex items-center gap-3">
+          <span className="experience-card-header flex items-center gap-3">
             <span className="experience-display-icon" aria-hidden="true">
               {card.icon}
             </span>
-            <span className="text-lg font-semibold text-white">{card.title}</span>
+            <span className="experience-card-title">{card.title}</span>
           </span>
-          <span className="block text-base font-medium leading-6 text-white/90">
-            {card.description}
+          <span className="experience-card-body">
+            <span className="experience-card-kicker">{card.date}</span>
+            <span className="experience-card-main">{card.title}</span>
+            <span className="experience-card-copy">{card.description}</span>
           </span>
-          <span className="block text-sm font-semibold text-white/70">{card.date}</span>
         </Link>
       ))}
     </div>

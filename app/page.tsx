@@ -154,7 +154,7 @@ export default function Home() {
             src={heroVideoSrc}
           />
           <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,204,0.3),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.88),rgba(0,0,0,0.56)_45%,rgba(0,0,0,0.28))]" />
-          <div className="section-shell relative z-10 grid min-h-[calc(100vh-12rem)] items-center gap-14 pt-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="section-shell relative z-10 grid min-h-[calc(100vh-12rem)] items-center gap-12 pt-10 lg:grid-cols-[0.88fr_1.12fr] xl:gap-16">
             <div className="max-w-2xl text-left">
               <div className="liquid-glass inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-white">
                 <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-950">
@@ -268,7 +268,7 @@ function HeroPortfolioCards({ locale }: { locale: Locale }) {
   return (
     <section
       aria-label={locale === "en" ? "Portfolio sections" : "Portfolio sections"}
-      className="page-section mx-auto w-full max-w-[34rem] scroll-mt-36 lg:mx-0 lg:justify-self-end"
+      className="page-section mx-auto w-full max-w-[42rem] scroll-mt-36 lg:mx-0 lg:justify-self-end"
       id="experience"
     >
       <DisplayCards cards={cardItems} />

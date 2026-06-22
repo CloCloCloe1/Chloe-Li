@@ -43,7 +43,7 @@ h3 {
 }
 
 .section-shell {
-  @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-[76rem] px-4 sm:px-5 lg:px-6;
 }
 
 .section-title {
@@ -184,55 +184,56 @@ h3 {
 .experience-card-stack {
   display: grid;
   grid-template-areas: "stack";
-  min-height: 500px;
+  min-height: 590px;
   place-items: center;
   position: relative;
+  perspective: 900px;
 }
 
 .experience-display-card {
   align-items: stretch;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08)),
-    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--card-tone) 52%, transparent), transparent 38%);
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 1.2rem;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+    linear-gradient(180deg, rgba(10, 10, 14, 0.88), rgba(7, 8, 15, 0.74)),
+    radial-gradient(circle at 18% 82%, color-mix(in srgb, var(--card-tone) 46%, transparent), transparent 42%);
+  backdrop-filter: blur(20px) saturate(145%);
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.85rem;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34), inset 0 1px 1px rgba(255, 255, 255, 0.14);
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
   grid-area: stack;
-  height: 9.5rem;
-  justify-content: space-between;
-  padding: 1rem;
+  height: 24rem;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0;
   position: relative;
-  transform: skewY(-8deg);
+  transform: skewY(5deg);
   transition-duration: 700ms;
   transition-property: background-color, border-color, filter, transform;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   user-select: none;
-  width: min(22rem, calc(100vw - 3rem));
+  width: min(32rem, calc(100vw - 2.5rem));
 }
 
 .experience-display-card::before {
-  background: rgba(7, 10, 16, 0.5);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%);
   border-radius: inherit;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
   content: "";
   inset: 0;
-  opacity: 1;
+  opacity: 0.92;
   pointer-events: none;
   position: absolute;
   transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .experience-display-card::after {
-  background: linear-gradient(270deg, rgba(4, 6, 12, 0.86), rgba(4, 6, 12, 0));
+  background: linear-gradient(270deg, rgba(4, 6, 12, 0.24), rgba(4, 6, 12, 0));
   content: "";
   height: 110%;
-  opacity: 1;
+  opacity: 0.4;
   pointer-events: none;
   position: absolute;
   right: -0.25rem;
@@ -249,7 +250,7 @@ h3 {
 .experience-display-card:hover,
 .experience-display-card:focus-visible {
   background-color: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.34);
+  border-color: rgba(255, 255, 255, 0.72);
   filter: grayscale(0);
 }
 
@@ -269,52 +270,121 @@ h3 {
   border-radius: 999px;
   color: #ffffff;
   display: inline-flex;
-  height: 2rem;
+  height: 1.55rem;
   justify-content: center;
-  width: 2rem;
+  width: 1.55rem;
+}
+
+.experience-card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.62);
+  min-height: 3.55rem;
+  padding: 0.85rem 1rem;
+}
+
+.experience-card-title {
+  color: #ffffff;
+  font-size: 1.18rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.experience-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1.3rem;
+  position: relative;
+}
+
+.experience-card-body::before {
+  background:
+    radial-gradient(circle at 72% 50%, color-mix(in srgb, var(--card-tone) 54%, transparent), transparent 23%),
+    radial-gradient(circle at 30% 66%, rgba(255, 255, 255, 0.16), transparent 34%);
+  content: "";
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+  position: absolute;
+}
+
+.experience-card-kicker,
+.experience-card-main,
+.experience-card-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-card-kicker {
+  color: #ffffffb3;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.experience-card-main {
+  color: #ffffff;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3.3rem, 7vw, 5.65rem);
+  font-style: italic;
+  letter-spacing: 0;
+  line-height: 0.85;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.experience-card-copy {
+  color: #ffffffe0;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.45;
+  max-width: 24rem;
 }
 
 .experience-card-one {
   filter: grayscale(1);
-  transform: translateX(-4rem) translateY(-4.5rem) skewY(-8deg);
+  transform: translateX(-5rem) translateY(5.8rem) skewY(5deg);
   z-index: 5;
 }
 
 .experience-card-one:hover,
 .experience-card-one:focus-visible {
-  transform: translateX(-4rem) translateY(-7rem) skewY(-8deg);
+  transform: translateX(-5rem) translateY(4.4rem) skewY(5deg);
 }
 
 .experience-card-two {
   filter: grayscale(1);
-  transform: translateX(1rem) translateY(-1.95rem) skewY(-8deg);
+  transform: translateX(-1rem) translateY(1.4rem) skewY(5deg);
   z-index: 4;
 }
 
 .experience-card-two:hover,
 .experience-card-two:focus-visible {
-  transform: translateX(1rem) translateY(-2.7rem) skewY(-8deg);
+  transform: translateX(-1rem) translateY(0.2rem) skewY(5deg);
 }
 
 .experience-card-three {
-  transform: translateX(5.5rem) translateY(0.75rem) skewY(-8deg);
+  filter: grayscale(1);
+  transform: translateX(3rem) translateY(-3rem) skewY(5deg);
   z-index: 3;
 }
 
 .experience-card-three:hover,
 .experience-card-three:focus-visible {
-  transform: translateX(5.5rem) translateY(2.7rem) skewY(-8deg);
+  transform: translateX(3rem) translateY(-4.2rem) skewY(5deg);
 }
 
 .experience-card-four {
   filter: grayscale(1);
-  transform: translateX(-1rem) translateY(3.6rem) skewY(-8deg);
+  transform: translateX(7rem) translateY(-7.4rem) skewY(5deg);
   z-index: 2;
 }
 
 .experience-card-four:hover,
 .experience-card-four:focus-visible {
-  transform: translateX(-1rem) translateY(2.55rem) skewY(-8deg);
+  transform: translateX(7rem) translateY(-8.6rem) skewY(5deg);
 }
 
 .experience-card-five {
