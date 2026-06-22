@@ -102,12 +102,21 @@ h3 {
 
   .home-hero-shell > :last-child {
     justify-self: stretch;
+    transform: translateY(20px);
     width: 100%;
   }
 
   .section-feature-row.section-feature-row {
     column-gap: 100px;
     grid-template-columns: minmax(0, calc(100% - 644px)) minmax(0, 544px);
+  }
+
+  .section-feature-row:not(.section-feature-row-reverse) > :last-child > .liquid-glass-strong {
+    transform: translateX(-10px);
+  }
+
+  .section-feature-row.section-feature-row-reverse > :first-child {
+    margin-left: -10px;
   }
 }
 

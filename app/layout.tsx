@@ -5,13 +5,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://chloe-li.vercel.app"),
-  title: "Chloe Li | Business Analyst & Product Analyst",
+  title: "Chloe Li | Business Analyst",
   description:
-    "A concise bilingual portfolio for Business Analyst, Product Analyst, and Data Analyst opportunities.",
+    "A concise bilingual portfolio for Business Analyst and Data Analyst opportunities.",
   openGraph: {
     title: "Chloe Li | Portfolio",
     description:
-      "Business Analyst and Product Analyst portfolio highlighting experience in data analysis, AI workflows, product validation, financial systems, reporting, and research.",
+      "Business Analyst portfolio highlighting experience in data analysis, AI workflows, product validation, financial systems, reporting, and research.",
     url: "https://chloe-li.vercel.app/",
     siteName: "Chloe Li Portfolio",
     images: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chloe Li | Portfolio",
     description:
-      "Business Analyst and Product Analyst portfolio highlighting experience in data analysis, AI workflows, product validation, financial systems, reporting, and research.",
+      "Business Analyst portfolio highlighting experience in data analysis, AI workflows, product validation, financial systems, reporting, and research.",
     images: ["/linkedin-preview.jpg?v=1"]
   }
 };

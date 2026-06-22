@@ -220,7 +220,7 @@ function ParallaxFeatureRow({
 
   return (
     <section
-      className={`section-feature-row grid min-h-screen items-center gap-10 py-24 md:grid-cols-2 md:gap-14 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`section-feature-row grid min-h-[calc(100vh-1.25rem)] items-center gap-10 py-[5.5rem] md:grid-cols-2 md:gap-14 ${reverse ? "section-feature-row-reverse md:[&>*:first-child]:order-2" : ""}`}
       ref={ref}
     >
       <motion.div style={{ y }}>
