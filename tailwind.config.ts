@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: ["Barlow", "Arial", "Helvetica", "sans-serif"],
+        heading: ["Instrument Serif", "Georgia", "serif"]
+      },
       colors: {
         ink: "#18212f",
         mist: "#eef5f3",

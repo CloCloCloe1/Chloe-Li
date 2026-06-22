@@ -1,7 +1,11 @@
 "use client";
 
 import {
+  Award,
   ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  BriefcaseBusiness,
   Check,
   Download,
   Globe2,
@@ -14,10 +18,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
+import CardSwap, { Card } from "@/components/CardSwap";
 import { contact, content, type Locale, type PortfolioItem, type SectionKey } from "@/lib/profile";
 
 const sectionIds = ["home", "about", "experience", "education", "publications", "certifications", "contact"] as const;
 const detailSections: SectionKey[] = ["publications", "certifications"];
+const heroVideoSrc =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4";
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "nakama-brand-product-analyst": {
@@ -97,21 +104,21 @@ export default function Home() {
         Skip To Main Content
       </a>
     <main
-      className="min-h-screen overflow-hidden bg-white pt-[6.5rem] text-neutral-950 md:pt-14"
+      className="min-h-screen overflow-hidden bg-white text-neutral-950"
       id="main-content"
       lang={locale === "zh" ? "zh" : "en"}
       tabIndex={-1}
     >
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
-        <nav aria-label="Primary" className="section-shell flex h-14 items-center justify-between">
-          <a className="text-sm font-semibold tracking-normal text-neutral-950 focus-ring" href="#home">
-            {t.displayName}
+      <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
+        <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
+          <a className="liquid-glass flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring" href="#home">
+            CL
           </a>
 
-          <div className="hidden items-center gap-5 md:flex">
+          <div className="liquid-glass hidden items-center gap-1 rounded-full px-2 py-1.5 md:flex">
             {nav.map((item) => (
               <a
-                className="text-xs font-medium text-neutral-600 transition hover:text-neutral-950 focus-ring"
+                className="rounded-full px-3 py-2 text-xs font-medium text-white/80 transition hover:bg-white/10 hover:text-white focus-ring"
                 href={`#${item.id}`}
                 key={item.id}
               >
@@ -122,7 +129,7 @@ export default function Home() {
 
           <button
             aria-label={`${languageLabel} language toggle`}
-            className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-neutral-50 px-3 py-1.5 text-xs font-semibold text-neutral-800 transition hover:border-black/20 hover:bg-neutral-100 focus-ring"
+            className="liquid-glass inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition hover:bg-white/10 focus-ring"
             onClick={() => setLocale(oppositeLocale)}
             type="button"
           >
@@ -130,11 +137,11 @@ export default function Home() {
             {languageLabel}
           </button>
         </nav>
-        <div className="border-t border-black/5 md:hidden">
-          <div className="flex gap-5 overflow-x-auto px-5 py-3">
+        <div className="mt-3 md:hidden">
+          <div className="liquid-glass mx-auto flex max-w-[calc(100vw-2rem)] gap-3 overflow-x-auto rounded-full px-4 py-3">
             {nav.map((item) => (
               <a
-                className="shrink-0 text-xs font-medium text-neutral-600 transition hover:text-neutral-950 focus-ring"
+                className="shrink-0 text-xs font-medium text-white/80 transition hover:text-white focus-ring"
                 href={`#${item.id}`}
                 key={item.id}
               >
@@ -145,43 +152,64 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="page-section section-shell flex min-h-[calc(100vh-3.5rem)] flex-col justify-center py-20 text-center" id="home">
-        <p className="animate-rise text-2xl font-semibold tracking-normal text-neutral-950 sm:text-3xl">
-          {t.displayName}
-        </p>
-        <p className="mt-5 animate-rise text-sm font-semibold text-[#0066cc]">{t.hero.eyebrow}</p>
-        <h1 className="mx-auto mt-5 max-w-5xl animate-rise text-5xl font-semibold leading-[1.05] tracking-normal text-neutral-950 sm:text-7xl">
-          {t.hero.title}
-        </h1>
-        <p className="mx-auto mt-6 max-w-3xl animate-rise text-lg leading-8 text-neutral-600 sm:text-xl">
-          {t.hero.summary}
-        </p>
-
-        <div className="mt-9 flex animate-rise flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0066cc] px-6 text-sm font-semibold text-white transition hover:bg-[#0057b8] focus-ring"
-            href="#experience"
-          >
-            {t.hero.primaryCta}
-            <ArrowRight aria-hidden="true" size={16} />
-          </a>
-          <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-neutral-500 bg-white px-6 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100 focus-ring"
-            download="ChloeLi_Analyst_resume.pdf"
-            href={contact.resumeUrl}
-          >
-            <Download aria-hidden="true" size={16} />
-            {t.hero.secondaryCta}
-          </a>
-        </div>
-
-        <div className="mx-auto mt-16 grid w-full max-w-4xl gap-3 sm:grid-cols-3">
-          {t.metrics.map((metric) => (
-            <div className="rounded-3xl bg-neutral-100 px-6 py-7" key={metric.label}>
-              <p className="text-4xl font-semibold tracking-normal text-neutral-950">{metric.value}</p>
-              <p className="mt-2 text-sm leading-5 text-neutral-600">{metric.label}</p>
+      <section className="page-section relative flex min-h-screen items-center overflow-hidden bg-black px-5 py-28 sm:px-6 lg:px-8" id="home">
+        <video
+          aria-hidden="true"
+          autoPlay
+          className="hero-video"
+          loop
+          muted
+          playsInline
+          poster="/linkedin-preview.jpg"
+          preload="metadata"
+          src={heroVideoSrc}
+        />
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,204,0.28),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.86),rgba(0,0,0,0.52)_45%,rgba(0,0,0,0.28))]" />
+        <div className="section-shell relative z-10 grid min-h-[calc(100vh-12rem)] items-center gap-12 pt-10 lg:grid-cols-[0.92fr_1.08fr]">
+          <div className="max-w-2xl text-left">
+            <div className="liquid-glass inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-white">
+              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-950">Portfolio</span>
+              <span className="pr-3 text-sm font-medium text-white/85">{t.hero.eyebrow}</span>
             </div>
-          ))}
+            <p className="mt-8 font-heading text-4xl italic tracking-normal text-white sm:text-5xl">
+              {t.displayName}
+            </p>
+            <h1 className="mt-4 max-w-3xl font-heading text-6xl italic leading-[0.88] tracking-normal text-white sm:text-7xl lg:text-[5.6rem]">
+              <BlurWords text={t.hero.title} />
+            </h1>
+            <p className="mt-7 max-w-xl text-base font-light leading-8 text-white/85 sm:text-lg">
+              {t.hero.summary}
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                className="liquid-glass-strong inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition hover:bg-white/15 focus-ring"
+                href="#experience"
+              >
+                {t.hero.primaryCta}
+                <ArrowUpRight aria-hidden="true" size={17} />
+              </a>
+              <a
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-neutral-950 transition hover:bg-white/85 focus-ring"
+                download="ChloeLi_Analyst_resume.pdf"
+                href={contact.resumeUrl}
+              >
+                <Download aria-hidden="true" size={16} />
+                {t.hero.secondaryCta}
+              </a>
+            </div>
+
+            <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {t.metrics.map((metric) => (
+                <div className="liquid-glass rounded-[1.4rem] px-5 py-5" key={metric.label}>
+                  <p className="font-heading text-4xl italic leading-none text-white">{metric.value}</p>
+                  <p className="mt-3 text-xs font-light leading-5 text-white/80">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <HeroCardSwap locale={locale} />
         </div>
       </section>
 
@@ -245,6 +273,123 @@ export default function Home() {
       </footer>
     </main>
     </>
+  );
+}
+
+function BlurWords({ text }: { text: string }) {
+  return (
+    <span className="flex flex-wrap" aria-label={text}>
+      {text.split(" ").map((word, index) => (
+        <span
+          aria-hidden="true"
+          className="blur-word"
+          key={`${word}-${index}`}
+          style={{ animationDelay: `${0.08 * index + 0.18}s` }}
+        >
+          {word}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function HeroCardSwap({ locale }: { locale: Locale }) {
+  const t = content[locale];
+  const cards = [
+    {
+      href: "#experience",
+      eyebrow: t.nav.experience,
+      title: locale === "en" ? "Experience" : "经历",
+      body:
+        locale === "en"
+          ? "AI workflows, financial systems, product data, and business operations translated into measurable delivery."
+          : "覆盖 AI 工作流、金融系统、产品数据和业务运营的项目经验。",
+      stat: `${t.sections.experience.items.length} roles`,
+      icon: <BriefcaseBusiness aria-hidden="true" size={25} />,
+      tags: ["AI", "Systems", "Product"]
+    },
+    {
+      href: "#publications",
+      eyebrow: t.nav.publications,
+      title: locale === "en" ? "Publications" : "发表",
+      body:
+        locale === "en"
+          ? "Research work across precision control, dataset design, detection, and segmentation systems."
+          : "包含精密控制、数据集构建、检测与分割方向的研究成果。",
+      stat: `${t.sections.publications.items.length} papers`,
+      icon: <BookOpen aria-hidden="true" size={25} />,
+      tags: ["Research", "Data", "Systems"]
+    },
+    {
+      href: "#certifications",
+      eyebrow: t.nav.certifications,
+      title: locale === "en" ? "Certifications" : "证书",
+      body:
+        locale === "en"
+          ? "Focused learning in Excel, Power Automate, collaboration, professional communication, and workplace awareness."
+          : "涵盖 Excel、Power Automate、协作沟通与职场意识的专业学习。",
+      stat: `${t.sections.certifications.items.length} certificates`,
+      icon: <Award aria-hidden="true" size={25} />,
+      tags: ["Excel", "Automation", "Business"]
+    }
+  ];
+
+  return (
+    <div aria-label="Featured portfolio sections">
+      <div className="card-swap-stage hidden lg:block">
+        <CardSwap cardDistance={52} delay={4600} height={320} pauseOnHover verticalDistance={62} width={440}>
+          {cards.map((card) => (
+            <Card className="liquid-glass-strong" key={card.href}>
+              <a className="flex h-full flex-col p-6 text-white focus-ring" href={card.href}>
+                <span className="flex items-start justify-between gap-5">
+                  <span className="liquid-glass flex h-12 w-12 items-center justify-center rounded-[1rem] text-white">
+                    {card.icon}
+                  </span>
+                  <span className="flex max-w-[70%] flex-wrap justify-end gap-1.5">
+                    {card.tags.map((tag) => (
+                      <span className="liquid-glass rounded-full px-3 py-1 text-[11px] font-medium text-white/88" key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </span>
+                </span>
+                <span className="mt-auto block">
+                  <span className="text-sm font-semibold text-[#8ec5ff]">{card.eyebrow}</span>
+                  <span className="mt-3 block font-heading text-5xl italic leading-none tracking-normal text-white">{card.title}</span>
+                  <span className="mt-4 block max-w-[32ch] text-sm font-light leading-6 text-white/82">{card.body}</span>
+                  <span className="mt-6 flex items-center justify-between gap-4">
+                    <span className="rounded-full bg-white px-4 py-2 text-xs font-semibold text-neutral-950">{card.stat}</span>
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-white">
+                      Open
+                      <ArrowRight aria-hidden="true" size={15} />
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </Card>
+          ))}
+        </CardSwap>
+      </div>
+
+      <div className="grid gap-3 lg:hidden">
+        {cards.map((card) => (
+          <a className="liquid-glass rounded-[1.4rem] p-5 text-white focus-ring" href={card.href} key={card.href}>
+            <span className="flex items-center justify-between gap-4">
+              <span className="flex items-center gap-3">
+                <span className="liquid-glass flex h-11 w-11 items-center justify-center rounded-[0.9rem]">
+                  {card.icon}
+                </span>
+                <span>
+                  <span className="block text-xs font-semibold text-[#8ec5ff]">{card.eyebrow}</span>
+                  <span className="block font-heading text-3xl italic leading-none">{card.title}</span>
+                </span>
+              </span>
+              <ArrowRight aria-hidden="true" size={18} />
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }
 
