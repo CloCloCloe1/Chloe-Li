@@ -586,17 +586,6 @@ h3 {
   min-height: 430px;
 }
 
-.lanyard-face-back {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 430px;
-  position: absolute;
-  text-align: center;
-  transform: rotateY(180deg);
-}
-
 .lanyard-close-button {
   position: absolute;
   right: 0.65rem;
