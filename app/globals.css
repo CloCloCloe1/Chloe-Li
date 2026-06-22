@@ -351,9 +351,11 @@ h3 {
 }
 
 .lanyard-modal {
-  animation: lanyard-drop-in 0.82s cubic-bezier(0.22, 1, 0.36, 1) both;
-  padding-top: 122px;
+  cursor: grab;
+  padding-top: 86px;
+  perspective: 900px;
   transform-origin: top center;
+  will-change: transform;
 }
 
 .lanyard-anchor {
@@ -363,22 +365,22 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 999px;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-  height: 20px;
+  height: 14px;
   left: 50%;
   position: absolute;
   top: 4px;
   transform: translateX(-50%);
-  width: 72px;
+  width: 50px;
   z-index: 5;
 }
 
 .lanyard-cord {
   position: absolute;
   left: 50%;
-  top: 18px;
+  top: 15px;
   z-index: 2;
-  height: 146px;
-  width: 28px;
+  height: 105px;
+  width: 22px;
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -387,8 +389,8 @@ h3 {
   position: absolute;
   left: 50%;
   top: 0;
-  height: 150px;
-  width: 8px;
+  height: 108px;
+  width: 5px;
   border-radius: 999px;
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0)),
@@ -405,10 +407,10 @@ h3 {
 .lanyard-clip {
   position: absolute;
   left: 50%;
-  top: 145px;
+  top: 104px;
   z-index: 3;
-  height: 32px;
-  width: 54px;
+  height: 23px;
+  width: 40px;
   transform: translateX(-50%);
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.78);
@@ -417,9 +419,9 @@ h3 {
 .lanyard-clip::after {
   position: absolute;
   left: 50%;
-  top: 7px;
-  height: 18px;
-  width: 30px;
+  top: 5px;
+  height: 13px;
+  width: 23px;
   transform: translateX(-50%);
   border: 2px solid rgba(255, 255, 255, 0.54);
   border-radius: 999px;
@@ -428,13 +430,15 @@ h3 {
 
 .lanyard-card {
   position: relative;
-  border-radius: 28px;
-  padding: 18px;
+  min-height: 456px;
+  border-radius: 22px;
+  padding: 13px;
   box-shadow: 0 34px 110px rgba(0, 0, 0, 0.46), inset 0 1px 1px rgba(255, 255, 255, 0.18);
-  transform: perspective(1000px) rotateX(1deg);
   transition-duration: 500ms;
-  transition-property: box-shadow, transform;
+  transition-property: box-shadow;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .lanyard-card::before {
@@ -450,20 +454,19 @@ h3 {
 .lanyard-card::after {
   background: radial-gradient(circle at 50% 50%, #050505 0 26%, rgba(255, 255, 255, 0.42) 28% 42%, transparent 44%);
   content: "";
-  height: 34px;
+  height: 26px;
   left: 50%;
   pointer-events: none;
   position: absolute;
-  top: -14px;
+  top: -10px;
   transform: translateX(-50%);
-  width: 34px;
+  width: 26px;
   z-index: 4;
 }
 
 .lanyard-card:hover,
 .lanyard-card:focus-within {
   box-shadow: 0 42px 130px rgba(0, 0, 0, 0.52), 0 0 48px rgba(0, 102, 204, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.18);
-  transform: perspective(1000px) rotateX(0) rotateY(-2deg) translateY(-3px);
 }
 
 .lanyard-id-header {
@@ -475,20 +478,40 @@ h3 {
   z-index: 1;
 }
 
-.lanyard-card > *:not(.lanyard-close-button) {
+.lanyard-face {
+  backface-visibility: hidden;
+  inset: 0;
+  padding: 13px;
   position: relative;
   z-index: 1;
 }
 
+.lanyard-face-front {
+  min-height: 430px;
+}
+
+.lanyard-face-back {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 430px;
+  position: absolute;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
 .lanyard-close-button {
   position: absolute;
-  right: 1rem;
-  top: 1rem;
+  right: 0.65rem;
+  top: 0.65rem;
   z-index: 10;
 }
 
 .lanyard-photo-frame {
-  height: clamp(11rem, 28vh, 16rem);
+  aspect-ratio: 3 / 4;
+  height: auto;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -541,13 +564,13 @@ h3 {
 
 @media (max-width: 520px) {
   .lanyard-modal {
-    max-width: 360px;
-    padding-top: 118px;
+    max-width: 252px;
+    padding-top: 78px;
   }
 
   .lanyard-card {
-    border-radius: 28px;
-    padding: 16px;
+    border-radius: 22px;
+    padding: 12px;
   }
 }
 

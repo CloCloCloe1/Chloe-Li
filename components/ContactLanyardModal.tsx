@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   Linkedin,
   Mail,
@@ -11,6 +12,7 @@ import Image from "next/image";
 import {
   useEffect,
   useRef,
+  useState,
   type ReactNode,
   type RefObject
 } from "react";
@@ -35,6 +37,7 @@ export default function ContactLanyardModal({
 }: ContactLanyardModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -92,7 +95,7 @@ export default function ContactLanyardModal({
   }
 
   return (
-    <div className="fixed inset-0 z-[120] overflow-y-auto bg-black/74 px-4 py-8 backdrop-blur-xl">
+    <div className="fixed inset-0 z-[120] overflow-y-auto bg-black/30 px-4 py-8 backdrop-blur-[2px]">
       <button
         aria-label="Close contact card"
         className="absolute inset-0 h-full w-full cursor-default"
@@ -103,16 +106,35 @@ export default function ContactLanyardModal({
         aria-labelledby="contact-lanyard-title"
         aria-modal="true"
         className="lanyard-wrapper"
+        onMouseDown={(event) => {
+          if (event.target === event.currentTarget) {
+            onClose();
+          }
+        }}
         ref={dialogRef}
         role="dialog"
       >
-        <div className="lanyard-modal relative z-10 w-full max-w-[350px]">
+        <motion.div
+          animate={{ rotate: 0, scale: 1, y: 0 }}
+          className="lanyard-modal relative z-10 w-full max-w-[252px]"
+          drag
+          dragConstraints={{ bottom: 120, left: -180, right: 180, top: -90 }}
+          dragElastic={0.24}
+          dragMomentum
+          initial={{ opacity: 0, rotate: -7, scale: 0.82, y: -150 }}
+          transition={{ damping: 13, mass: 0.7, stiffness: 180, type: "spring" }}
+          whileDrag={{ cursor: "grabbing", rotate: 8, scale: 1.04 }}
+        >
           <div aria-hidden="true" className="lanyard-anchor" />
           <div aria-hidden="true" className="lanyard-cord">
             <span />
           </div>
           <div className="lanyard-clip liquid-glass" aria-hidden="true" />
-          <article className="lanyard-card liquid-glass-strong text-white">
+          <motion.article
+            animate={{ rotateY: flipped ? 180 : 0 }}
+            className="lanyard-card liquid-glass-strong text-white"
+            transition={{ damping: 18, stiffness: 220, type: "spring" }}
+          >
             <button
               aria-label="Close contact card"
               className="lanyard-close-button inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white transition hover:bg-white/20 focus-ring"
@@ -122,44 +144,68 @@ export default function ContactLanyardModal({
               <X aria-hidden="true" size={18} />
             </button>
 
-            <div className="lanyard-id-header">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/58">Analyst Portfolio</span>
-            </div>
+            <div className="lanyard-face lanyard-face-front">
+              <div className="lanyard-id-header pr-10">
+                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/66">Analyst Profile</span>
+              </div>
 
-            <div className="lanyard-photo-frame mt-5 rounded-[1.5rem] bg-white/92 p-3 shadow-2xl">
-              <Image
-                alt="Chloe Li portrait"
-                className="h-full w-full rounded-[1.25rem] object-cover object-top"
-                height={720}
-                priority
-                src="/profile/chloe-li-headshot.jpg"
-                width={576}
-              />
-            </div>
+              <div className="lanyard-photo-frame mt-3 rounded-[1.15rem] bg-white/92 p-2 shadow-2xl">
+                <Image
+                  alt="Chloe Li portrait"
+                  className="h-full w-full rounded-[0.9rem] object-cover object-top"
+                  height={800}
+                  priority
+                  src="/profile/chloe-li-headshot.jpg"
+                  width={600}
+                />
+              </div>
 
-            <div className="mt-6">
-              <p className="text-sm font-semibold text-[#8ec5ff]">Toronto, ON</p>
-              <h2
-                className="mt-2 rounded-xl font-heading text-5xl italic leading-none tracking-normal text-white focus-ring"
-                id="contact-lanyard-title"
-                ref={headingRef}
-                tabIndex={-1}
+              <div className="mt-4">
+                <p className="text-xs font-semibold text-[#8ec5ff]">Toronto, ON</p>
+                <h2
+                  className="mt-1 rounded-xl font-heading text-4xl italic leading-none tracking-normal text-white focus-ring"
+                  id="contact-lanyard-title"
+                  ref={headingRef}
+                  tabIndex={-1}
+                >
+                  Chloe Li
+                </h2>
+                <p className="mt-2 text-xs font-light leading-5 text-white/78">
+                  Business Analyst / Product Analyst.
+                </p>
+              </div>
+
+              <div className="mt-4 grid gap-2">
+                <ContactLanyardLink href={`tel:${contact.phone}`} icon={<Phone aria-hidden="true" size={14} />} label={contact.phone} />
+                <ContactLanyardLink href={`mailto:${contact.email}`} icon={<Mail aria-hidden="true" size={14} />} label={contact.email} />
+                <ContactLanyardLink href={contact.linkedin} icon={<Linkedin aria-hidden="true" size={14} />} label="LinkedIn Profile" />
+                <ContactLanyardLink href="https://www.google.com/maps/search/?api=1&query=Toronto%2C%20ON" icon={<MapPin aria-hidden="true" size={14} />} label="Toronto, ON" />
+              </div>
+              <button
+                className="mt-3 inline-flex min-h-9 items-center justify-center rounded-full bg-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/18 focus-ring"
+                onClick={() => setFlipped(true)}
+                type="button"
               >
-                Chloe Li
-              </h2>
-              <p className="mt-3 text-sm font-light leading-6 text-white/78">
-                Business Analyst / Product Analyst.
-              </p>
+                Flip Card
+              </button>
             </div>
 
-            <div className="mt-6 grid gap-3">
-              <ContactLanyardLink href={`tel:${contact.phone}`} icon={<Phone aria-hidden="true" size={18} />} label={contact.phone} />
-              <ContactLanyardLink href={`mailto:${contact.email}`} icon={<Mail aria-hidden="true" size={18} />} label={contact.email} />
-              <ContactLanyardLink href={contact.linkedin} icon={<Linkedin aria-hidden="true" size={18} />} label="LinkedIn Profile" />
-              <ContactLanyardLink href="https://www.google.com/maps/search/?api=1&query=Toronto%2C%20ON" icon={<MapPin aria-hidden="true" size={18} />} label="Toronto, ON" />
+            <div aria-hidden={!flipped} className="lanyard-face lanyard-face-back">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8ec5ff]">Portfolio Card</p>
+              <h3 className="mt-4 font-heading text-4xl italic leading-none text-white">Chloe Li</h3>
+              <p className="mt-4 text-xs leading-5 text-white/76">
+                Data, product, and business systems work across AI workflows, financial systems, brand analysis, and product operations.
+              </p>
+              <button
+                className="mt-5 inline-flex min-h-9 items-center justify-center rounded-full bg-white px-4 text-xs font-semibold text-neutral-950 transition hover:bg-white/88 focus-ring"
+                onClick={() => setFlipped(false)}
+                type="button"
+              >
+                Back To Contact
+              </button>
             </div>
-          </article>
-        </div>
+          </motion.article>
+        </motion.div>
       </div>
     </div>
   );
@@ -178,13 +224,13 @@ function ContactLanyardLink({
 }) {
   return (
     <a
-      className="liquid-glass flex min-h-12 items-center gap-3 rounded-full px-4 text-sm font-semibold text-white transition hover:bg-white/14 focus-ring"
+      className="liquid-glass flex min-h-9 items-center gap-2 rounded-full px-3 text-[0.72rem] font-semibold text-white transition hover:bg-white/14 focus-ring"
       href={href}
       onClick={onClick}
       rel={href.startsWith("http") ? "noreferrer" : undefined}
       target={href.startsWith("http") ? "_blank" : undefined}
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-neutral-950">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-neutral-950">
         {icon}
       </span>
       <span className="break-all">{label}</span>
