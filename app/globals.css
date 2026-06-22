@@ -82,12 +82,17 @@ h3 {
 }
 
 @media (min-width: 1280px) {
+  #home.page-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .home-hero-shell.home-hero-shell {
     column-gap: 80px;
     grid-template-columns: 600px minmax(0, 1fr);
-    max-width: min(1380px, calc(100vw - 60px));
-    padding-left: 30px;
-    padding-right: 30px;
+    max-width: min(1400px, calc(100vw - 40px));
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .home-hero-shell > :first-child {
