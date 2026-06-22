@@ -216,7 +216,7 @@ function ParallaxFeatureRow({
       : variant === "certifications"
         ? "View Certification"
         : item.cta;
-  const showExternalCta = Boolean(item.url) && (variant === "publications" || variant === "certifications" || variant === "work-samples");
+  const showExternalCta = Boolean(item.url) && (variant === "publications" || variant === "certifications");
 
   return (
     <section
