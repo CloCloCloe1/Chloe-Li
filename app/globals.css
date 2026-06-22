@@ -83,11 +83,11 @@ h3 {
 
 @media (min-width: 1280px) {
   .home-hero-shell.home-hero-shell {
-    column-gap: 70px;
+    column-gap: 80px;
     grid-template-columns: 600px minmax(0, 1fr);
     max-width: min(1380px, calc(100vw - 60px));
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   .home-hero-shell > :first-child {
