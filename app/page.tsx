@@ -193,10 +193,10 @@ export default function Home() {
                 </span>
                 <span className="pr-3 text-sm font-medium text-white/85">{t.hero.eyebrow}</span>
               </div>
-              <p className="mt-8 font-heading text-4xl italic tracking-normal text-white sm:text-5xl">
+              <p className="mt-8 font-heading text-[clamp(1.8rem,4vw,3.15rem)] italic tracking-normal text-white">
                 {t.displayName}
               </p>
-              <h1 className="mt-4 max-w-3xl font-heading text-[clamp(2.15rem,8.8vw,5.6rem)] italic leading-[0.88] tracking-normal text-white sm:text-7xl lg:text-[5.6rem]">
+              <h1 className="mt-4 max-w-none whitespace-nowrap font-heading text-[clamp(2.4rem,5.35vw,4.2rem)] italic leading-[0.9] tracking-normal text-white">
                 <HeroTitle text={t.hero.title} />
               </h1>
             </div>
@@ -256,10 +256,7 @@ function HeroTitle({ text }: { text: string }) {
       <span>
         <span className="sr-only">{text}</span>
         <span aria-hidden="true" className="block whitespace-nowrap">
-          <BlurWords text="Data clarity for better" />
-        </span>
-        <span aria-hidden="true" className="block">
-          <BlurWords delayOffset={0.42} text="products, systems, and decisions." />
+          <BlurWords noWrap text="Data clarity for better products, systems, and decisions." />
         </span>
       </span>
     );
@@ -268,9 +265,9 @@ function HeroTitle({ text }: { text: string }) {
   return <BlurWords text={text} />;
 }
 
-function BlurWords({ delayOffset = 0.18, text }: { delayOffset?: number; text: string }) {
+function BlurWords({ delayOffset = 0.18, noWrap = false, text }: { delayOffset?: number; noWrap?: boolean; text: string }) {
   return (
-    <span className="flex flex-wrap" aria-label={text}>
+    <span className={`flex ${noWrap ? "flex-nowrap whitespace-nowrap" : "flex-wrap"}`} aria-label={text}>
       {text.split(" ").map((word, index) => (
         <span
           aria-hidden="true"
