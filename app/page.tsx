@@ -1,23 +1,29 @@
 "use client";
 
 import {
-  ArrowRight,
   ArrowUpRight,
-  BarChart3,
+  Award,
+  BookOpen,
   BriefcaseBusiness,
-  Car,
-  Cpu,
   Download,
   Globe2,
-  GraduationCap,
-  Megaphone
+  GraduationCap
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import ContactLanyardModal from "@/components/ContactLanyardModal";
 import DisplayCards from "@/components/ui/display-cards";
 import { contact, content, type Locale } from "@/lib/profile";
 
-const sectionIds = ["home", "experience", "contact"] as const;
+const navItems = [
+  { id: "home", href: "#home" },
+  { id: "education", href: "/education" },
+  { id: "experience", href: "/experience" },
+  { id: "publications", href: "/publications" },
+  { id: "certifications", href: "/certifications" },
+  { id: "contact", href: "#contact" }
+] as const;
+
 const heroVideoSrc =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4";
 
@@ -29,8 +35,17 @@ export default function Home() {
   const oppositeLocale = locale === "en" ? "zh" : "en";
   const languageLabel = locale === "en" ? "\u4e2d\u6587" : "EN";
   const nav = useMemo(
-    () => sectionIds.map((id) => ({ id, label: t.nav[id] })),
-    [t.nav]
+    () =>
+      navItems.map((item) => ({
+        ...item,
+        label:
+          locale === "en" && item.id === "publications"
+            ? "Publication"
+            : locale === "en" && item.id === "certifications"
+              ? "Certification"
+              : t.nav[item.id]
+      })),
+    [locale, t.nav]
   );
 
   return (
@@ -68,13 +83,13 @@ export default function Home() {
                     {item.label}
                   </button>
                 ) : (
-                  <a
+                  <Link
                     className="rounded-full px-3 py-2 text-xs font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-ring"
-                    href={`#${item.id}`}
+                    href={item.href}
                     key={item.id}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 )
               )}
             </div>
@@ -104,13 +119,13 @@ export default function Home() {
                     {item.label}
                   </button>
                 ) : (
-                  <a
+                  <Link
                     className="shrink-0 text-xs font-medium text-white/80 transition-colors hover:text-white focus-ring"
-                    href={`#${item.id}`}
+                    href={item.href}
                     key={item.id}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 )
               )}
             </div>
@@ -158,13 +173,13 @@ export default function Home() {
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
+                <Link
                   className="liquid-glass-strong inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
-                  href="#experience"
+                  href="/experience"
                 >
                   {t.hero.primaryCta}
                   <ArrowUpRight aria-hidden="true" size={17} />
-                </a>
+                </Link>
                 <a
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-semibold text-neutral-950 transition-colors hover:bg-white/85 focus-ring"
                   download="ChloeLi_Analyst_resume.pdf"
@@ -185,7 +200,7 @@ export default function Home() {
               </div>
             </div>
 
-            <HeroExperienceCards locale={locale} />
+            <HeroPortfolioCards locale={locale} />
           </div>
         </section>
       </main>
@@ -210,55 +225,52 @@ function BlurWords({ text }: { text: string }) {
   );
 }
 
-function HeroExperienceCards({ locale }: { locale: Locale }) {
-  const items = content[locale].sections.experience.items;
-  const education = content[locale].sections.education;
-  const iconMap = {
-    "imco-business-systems-analyst": <BriefcaseBusiness size={18} />,
-    "mec-tech-algorithm-engineer": <Cpu size={18} />,
-    "nakama-brand-product-analyst": <BarChart3 size={18} />,
-    "nissan-business-systems-analyst": <Car size={18} />,
-    "hgtech-international-business-analyst": <Megaphone size={18} />
-  };
-  const tones = ["#0ea5e9", "#22c55e", "#f97316", "#8b5cf6", "#ef4444", "#facc15"];
-  const offsets = [
-    "experience-card-one",
-    "experience-card-two",
-    "experience-card-three",
-    "experience-card-four",
-    "experience-card-five",
-    "experience-card-six"
+function HeroPortfolioCards({ locale }: { locale: Locale }) {
+  const cardItems = [
+    {
+      href: "/education",
+      icon: <GraduationCap size={18} />,
+      title: locale === "en" ? "Education" : "教育",
+      description: "Waterloo, Fudan, and Queen's",
+      date: "Academic Timeline",
+      tone: "#facc15",
+      className: "experience-card-one"
+    },
+    {
+      href: "/experience",
+      icon: <BriefcaseBusiness size={18} />,
+      title: locale === "en" ? "Experience" : "经历",
+      description: "AI, systems, product, and business analysis",
+      date: "Work Timeline",
+      tone: "#0ea5e9",
+      className: "experience-card-two"
+    },
+    {
+      href: "/publications",
+      icon: <BookOpen size={18} />,
+      title: locale === "en" ? "Publication" : "发表",
+      description: "Control systems and computer vision research",
+      date: "Research Work",
+      tone: "#22c55e",
+      className: "experience-card-three"
+    },
+    {
+      href: "/certifications",
+      icon: <Award size={18} />,
+      title: locale === "en" ? "Certification" : "认证",
+      description: "Excel, automation, communication, and bias training",
+      date: "Learning Record",
+      tone: "#8b5cf6",
+      className: "experience-card-four"
+    }
   ];
-  const cardItems = items.slice(0, 5).map((item, index) => ({
-    href: `/experience/${item.slug}`,
-    icon: iconMap[item.slug as keyof typeof iconMap] ?? <ArrowRight size={18} />,
-    title: item.subtitle,
-    description: item.title,
-    date: item.meta,
-    tone: tones[index],
-    className: offsets[index]
-  })).concat({
-    href: "/education",
-    icon: <GraduationCap size={18} />,
-    title: education.eyebrow,
-    description: locale === "en" ? "Waterloo, Fudan, and Queen's" : "Waterloo、Fudan 与 Queen's",
-    date: locale === "en" ? "Academic Timeline" : "教育时间线",
-    tone: tones[5],
-    className: offsets[5]
-  });
 
   return (
     <section
-      aria-labelledby="experience-card-heading"
+      aria-label={locale === "en" ? "Portfolio sections" : "Portfolio sections"}
       className="page-section mx-auto w-full max-w-[34rem] scroll-mt-36 lg:mx-0 lg:justify-self-end"
       id="experience"
     >
-      <div className="liquid-glass mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white/85">
-        <BriefcaseBusiness aria-hidden="true" size={16} />
-        <span id="experience-card-heading">
-          {locale === "en" ? "Hover To Explore Experience" : "悬停查看经历"}
-        </span>
-      </div>
       <DisplayCards cards={cardItems} />
     </section>
   );

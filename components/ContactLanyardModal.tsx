@@ -106,14 +106,10 @@ export default function ContactLanyardModal({
         ref={dialogRef}
         role="dialog"
       >
-        <div className="lanyard-modal relative z-10 w-full max-w-[430px]">
+        <div className="lanyard-modal relative z-10 w-full max-w-[350px]">
           <div aria-hidden="true" className="lanyard-anchor" />
           <div aria-hidden="true" className="lanyard-cord">
             <span />
-            <span />
-          </div>
-          <div aria-hidden="true" className="lanyard-band">
-            <span>CHLOE LI</span>
           </div>
           <div className="lanyard-clip liquid-glass" aria-hidden="true" />
           <article className="lanyard-card liquid-glass-strong text-white">
@@ -128,7 +124,6 @@ export default function ContactLanyardModal({
 
             <div className="lanyard-id-header">
               <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/58">Analyst Portfolio</span>
-              <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-950">Contact</span>
             </div>
 
             <div className="lanyard-photo-frame mt-5 rounded-[1.5rem] bg-white/92 p-3 shadow-2xl">
