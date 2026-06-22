@@ -66,6 +66,32 @@ h3 {
   @apply scroll-mt-28 md:scroll-mt-20;
 }
 
+.mobile-nav-dropdown {
+  border-radius: 1.5rem;
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.75rem 0 0 auto;
+  max-width: min(18rem, calc(100vw - 1.5rem));
+  padding: 0.55rem;
+}
+
+.mobile-nav-item {
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.86);
+  display: flex;
+  font-size: 0.82rem;
+  font-weight: 600;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.9rem;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
 .liquid-glass {
   position: relative;
   overflow: hidden;
@@ -629,6 +655,111 @@ h3 {
 
   .experience-display-card::before {
     opacity: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .home-mobile-lower {
+    align-items: center;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+  }
+
+  .home-mobile-card-zone {
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .home-mobile-card-zone .experience-card-stack {
+    display: grid;
+    grid-template-areas: "stack";
+    min-height: 22rem;
+    overflow: visible;
+    perspective: 740px;
+    place-items: center;
+  }
+
+  .home-mobile-card-zone .experience-display-card,
+  .home-mobile-card-zone .experience-display-card:hover,
+  .home-mobile-card-zone .experience-display-card:focus-visible {
+    filter: grayscale(0);
+    height: 13.6rem;
+    min-height: 0;
+    transform: skewY(5deg);
+    width: min(11.5rem, 46vw);
+  }
+
+  .home-mobile-card-zone .experience-card-header {
+    min-height: 2.6rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .home-mobile-card-zone .experience-card-title {
+    font-size: 0.82rem;
+  }
+
+  .home-mobile-card-zone .experience-display-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .home-mobile-card-zone .experience-card-body {
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .home-mobile-card-zone .experience-card-kicker {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .home-mobile-card-zone .experience-card-main {
+    font-size: clamp(1.65rem, 8vw, 2.45rem);
+  }
+
+  .home-mobile-card-zone .experience-card-copy {
+    display: none;
+  }
+
+  .home-mobile-card-zone .experience-card-one {
+    transform: translateX(-1.7rem) translateY(3.8rem) skewY(5deg);
+    z-index: 5;
+  }
+
+  .home-mobile-card-zone .experience-card-one:hover,
+  .home-mobile-card-zone .experience-card-one:focus-visible {
+    transform: translateX(-1.7rem) translateY(2.9rem) skewY(5deg);
+  }
+
+  .home-mobile-card-zone .experience-card-two {
+    transform: translateX(-0.45rem) translateY(1.1rem) skewY(5deg);
+    z-index: 4;
+  }
+
+  .home-mobile-card-zone .experience-card-two:hover,
+  .home-mobile-card-zone .experience-card-two:focus-visible {
+    transform: translateX(-0.45rem) translateY(0.35rem) skewY(5deg);
+  }
+
+  .home-mobile-card-zone .experience-card-three {
+    transform: translateX(0.9rem) translateY(-1.65rem) skewY(5deg);
+    z-index: 3;
+  }
+
+  .home-mobile-card-zone .experience-card-three:hover,
+  .home-mobile-card-zone .experience-card-three:focus-visible {
+    transform: translateX(0.9rem) translateY(-2.35rem) skewY(5deg);
+  }
+
+  .home-mobile-card-zone .experience-card-four {
+    transform: translateX(2.15rem) translateY(-4.35rem) skewY(5deg);
+    z-index: 2;
+  }
+
+  .home-mobile-card-zone .experience-card-four:hover,
+  .home-mobile-card-zone .experience-card-four:focus-visible {
+    transform: translateX(2.15rem) translateY(-5.05rem) skewY(5deg);
   }
 }
 

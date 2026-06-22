@@ -6,7 +6,8 @@ import {
   BriefcaseBusiness,
   Download,
   Globe2,
-  GraduationCap
+  GraduationCap,
+  Menu
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -29,6 +30,7 @@ const heroVideoSrc =
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("en");
   const [contactOpen, setContactOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const contactButtonRef = useRef<HTMLButtonElement | null>(null);
   const t = content[locale];
   const oppositeLocale = locale === "en" ? "zh" : "en";
@@ -88,40 +90,71 @@ export default function Home() {
 
             <button
               aria-label={`${languageLabel} language toggle`}
-              className="liquid-glass absolute right-0 inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition-colors hover:bg-white/10 focus-ring"
+              className="liquid-glass absolute right-0 hidden min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition-colors hover:bg-white/10 focus-ring md:inline-flex"
               onClick={() => setLocale(oppositeLocale)}
               type="button"
             >
               <Globe2 aria-hidden="true" size={14} />
               {languageLabel}
             </button>
+            <div className="flex w-full items-center justify-between md:hidden">
+              <div className="liquid-glass flex min-h-12 flex-col justify-center rounded-full px-4 text-white">
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/58">Portfolio</span>
+                <span className="text-sm font-semibold leading-none text-white">Business Analyst</span>
+              </div>
+              <button
+                aria-expanded={mobileMenuOpen}
+                aria-label="Open navigation menu"
+                className="liquid-glass inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition hover:bg-white/10 focus-ring"
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                type="button"
+              >
+                <Menu aria-hidden="true" size={16} />
+                Menu
+              </button>
+            </div>
           </nav>
-          <div className="mt-3 md:hidden">
-            <div className="liquid-glass mx-auto flex max-w-[calc(100vw-2rem)] gap-3 overflow-x-auto rounded-full px-4 py-3">
+          {mobileMenuOpen ? (
+            <nav aria-label="Mobile" className="mobile-nav-dropdown liquid-glass md:hidden">
               {nav.map((item) =>
                 item.id === "contact" ? (
                   <button
                     aria-expanded={contactOpen}
                     aria-haspopup="dialog"
-                    className="shrink-0 text-xs font-medium text-white/80 transition-colors hover:text-white focus-ring"
+                    className="mobile-nav-item text-left"
                     key={item.id}
-                    onClick={() => setContactOpen(true)}
+                    onClick={() => {
+                      setContactOpen(true);
+                      setMobileMenuOpen(false);
+                    }}
                     type="button"
                   >
                     {item.label}
                   </button>
                 ) : (
                   <Link
-                    className="shrink-0 text-xs font-medium text-white/80 transition-colors hover:text-white focus-ring"
+                    className="mobile-nav-item"
                     href={item.href}
                     key={item.id}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
                 )
               )}
-            </div>
-          </div>
+              <button
+                className="mobile-nav-item inline-flex items-center gap-2 text-left"
+                onClick={() => {
+                  setLocale(oppositeLocale);
+                  setMobileMenuOpen(false);
+                }}
+                type="button"
+              >
+                <Globe2 aria-hidden="true" size={14} />
+                {languageLabel}
+              </button>
+            </nav>
+          ) : null}
         </header>
 
         <ContactLanyardModal
@@ -175,7 +208,7 @@ export default function Home() {
                 </a>
               </div>
 
-              <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+              <div className="mt-10 hidden max-w-2xl gap-3 sm:grid-cols-3 lg:grid">
                 {t.metrics.map((metric) => (
                   <div className="liquid-glass rounded-[1.4rem] px-5 py-5" key={metric.label}>
                     <p className="font-heading text-4xl italic leading-none text-white">{metric.value}</p>
@@ -183,9 +216,22 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+              <div className="home-mobile-lower mt-10 lg:hidden">
+                <div className="grid gap-3">
+                  {t.metrics.map((metric) => (
+                    <div className="liquid-glass rounded-[1.1rem] px-4 py-4" key={metric.label}>
+                      <p className="font-heading text-3xl italic leading-none text-white">{metric.value}</p>
+                      <p className="mt-2 text-[0.68rem] font-light leading-4 text-white/80">{metric.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <HeroPortfolioCards compact locale={locale} />
+              </div>
             </div>
 
-            <HeroPortfolioCards locale={locale} />
+            <div className="hidden lg:block">
+              <HeroPortfolioCards locale={locale} />
+            </div>
           </div>
         </section>
       </main>
@@ -210,7 +256,7 @@ function BlurWords({ text }: { text: string }) {
   );
 }
 
-function HeroPortfolioCards({ locale }: { locale: Locale }) {
+function HeroPortfolioCards({ compact = false, locale }: { compact?: boolean; locale: Locale }) {
   const cardItems = [
     {
       href: "/education",
@@ -253,8 +299,8 @@ function HeroPortfolioCards({ locale }: { locale: Locale }) {
   return (
     <section
       aria-label={locale === "en" ? "Portfolio sections" : "Portfolio sections"}
-      className="page-section mx-auto w-full max-w-[42rem] scroll-mt-36 lg:mx-0 lg:justify-self-end"
-      id="experience"
+      className={`page-section mx-auto w-full scroll-mt-36 ${compact ? "home-mobile-card-zone" : "max-w-[42rem] lg:mx-0 lg:justify-self-end"}`}
+      id={compact ? undefined : "experience"}
     >
       <DisplayCards cards={cardItems} />
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -53,6 +53,7 @@ export default function ParallaxSectionPage({
   items
 }: ParallaxSectionPageProps) {
   const [contactOpen, setContactOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const contactButtonRef = useRef<HTMLButtonElement | null>(null);
   const navItems = [
     { label: "Home", href: "/" },
@@ -84,7 +85,7 @@ export default function ParallaxSectionPage({
         <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
           <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
             <Link
-              className="liquid-glass flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring"
+              className="liquid-glass hidden h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring md:flex"
               href="/"
             >
               CL
@@ -110,14 +111,34 @@ export default function ParallaxSectionPage({
               </button>
             </div>
             <span aria-hidden="true" className="hidden h-12 w-12 md:block" />
+            <div className="flex w-full items-center justify-between md:hidden">
+              <div className="liquid-glass flex min-h-12 flex-col justify-center rounded-full px-4 text-white">
+                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/58">Portfolio</span>
+                <span className="text-sm font-semibold leading-none text-white">Business Analyst</span>
+              </div>
+              <button
+                aria-expanded={mobileMenuOpen}
+                aria-label="Open navigation menu"
+                className="liquid-glass inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition hover:bg-white/10 focus-ring"
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                type="button"
+              >
+                <Menu aria-hidden="true" size={16} />
+                Menu
+              </button>
+            </div>
           </nav>
-          <nav aria-label="Mobile" className="mx-auto mt-3 flex max-w-6xl gap-2 overflow-x-auto pb-1 md:hidden">
+          {mobileMenuOpen ? (
+          <nav aria-label="Mobile" className="mobile-nav-dropdown liquid-glass md:hidden">
             {[...navItems, { label: "Contact", href: "#contact" }].map((item) =>
               item.label === "Contact" ? (
                 <button
-                  className="liquid-glass min-h-10 shrink-0 rounded-full px-4 text-xs font-medium text-white/82 focus-ring"
+                  className="mobile-nav-item text-left"
                   key={item.label}
-                  onClick={() => setContactOpen(true)}
+                  onClick={() => {
+                    setContactOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
                   type="button"
                 >
                   {item.label}
@@ -125,15 +146,17 @@ export default function ParallaxSectionPage({
               ) : (
                 <Link
                   aria-current={item.href === `/${sectionKey}` ? "page" : undefined}
-                  className="liquid-glass flex min-h-10 shrink-0 items-center rounded-full px-4 text-xs font-medium text-white/82 focus-ring"
+                  className="mobile-nav-item"
                   href={item.href}
                   key={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               )
             )}
           </nav>
+          ) : null}
         </header>
 
         <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">

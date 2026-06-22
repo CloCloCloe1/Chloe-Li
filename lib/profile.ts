@@ -88,7 +88,7 @@ export const content = {
       contact: "Contact"
     },
     hero: {
-      eyebrow: "Business Analyst / Product Analyst",
+      eyebrow: "Business Analyst",
       title: "Data clarity for better products, systems, and decisions.",
       summary:
         "I turn complex datasets and business workflows into clear insights, reliable reporting, AI-supported workflows, and practical product and systems improvements.",
@@ -554,7 +554,7 @@ export const content = {
       contact: "联系"
     },
     hero: {
-      eyebrow: "商业分析 / 产品分析",
+      eyebrow: "商业分析",
       title: "用清晰的数据，支持更好的产品、系统与业务决策。",
       summary:
         "我擅长把复杂数据和业务流程转化为可执行的洞察、稳定的报表、AI 辅助工作流，以及面向产品和系统改进的解决方案。",
