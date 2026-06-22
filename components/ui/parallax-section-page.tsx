@@ -210,12 +210,16 @@ function ParallaxFeatureRow({
   const y = useTransform(scrollYProgress, [0, 1], [-50, 0]);
   const imageAspect = variant === "certifications" ? "aspect-[4/3]" : "aspect-video";
   const externalCta =
-    variant === "publications" ? "View Publication" : variant === "certifications" ? "View Certification" : item.cta;
-  const showExternalCta = (variant === "publications" || variant === "certifications") && item.url;
+    variant === "publications"
+      ? "View Publication"
+      : variant === "certifications"
+        ? "View Certification"
+        : item.cta;
+  const showExternalCta = Boolean(item.url) && (variant === "publications" || variant === "certifications" || variant === "work-samples");
 
   return (
     <section
-      className={`grid min-h-screen items-center gap-12 py-24 md:grid-cols-2 md:gap-24 lg:gap-32 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
+      className={`grid min-h-screen items-center gap-10 py-24 md:grid-cols-2 md:gap-14 lg:gap-20 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}
       ref={ref}
     >
       <motion.div style={{ y }}>
@@ -245,39 +249,13 @@ function ParallaxFeatureRow({
           ))}
         </div>
         {item.workSamples?.length ? (
-          <div className="mt-8 grid max-w-xl gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/52">Selected Work Samples</p>
-            {item.workSamples.map((sample) => (
-              <article
-                className="liquid-glass rounded-[1rem] px-4 py-4 text-sm text-white/78"
-                key={sample.title}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-semibold text-[#8ec5ff]">{sample.label}</p>
-                    <h3 className="mt-1 text-base font-semibold text-white">{sample.title}</h3>
-                  </div>
-                  {sample.url ? (
-                    <a
-                      aria-label={`View ${sample.title} sample`}
-                      className="inline-flex min-h-9 shrink-0 items-center justify-center rounded-full bg-white/12 px-3 text-xs font-semibold text-white transition hover:bg-white/18 focus-ring"
-                      href={sample.url}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      View
-                      <ArrowUpRight aria-hidden="true" size={14} />
-                    </a>
-                  ) : null}
-                </div>
-                <div className="mt-4 grid gap-3 text-xs leading-5 text-white/68">
-                  <p><span className="font-semibold text-white/86">Problem:</span> {sample.problem}</p>
-                  <p><span className="font-semibold text-white/86">Solution:</span> {sample.solution}</p>
-                  <p><span className="font-semibold text-white/86">Outcome:</span> {sample.outcome}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          <Link
+            className="liquid-glass-strong mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
+            href={`/experience/${item.slug}/work-samples`}
+          >
+            View Selected Work Samples
+            <ArrowUpRight aria-hidden="true" size={16} />
+          </Link>
         ) : null}
         {showExternalCta ? (
           <a

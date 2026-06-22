@@ -190,8 +190,8 @@ export default function Home() {
               <p className="mt-8 font-heading text-4xl italic tracking-normal text-white sm:text-5xl">
                 {t.displayName}
               </p>
-              <h1 className="mt-4 max-w-3xl font-heading text-6xl italic leading-[0.88] tracking-normal text-white sm:text-7xl lg:text-[5.6rem]">
-                <BlurWords text={t.hero.title} />
+              <h1 className="mt-4 max-w-3xl font-heading text-[clamp(2.15rem,8.8vw,5.6rem)] italic leading-[0.88] tracking-normal text-white sm:text-7xl lg:text-[5.6rem]">
+                <HeroTitle text={t.hero.title} />
               </h1>
               <p className="mt-7 max-w-xl text-base font-light leading-8 text-white/85 sm:text-lg">
                 {t.hero.summary}
@@ -239,7 +239,25 @@ export default function Home() {
   );
 }
 
-function BlurWords({ text }: { text: string }) {
+function HeroTitle({ text }: { text: string }) {
+  if (text === "Data clarity for better products, systems, and decisions.") {
+    return (
+      <span>
+        <span className="sr-only">{text}</span>
+        <span aria-hidden="true" className="block whitespace-nowrap">
+          <BlurWords text="Data clarity for better" />
+        </span>
+        <span aria-hidden="true" className="block">
+          <BlurWords delayOffset={0.42} text="products, systems, and decisions." />
+        </span>
+      </span>
+    );
+  }
+
+  return <BlurWords text={text} />;
+}
+
+function BlurWords({ delayOffset = 0.18, text }: { delayOffset?: number; text: string }) {
   return (
     <span className="flex flex-wrap" aria-label={text}>
       {text.split(" ").map((word, index) => (
@@ -247,7 +265,7 @@ function BlurWords({ text }: { text: string }) {
           aria-hidden="true"
           className="blur-word"
           key={`${word}-${index}`}
-          style={{ animationDelay: `${0.08 * index + 0.18}s` }}
+          style={{ animationDelay: `${0.08 * index + delayOffset}s` }}
         >
           {word}
         </span>

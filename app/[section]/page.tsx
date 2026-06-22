@@ -17,8 +17,8 @@ const visuals: Record<string, ParallaxSectionItem["image"]> = {
     blend: true
   },
   "nakama-brand-product-analyst": {
-    src: "/brand/nakama.png",
-    alt: "Nakama brand portfolio grid",
+    src: "/brand/nakama.jpg?v=3",
+    alt: "Nakama logo",
     fullBleed: true
   },
   "nissan-business-systems-analyst": {

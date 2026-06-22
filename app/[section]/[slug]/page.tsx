@@ -12,7 +12,7 @@ type DetailSectionKey = (typeof sections)[number];
 
 const brandVisuals: Record<string, { src: string; backgroundColor: string; blend?: boolean; fullBleed?: boolean; imageClassName?: string }> = {
   "nakama-brand-product-analyst": {
-    src: "/brand/nakama.png",
+    src: "/brand/nakama.jpg?v=3",
     backgroundColor: "#eef7ef",
     fullBleed: true,
     imageClassName: "object-cover"
