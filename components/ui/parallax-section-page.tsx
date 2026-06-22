@@ -172,11 +172,10 @@ export default function ParallaxSectionPage({
         </section>
 
         <div className="section-feature-shell relative z-10 flex flex-col px-6 md:px-10">
-          {items.map((item, index) => (
+          {items.map((item) => (
             <ParallaxFeatureRow
               item={item}
               key={item.slug}
-              reverse={index % 2 === 1}
               variant={sectionKey}
             />
           ))}
@@ -194,11 +193,9 @@ export default function ParallaxSectionPage({
 
 function ParallaxFeatureRow({
   item,
-  reverse,
   variant
 }: {
   item: ParallaxSectionItem;
-  reverse: boolean;
   variant: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -220,78 +217,83 @@ function ParallaxFeatureRow({
 
   return (
     <section
-      className={`section-feature-row grid min-h-[calc(100vh-1.25rem)] items-center gap-10 py-[5.5rem] md:grid-cols-2 md:gap-14 ${reverse ? "section-feature-row-reverse md:[&>*:first-child]:order-2" : ""}`}
+      className="section-feature-row flex min-h-[calc(100vh-1.25rem)] flex-col justify-center py-[5.5rem]"
       ref={ref}
     >
-      <motion.div style={{ y }}>
+      <motion.div className="section-feature-summary" style={{ y }}>
         <p className="text-sm font-semibold text-[#8ec5ff]">{item.meta}</p>
-        <h2 className="mt-4 max-w-lg text-balance font-heading text-5xl italic leading-none tracking-normal text-white sm:text-6xl">
+        <h2 className="mt-4 max-w-4xl text-balance font-heading text-5xl italic leading-none tracking-normal text-white sm:text-6xl">
           {item.title}
         </h2>
         <p className="mt-5 text-xl font-medium leading-8 text-white/78">{item.subtitle}</p>
         {item.description ? (
-          <p className="mt-8 max-w-xl text-base leading-8 text-white/70">{item.description}</p>
-        ) : null}
-        {item.bullets?.length ? (
-          <ul className="mt-7 grid max-w-xl gap-3">
-            {item.bullets.map((bullet) => (
-              <li className="flex gap-3 text-sm leading-7 text-white/72" key={bullet}>
-                <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ec5ff]" />
-                <span>{bullet}</span>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        <div className="mt-7 flex flex-wrap gap-2">
-          {item.tags?.slice(0, 5).map((tag) => (
-            <span className="liquid-glass rounded-full px-3 py-1.5 text-xs font-semibold text-white/82" key={tag}>
-              {tag}
-            </span>
-          ))}
-        </div>
-        {item.workSamples?.length ? (
-          <Link
-            className="liquid-glass-strong mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
-            href={`/experience/${item.slug}/work-samples`}
-          >
-            View Selected Work Samples
-            <ArrowUpRight aria-hidden="true" size={16} />
-          </Link>
-        ) : null}
-        {showExternalCta ? (
-          <a
-            className="liquid-glass-strong mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
-            href={item.url}
-            rel="noreferrer"
-            target="_blank"
-          >
-            {externalCta}
-            <ArrowUpRight aria-hidden="true" size={16} />
-          </a>
+          <p className="mt-7 max-w-5xl text-base leading-8 text-white/70">{item.description}</p>
         ) : null}
       </motion.div>
 
-      <motion.div className="relative" style={{ clipPath, opacity }}>
-        <div className={`liquid-glass-strong relative mx-auto ${imageAspect} w-full max-w-[34rem] overflow-hidden rounded-[2rem] p-8`}>
-          {item.image.fullBleed ? (
-            <Image
-              alt={item.image.alt}
-              className="object-contain p-8"
-              fill
-              sizes="(min-width: 768px) 40vw, 90vw"
-              src={item.image.src}
-            />
-          ) : (
-            <Image
-              alt={item.image.alt}
-              className={`h-full w-full object-contain ${item.image.blend ? "mix-blend-screen" : ""}`}
-              height={420}
-              src={item.image.src}
-              width={420}
-            />
-          )}
-        </div>
-      </motion.div>
+      <div className="section-feature-detail-grid mt-10 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(20rem,34rem)] md:items-center">
+        <motion.div style={{ y }}>
+          {item.bullets?.length ? (
+            <ul className="grid gap-3">
+              {item.bullets.map((bullet) => (
+                <li className="flex gap-3 text-sm leading-7 text-white/72" key={bullet}>
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#8ec5ff]" />
+                  <span>{bullet}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          <div className="mt-7 flex flex-wrap gap-2">
+            {item.tags?.slice(0, 5).map((tag) => (
+              <span className="liquid-glass rounded-full px-3 py-1.5 text-xs font-semibold text-white/82" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          {item.workSamples?.length ? (
+            <Link
+              className="liquid-glass-strong mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
+              href={`/experience/${item.slug}/work-samples`}
+            >
+              View Selected Work Samples
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
+          ) : null}
+          {showExternalCta ? (
+            <a
+              className="liquid-glass-strong mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold text-white transition-colors hover:bg-white/15 focus-ring"
+              href={item.url}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {externalCta}
+              <ArrowUpRight aria-hidden="true" size={16} />
+            </a>
+          ) : null}
+        </motion.div>
+
+        <motion.div className="relative" style={{ clipPath, opacity }}>
+          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} w-full max-w-[34rem] overflow-hidden rounded-[2rem] p-8`}>
+            {item.image.fullBleed ? (
+              <Image
+                alt={item.image.alt}
+                className="object-contain p-8"
+                fill
+                sizes="(min-width: 768px) 40vw, 90vw"
+                src={item.image.src}
+              />
+            ) : (
+              <Image
+                alt={item.image.alt}
+                className={`h-full w-full object-contain ${item.image.blend ? "mix-blend-screen" : ""}`}
+                height={420}
+                src={item.image.src}
+                width={420}
+              />
+            )}
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }
