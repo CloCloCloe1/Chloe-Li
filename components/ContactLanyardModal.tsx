@@ -47,6 +47,7 @@ export default function ContactLanyardModal({
     const previousOverflow = document.body.style.overflow;
     const returnFocusElement = returnFocusRef?.current;
     document.body.style.overflow = "hidden";
+    setFlipped(false);
     headingRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -115,7 +116,7 @@ export default function ContactLanyardModal({
         role="dialog"
       >
         <motion.div
-          animate={{ rotate: 0, scale: 1, y: 0 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1, y: 0 }}
           className="lanyard-modal relative z-10 w-full max-w-[252px]"
           drag
           dragConstraints={{ bottom: 120, left: -180, right: 180, top: -90 }}
