@@ -9,7 +9,7 @@ import {
   GraduationCap,
   Menu
 } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import ContactLanyardModal from "@/components/ContactLanyardModal";
 import DisplayCards from "@/components/ui/display-cards";
@@ -48,6 +48,12 @@ export default function Home() {
       })),
     [locale, t.nav]
   );
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("lang") === "zh") {
+      setLocale("zh");
+    }
+  }, []);
 
   return (
     <>

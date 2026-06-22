@@ -649,10 +649,10 @@ h3 {
 
 @media (max-width: 1023px) {
   .home-mobile-lower {
-    align-items: center;
+    align-items: start;
     display: grid;
-    gap: 0.75rem;
-    grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+    gap: 0.35rem;
+    grid-template-columns: minmax(0, 0.46fr) minmax(0, 0.54fr);
   }
 
   .home-mobile-card-zone {
@@ -663,39 +663,39 @@ h3 {
   .home-mobile-card-zone .experience-card-stack {
     display: grid;
     grid-template-areas: "stack";
-    min-height: 22rem;
+    min-height: 21rem;
     overflow: visible;
     perspective: 740px;
-    place-items: center;
+    place-items: center end;
   }
 
   .home-mobile-card-zone .experience-display-card,
   .home-mobile-card-zone .experience-display-card:hover,
   .home-mobile-card-zone .experience-display-card:focus-visible {
     filter: grayscale(0);
-    height: 13.6rem;
+    height: 12.35rem;
     min-height: 0;
     transform: skewY(5deg);
-    width: min(11.5rem, 46vw);
+    width: min(9.6rem, 39vw);
   }
 
   .home-mobile-card-zone .experience-card-header {
-    min-height: 2.6rem;
-    padding: 0.55rem 0.65rem;
+    min-height: 2.45rem;
+    padding: 0.5rem 0.55rem;
   }
 
   .home-mobile-card-zone .experience-card-title {
-    font-size: 0.82rem;
+    font-size: 0.76rem;
   }
 
   .home-mobile-card-zone .experience-display-icon {
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.15rem;
+    width: 1.15rem;
   }
 
   .home-mobile-card-zone .experience-card-body {
     gap: 0.5rem;
-    padding: 0.75rem;
+    padding: 0.68rem;
   }
 
   .home-mobile-card-zone .experience-card-kicker {
@@ -704,7 +704,7 @@ h3 {
   }
 
   .home-mobile-card-zone .experience-card-main {
-    font-size: clamp(1.65rem, 8vw, 2.45rem);
+    font-size: clamp(1.55rem, 7.4vw, 2.15rem);
   }
 
   .home-mobile-card-zone .experience-card-copy {
@@ -712,43 +712,67 @@ h3 {
   }
 
   .home-mobile-card-zone .experience-card-one {
-    transform: translateX(-1.7rem) translateY(3.8rem) skewY(5deg);
+    transform: translateX(-0.9rem) translateY(3.55rem) skewY(5deg);
     z-index: 5;
   }
 
   .home-mobile-card-zone .experience-card-one:hover,
   .home-mobile-card-zone .experience-card-one:focus-visible {
-    transform: translateX(-1.7rem) translateY(2.9rem) skewY(5deg);
+    transform: translateX(-0.9rem) translateY(2.8rem) skewY(5deg);
   }
 
   .home-mobile-card-zone .experience-card-two {
-    transform: translateX(-0.45rem) translateY(1.1rem) skewY(5deg);
+    transform: translateX(-0.2rem) translateY(1rem) skewY(5deg);
     z-index: 4;
   }
 
   .home-mobile-card-zone .experience-card-two:hover,
   .home-mobile-card-zone .experience-card-two:focus-visible {
-    transform: translateX(-0.45rem) translateY(0.35rem) skewY(5deg);
+    transform: translateX(-0.2rem) translateY(0.3rem) skewY(5deg);
   }
 
   .home-mobile-card-zone .experience-card-three {
-    transform: translateX(0.9rem) translateY(-1.65rem) skewY(5deg);
+    transform: translateX(0.55rem) translateY(-1.55rem) skewY(5deg);
     z-index: 3;
   }
 
   .home-mobile-card-zone .experience-card-three:hover,
   .home-mobile-card-zone .experience-card-three:focus-visible {
-    transform: translateX(0.9rem) translateY(-2.35rem) skewY(5deg);
+    transform: translateX(0.55rem) translateY(-2.2rem) skewY(5deg);
   }
 
   .home-mobile-card-zone .experience-card-four {
-    transform: translateX(2.15rem) translateY(-4.35rem) skewY(5deg);
+    transform: translateX(1.2rem) translateY(-4.1rem) skewY(5deg);
     z-index: 2;
   }
 
   .home-mobile-card-zone .experience-card-four:hover,
   .home-mobile-card-zone .experience-card-four:focus-visible {
-    transform: translateX(2.15rem) translateY(-5.05rem) skewY(5deg);
+    transform: translateX(1.2rem) translateY(-4.75rem) skewY(5deg);
+  }
+}
+
+@media (max-width: 380px) {
+  .home-mobile-lower {
+    grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+  }
+
+  .home-mobile-card-zone .experience-display-card,
+  .home-mobile-card-zone .experience-display-card:hover,
+  .home-mobile-card-zone .experience-display-card:focus-visible {
+    width: min(8.75rem, 38vw);
+  }
+
+  .home-mobile-card-zone .experience-card-one,
+  .home-mobile-card-zone .experience-card-one:hover,
+  .home-mobile-card-zone .experience-card-one:focus-visible {
+    transform: translateX(-0.55rem) translateY(3.45rem) skewY(5deg);
+  }
+
+  .home-mobile-card-zone .experience-card-four,
+  .home-mobile-card-zone .experience-card-four:hover,
+  .home-mobile-card-zone .experience-card-four:focus-visible {
+    transform: translateX(0.8rem) translateY(-4rem) skewY(5deg);
   }
 }
 

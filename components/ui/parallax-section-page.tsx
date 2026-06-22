@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Menu } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Globe2, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -84,12 +84,7 @@ export default function ParallaxSectionPage({
 
         <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
           <nav aria-label="Primary" className="mx-auto flex max-w-6xl items-center justify-between gap-3">
-            <Link
-              className="liquid-glass hidden h-12 w-12 shrink-0 items-center justify-center rounded-full font-heading text-2xl italic text-white focus-ring md:flex"
-              href="/"
-            >
-              CL
-            </Link>
+            <span aria-hidden="true" className="hidden h-12 w-20 md:block" />
             <div className="liquid-glass hidden min-h-12 items-center gap-1 rounded-full px-2 py-1 md:flex">
               {navItems.map((item) => (
                 <Link
@@ -110,7 +105,13 @@ export default function ParallaxSectionPage({
                 Contact
               </button>
             </div>
-            <span aria-hidden="true" className="hidden h-12 w-12 md:block" />
+            <Link
+              className="liquid-glass hidden min-h-12 items-center gap-2 rounded-full px-4 text-xs font-semibold text-white transition hover:bg-white/10 focus-ring md:inline-flex"
+              href="/?lang=zh"
+            >
+              <Globe2 aria-hidden="true" size={14} />
+              中文
+            </Link>
             <div className="flex w-full items-center justify-between md:hidden">
               <div className="liquid-glass flex min-h-12 flex-col justify-center rounded-full px-4 text-white">
                 <span className="text-xs font-semibold uppercase tracking-[0.12em] text-white/58">Portfolio</span>
@@ -130,7 +131,7 @@ export default function ParallaxSectionPage({
           </nav>
           {mobileMenuOpen ? (
           <nav aria-label="Mobile" className="mobile-nav-dropdown liquid-glass md:hidden">
-            {[...navItems, { label: "Contact", href: "#contact" }].map((item) =>
+            {[...navItems, { label: "Contact", href: "#contact" }, { label: "中文", href: "/?lang=zh" }].map((item) =>
               item.label === "Contact" ? (
                 <button
                   className="mobile-nav-item text-left"

@@ -1,6 +1,7 @@
 import {
   ArrowLeft,
   ArrowUpRight,
+  Globe2,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -118,13 +119,17 @@ export default async function DetailPage({ params }: DetailPageProps) {
     <main className="min-h-screen bg-white pt-14 text-neutral-950" id="main-content" tabIndex={-1}>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <nav aria-label="Detail page" className="section-shell flex h-14 items-center justify-between">
-          <Link className="text-sm font-semibold text-neutral-950 focus-ring" href="/">
-            Chloe Li
-          </Link>
-          <Link className="inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring" href={sectionHref}>
-            <ArrowLeft aria-hidden="true" size={14} />
-            {sectionLabel}
-          </Link>
+          <span aria-hidden="true" className="h-10 w-10" />
+          <div className="flex items-center gap-2">
+            <Link className="inline-flex min-h-10 items-center gap-2 rounded-full bg-neutral-100 px-4 text-xs font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring" href="/?lang=zh">
+              <Globe2 aria-hidden="true" size={14} />
+              中文
+            </Link>
+            <Link className="inline-flex min-h-10 items-center gap-2 rounded-full bg-neutral-100 px-4 text-xs font-semibold text-neutral-800 transition hover:bg-neutral-200 focus-ring" href={sectionHref}>
+              <ArrowLeft aria-hidden="true" size={14} />
+              {sectionLabel}
+            </Link>
+          </div>
         </nav>
       </header>
 
