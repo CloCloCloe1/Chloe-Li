@@ -37,13 +37,11 @@ const visuals: Record<string, ParallaxSectionItem["image"]> = {
   },
   "fudan-international-summer-session": {
     src: "/brand/fudan.jpg",
-    alt: "Fudan University logo",
-    fullBleed: true
+    alt: "Fudan University logo"
   },
   "queens-computing": {
     src: "/brand/qu.jpg?v=2",
-    alt: "Queen's University logo",
-    fullBleed: true
+    alt: "Queen's University logo"
   },
   "high-precision-air-temperature-control": {
     src: "/brand/sciencedirect.png?v=2",
@@ -98,7 +96,12 @@ export default async function SectionLanding({ params }: SectionLandingProps) {
     subtitle: item.subtitle,
     meta: item.meta,
     description: item.description,
+    bullets: item.bullets,
     tags: item.tags,
+    url: item.url,
+    cta: item.cta,
+    attachments: item.attachments,
+    workSamples: item.workSamples,
     image: visuals[item.slug] ?? {
       src: item.previewImage ?? "/linkedin-preview.jpg",
       alt: `${item.title} preview`,
