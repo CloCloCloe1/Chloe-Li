@@ -135,7 +135,7 @@ export default function ContactLanyardModal({
           <div className="mt-6">
             <p className="text-sm font-semibold text-[#8ec5ff]">Contact</p>
             <h2
-              className="mt-2 font-heading text-5xl italic leading-none tracking-normal text-white outline-none"
+              className="mt-2 rounded-xl font-heading text-5xl italic leading-none tracking-normal text-white focus-ring"
               id="contact-lanyard-title"
               ref={headingRef}
               tabIndex={-1}
@@ -151,7 +151,7 @@ export default function ContactLanyardModal({
             <ContactLanyardLink href={`tel:${contact.phone}`} icon={<Phone aria-hidden="true" size={18} />} label={contact.phone} />
             <ContactLanyardLink href={`mailto:${contact.email}`} icon={<Mail aria-hidden="true" size={18} />} label={contact.email} />
             <ContactLanyardLink href={contact.linkedin} icon={<Linkedin aria-hidden="true" size={18} />} label="LinkedIn Profile" />
-            <ContactLanyardLink href="#contact" icon={<MapPin aria-hidden="true" size={18} />} label="Toronto, ON" onClick={onClose} />
+            <ContactLanyardLink href="https://www.google.com/maps/search/?api=1&query=Toronto%2C%20ON" icon={<MapPin aria-hidden="true" size={18} />} label="Toronto, ON" />
           </div>
         </article>
       </div>

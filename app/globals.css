@@ -168,34 +168,153 @@ h3 {
   }
 }
 
-.card-swap-stage {
+.experience-card-stack {
+  display: grid;
+  grid-template-areas: "stack";
+  min-height: 430px;
+  place-items: center;
   position: relative;
-  min-height: 520px;
 }
 
-.card-swap-container {
-  bottom: 26px;
-  perspective: 900px;
+.experience-display-card {
+  align-items: stretch;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08)),
+    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--card-tone) 52%, transparent), transparent 38%);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.2rem;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  grid-area: stack;
+  height: 9.5rem;
+  justify-content: space-between;
+  padding: 1rem;
+  position: relative;
+  transform: skewY(-8deg);
+  transition-duration: 700ms;
+  transition-property: border-color, box-shadow, filter, opacity, transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+  width: min(22rem, calc(100vw - 3rem));
+}
+
+.experience-display-card::before {
+  background: rgba(10, 10, 12, 0.46);
+  border-radius: inherit;
+  content: "";
+  inset: 0;
+  opacity: 1;
+  pointer-events: none;
   position: absolute;
-  right: 0;
-  transform: translate(2%, 4%);
-  transform-origin: bottom right;
-  overflow: visible;
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.card-swap-card {
+.experience-display-card::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+  content: "";
+  height: 120%;
+  left: -64%;
+  opacity: 0;
+  pointer-events: none;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 28px;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform;
+  top: -10%;
+  transform: skewX(-18deg);
+  transition-duration: 700ms;
+  transition-property: left, opacity;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 44%;
 }
 
-.card-swap-card a {
-  min-height: 100%;
+.experience-display-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-display-card:hover,
+.experience-display-card:focus-visible {
+  border-color: rgba(255, 255, 255, 0.56);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.38), 0 0 42px color-mix(in srgb, var(--card-tone) 28%, transparent);
+  filter: grayscale(0);
+}
+
+.experience-display-card:hover::before,
+.experience-display-card:focus-visible::before {
+  opacity: 0;
+}
+
+.experience-display-card:hover::after,
+.experience-display-card:focus-visible::after {
+  left: 118%;
+  opacity: 1;
+}
+
+.experience-display-icon {
+  align-items: center;
+  background: color-mix(in srgb, var(--card-tone) 72%, #0f172a);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.experience-card-one {
+  filter: grayscale(1);
+  transform: translateX(-4rem) translateY(-4.5rem) skewY(-8deg);
+  z-index: 5;
+}
+
+.experience-card-one:hover,
+.experience-card-one:focus-visible {
+  transform: translateX(-4rem) translateY(-6.25rem) skewY(-8deg);
+}
+
+.experience-card-two {
+  filter: grayscale(1);
+  transform: translateX(1rem) translateY(-1.95rem) skewY(-8deg);
+  z-index: 4;
+}
+
+.experience-card-two:hover,
+.experience-card-two:focus-visible {
+  transform: translateX(1rem) translateY(-3.65rem) skewY(-8deg);
+}
+
+.experience-card-three {
+  transform: translateX(5.5rem) translateY(0.75rem) skewY(-8deg);
+  z-index: 3;
+}
+
+.experience-card-three:hover,
+.experience-card-three:focus-visible {
+  transform: translateX(5.5rem) translateY(-1rem) skewY(-8deg);
+}
+
+.experience-card-four {
+  filter: grayscale(1);
+  transform: translateX(-1rem) translateY(3.6rem) skewY(-8deg);
+  z-index: 2;
+}
+
+.experience-card-four:hover,
+.experience-card-four:focus-visible {
+  transform: translateX(-1rem) translateY(1.85rem) skewY(-8deg);
+}
+
+.experience-card-five {
+  filter: grayscale(1);
+  transform: translateX(3.2rem) translateY(6.35rem) skewY(-8deg);
+  z-index: 1;
+}
+
+.experience-card-five:hover,
+.experience-card-five:focus-visible {
+  transform: translateX(3.2rem) translateY(4.6rem) skewY(-8deg);
 }
 
 .lanyard-modal {
@@ -286,27 +405,31 @@ h3 {
 }
 
 @media (max-width: 1023px) {
-  .card-swap-stage {
-    min-height: 430px;
+  .experience-card-stack {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: auto;
+    place-items: initial;
   }
 
-  .card-swap-container {
-    left: 50%;
-    right: auto;
-    transform: translate(-50%, 2%) scale(0.86);
-    transform-origin: bottom center;
+  .experience-display-card,
+  .experience-display-card:hover,
+  .experience-display-card:focus-visible {
+    filter: grayscale(0);
+    height: auto;
+    min-height: 7.5rem;
+    transform: none;
+    width: 100%;
+  }
+
+  .experience-display-card::before {
+    opacity: 0;
   }
 }
 
 @media (max-width: 520px) {
-  .card-swap-stage {
-    min-height: 380px;
-  }
-
-  .card-swap-container {
-    transform: translate(-50%, 2%) scale(0.72);
-  }
-
   .lanyard-modal {
     max-width: 360px;
     padding-top: 70px;
@@ -341,5 +464,15 @@ h3 {
 
   .lanyard-modal {
     animation: none;
+  }
+
+  .experience-display-card,
+  .experience-display-card:hover,
+  .experience-display-card:focus-visible {
+    transform: none;
+  }
+
+  .experience-display-card::after {
+    display: none;
   }
 }
