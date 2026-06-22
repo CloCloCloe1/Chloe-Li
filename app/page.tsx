@@ -9,6 +9,7 @@ import {
   Cpu,
   Download,
   Globe2,
+  GraduationCap,
   Megaphone
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
@@ -211,6 +212,7 @@ function BlurWords({ text }: { text: string }) {
 
 function HeroExperienceCards({ locale }: { locale: Locale }) {
   const items = content[locale].sections.experience.items;
+  const education = content[locale].sections.education;
   const iconMap = {
     "imco-business-systems-analyst": <BriefcaseBusiness size={18} />,
     "mec-tech-algorithm-engineer": <Cpu size={18} />,
@@ -218,13 +220,14 @@ function HeroExperienceCards({ locale }: { locale: Locale }) {
     "nissan-business-systems-analyst": <Car size={18} />,
     "hgtech-international-business-analyst": <Megaphone size={18} />
   };
-  const tones = ["#0ea5e9", "#22c55e", "#f97316", "#8b5cf6", "#ef4444"];
+  const tones = ["#0ea5e9", "#22c55e", "#f97316", "#8b5cf6", "#ef4444", "#facc15"];
   const offsets = [
     "experience-card-one",
     "experience-card-two",
     "experience-card-three",
     "experience-card-four",
-    "experience-card-five"
+    "experience-card-five",
+    "experience-card-six"
   ];
   const cardItems = items.slice(0, 5).map((item, index) => ({
     href: `/experience/${item.slug}`,
@@ -234,7 +237,15 @@ function HeroExperienceCards({ locale }: { locale: Locale }) {
     date: item.meta,
     tone: tones[index],
     className: offsets[index]
-  }));
+  })).concat({
+    href: "/education",
+    icon: <GraduationCap size={18} />,
+    title: education.eyebrow,
+    description: locale === "en" ? "Waterloo, Fudan, and Queen's" : "Waterloo、Fudan 与 Queen's",
+    date: locale === "en" ? "Academic Timeline" : "教育时间线",
+    tone: tones[5],
+    className: offsets[5]
+  });
 
   return (
     <section

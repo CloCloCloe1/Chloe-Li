@@ -104,7 +104,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
 
   const item = getSectionItem(section, slug, "en");
   const sectionLabel = content.en.nav[section];
-  const sectionHref = `/#${section}`;
+  const sectionHref = `/${section}`;
 
   if (!item) {
     notFound();

@@ -142,6 +142,19 @@ h3 {
   object-position: top center;
 }
 
+.section-video-bg {
+  height: 115%;
+  left: 50%;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+  position: fixed;
+  top: 0;
+  transform: translateX(-50%);
+  width: 115%;
+  z-index: 0;
+}
+
 .blur-word {
   animation: blur-word-in 0.72s ease-out both;
   display: inline-block;
@@ -171,7 +184,7 @@ h3 {
 .experience-card-stack {
   display: grid;
   grid-template-areas: "stack";
-  min-height: 430px;
+  min-height: 500px;
   place-items: center;
   position: relative;
 }
@@ -313,6 +326,17 @@ h3 {
 .experience-card-five:hover,
 .experience-card-five:focus-visible {
   transform: translateX(3.2rem) translateY(5.4rem) skewY(-8deg);
+}
+
+.experience-card-six {
+  filter: grayscale(1);
+  transform: translateX(-2.8rem) translateY(8.7rem) skewY(-8deg);
+  z-index: 0;
+}
+
+.experience-card-six:hover,
+.experience-card-six:focus-visible {
+  transform: translateX(-2.8rem) translateY(7.75rem) skewY(-8deg);
 }
 
 .lanyard-modal {
