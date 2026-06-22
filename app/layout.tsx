@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import ClickSpark from "@/components/ClickSpark";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -39,7 +40,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ClickSpark
+          duration={460}
+          extraScale={1.1}
+          sparkColor="#0066cc"
+          sparkCount={8}
+          sparkRadius={22}
+          sparkSize={12}
+        >
+          {children}
+        </ClickSpark>
+      </body>
     </html>
   );
 }
