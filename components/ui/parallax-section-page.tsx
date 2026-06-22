@@ -232,7 +232,7 @@ function ParallaxFeatureRow({
         ) : null}
       </motion.div>
 
-      <div className="section-feature-detail-grid mt-10 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(20rem,34rem)] md:items-center">
+      <div className="section-feature-detail-grid mt-10 grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(20rem,34rem)] md:items-start">
         <motion.div style={{ y }}>
           {item.bullets?.length ? (
             <ul className="grid gap-3">
@@ -274,7 +274,7 @@ function ParallaxFeatureRow({
         </motion.div>
 
         <motion.div className="relative" style={{ clipPath, opacity }}>
-          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} ${imageMaxWidth} w-full overflow-hidden rounded-[2rem] p-4`}>
+          <div className={`liquid-glass-strong relative mr-auto ${imageAspect} ${imageMaxWidth} w-full overflow-hidden rounded-[2rem] p-4`}>
             {item.image.fullBleed ? (
               <Image
                 alt={item.image.alt}
