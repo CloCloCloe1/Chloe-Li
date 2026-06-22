@@ -84,20 +84,19 @@ h3 {
   }
 
   .home-hero-shell.home-hero-shell {
-    column-gap: 80px;
-    grid-template-columns: 600px minmax(0, 1fr);
     max-width: min(1400px, calc(100vw - 40px));
     padding-left: 40px;
     padding-right: 40px;
   }
 
-  .home-hero-shell > :first-child {
-    max-width: 600px;
-    width: 600px;
+  .home-hero-summary.home-hero-summary {
+    max-width: 100%;
+    width: 100%;
   }
 
-  .home-hero-shell > :last-child {
-    justify-self: stretch;
+  .home-hero-detail-grid.home-hero-detail-grid {
+    column-gap: 80px;
+    grid-template-columns: 600px minmax(0, 1fr);
     transform: translateY(20px);
     width: 100%;
   }

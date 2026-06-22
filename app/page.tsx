@@ -185,8 +185,8 @@ export default function Home() {
             src={heroVideoSrc}
           />
           <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,204,0.3),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.88),rgba(0,0,0,0.56)_45%,rgba(0,0,0,0.28))]" />
-          <div className="home-hero-shell section-shell relative z-10 grid min-h-[calc(100vh-12rem)] items-center gap-12 pt-10 lg:grid-cols-[0.88fr_1.12fr] xl:gap-16">
-            <div className="max-w-2xl text-left">
+          <div className="home-hero-shell section-shell relative z-10 flex min-h-[calc(100vh-12rem)] flex-col justify-center pt-10">
+            <div className="home-hero-summary max-w-5xl text-left">
               <div className="liquid-glass inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-white">
                 <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-950">
                   Portfolio
@@ -199,6 +199,10 @@ export default function Home() {
               <h1 className="mt-4 max-w-3xl font-heading text-[clamp(2.15rem,8.8vw,5.6rem)] italic leading-[0.88] tracking-normal text-white sm:text-7xl lg:text-[5.6rem]">
                 <HeroTitle text={t.hero.title} />
               </h1>
+            </div>
+
+            <div className="home-hero-detail-grid mt-8 grid gap-10 lg:grid-cols-[minmax(0,600px)_minmax(0,1fr)] lg:items-start">
+              <div className="text-left">
               <p className="mt-7 max-w-xl text-base font-light leading-8 text-white/85 sm:text-lg">
                 {t.hero.summary}
               </p>
@@ -237,6 +241,7 @@ export default function Home() {
 
             <div className="hidden lg:block">
               <HeroPortfolioCards locale={locale} />
+            </div>
             </div>
           </div>
         </section>
