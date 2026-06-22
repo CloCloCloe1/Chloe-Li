@@ -186,17 +186,17 @@ export default function Home() {
           />
           <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,204,0.3),transparent_34%),linear-gradient(90deg,rgba(0,0,0,0.88),rgba(0,0,0,0.56)_45%,rgba(0,0,0,0.28))]" />
           <div className="home-hero-shell section-shell relative z-10 flex min-h-[calc(100vh-12rem)] flex-col justify-center pt-10">
-            <div className="home-hero-summary max-w-5xl text-left">
+            <div className="home-hero-summary w-full max-w-none text-left">
               <div className="liquid-glass inline-flex items-center gap-2 rounded-full px-2 py-1.5 text-white">
                 <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-neutral-950">
                   Portfolio
                 </span>
                 <span className="pr-3 text-sm font-medium text-white/85">{t.hero.eyebrow}</span>
               </div>
-              <p className="mt-8 font-heading text-[clamp(1.8rem,4vw,3.15rem)] italic tracking-normal text-white">
+              <p className="mt-8 font-heading text-[clamp(1.55rem,3.4vw,2.75rem)] italic tracking-normal text-white">
                 {t.displayName}
               </p>
-              <h1 className="mt-4 max-w-none whitespace-nowrap font-heading text-[clamp(2.4rem,5.35vw,4.2rem)] italic leading-[0.9] tracking-normal text-white">
+              <h1 className="mt-4 max-w-none whitespace-nowrap font-heading text-[clamp(2rem,4.55vw,3.65rem)] italic leading-[0.9] tracking-normal text-white">
                 <HeroTitle text={t.hero.title} />
               </h1>
             </div>
