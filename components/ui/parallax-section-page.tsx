@@ -207,6 +207,7 @@ function ParallaxFeatureRow({
   const clipPath = useTransform(scrollYProgress, [0, 0.7], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
   const y = useTransform(scrollYProgress, [0, 1], [-50, 0]);
   const imageAspect = variant === "certifications" ? "aspect-[4/3]" : "aspect-video";
+  const imageMaxWidth = variant === "experience" || variant === "work-samples" ? "max-w-[26.1rem]" : "max-w-[20.9rem]";
   const externalCta =
     variant === "publications"
       ? "View Publication"
@@ -273,7 +274,7 @@ function ParallaxFeatureRow({
         </motion.div>
 
         <motion.div className="relative" style={{ clipPath, opacity }}>
-          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} w-full max-w-[26.1rem] overflow-hidden rounded-[2rem] p-4`}>
+          <div className={`liquid-glass-strong relative mx-auto ${imageAspect} ${imageMaxWidth} w-full overflow-hidden rounded-[2rem] p-4`}>
             {item.image.fullBleed ? (
               <Image
                 alt={item.image.alt}
